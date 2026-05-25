@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vis Technologie — PDF preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/styles.css" />
+<style>
+  html, body { background: var(--safe-bg, #F4F1EA); }
+  body { min-height: 100vh; }
+
+  .print-toolbar {
+    position: fixed; top: 12px; right: 12px; z-index: 9999;
+    display: flex; gap: 8px; align-items: center;
+    background: #0E1116; color: #F4F1EA;
+    padding: 8px 12px; border-radius: 999px;
+    font: 500 13px/1 "Inter", system-ui, sans-serif;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .print-toolbar button {
+    background: #F4F1EA; color: #0E1116;
+    border: none; padding: 8px 14px; border-radius: 999px;
+    font: inherit; cursor: pointer;
+  }
+  .print-toolbar button:disabled { opacity: .5; cursor: not-allowed; }
+  .print-toolbar .stat { padding: 0 6px; opacity: .85; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+
+  @media print {
+    .print-toolbar { display: none !important; }
+    @page { size: A4; margin: 12mm 10mm; }
+    html, body {
+      background: #fff !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .nav { position: static !important; backdrop-filter: none !important; background: transparent !important; }
+    .hero-blob { display: none !important; }
+    .nav-burger, .mobile-sheet { display: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .hero { break-after: page; padding-top: 0 !important; }
+    .section { break-inside: avoid; break-after: page; padding: 16px 0 !important; }
+    .footer { break-before: page; padding: 24px 0 !important; }
+    .bento-cell, .cs-card, .stat-item, .proc-step, .stack-row, .how-row { break-inside: avoid; }
+    .how-row .how-row-body { max-height: none !important; overflow: visible !important; }
+    .how-row .how-toggle { display: none !important; }
+    .bento-cell .reveal { display: none !important; }
+    .cs-card-img > * { transform: none !important; }
+    .t-display { font-size: 56px !important; line-height: 1 !important; }
+    .t-h1 { font-size: 38px !important; line-height: 1.02 !important; }
+    .t-h2 { font-size: 28px !important; }
+    .footer-big { font-size: 64px !important; }
+    .stat-num { font-size: 48px !important; }
+    .cd-headline { font-size: 48px !important; }
+    .container { padding: 0 6mm !important; max-width: 100% !important; }
+    .ph::before { opacity: 0.4 !important; }
+    a { color: inherit !important; text-decoration: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-toolbar">
+  <span class="stat" id="printstat">loading…</span>
+  <button id="printbtn" disabled>Print / Save as PDF</button>
+</div>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+  // ── Stubs so app.jsx doesn't blow up & doesn't render its own root ──
+  window.DesignCanvas = ({children}) => <>{children}</>;
+  window.DCSection    = ({children}) => <>{children}</>;
+  window.DCArtboard   = ({children}) => <>{children}</>;
+  window.DCPostIt     = () => null;
+  window.TweaksPanel  = () => null;
+  window.TweakSection = () => null;
+  window.TweakRadio   = () => null;
+  window.TweakSlider  = () => null;
+  window.TweakToggle  = () => null;
+  window.TweakSelect  = () => null;
+  window.TweakText    = () => null;
+  window.TweakNumber  = () => null;
+  window.TweakColor   = () => null;
+  window.TweakButton  = () => null;
+  window.useTweaks    = () => [{}, () => {}];
+
+  // Suppress app.jsx's auto-mount (it calls createRoot + render at the bottom).
+  // We replace createRoot temporarily, then restore for our print mount.
+  window.__realCreateRoot = ReactDOM.createRoot;
+  ReactDOM.createRoot = function() {
+    return { render: function(){}, unmount: function(){} };
+  };
+</script>
+
+<script type="text/babel" src="../shared/shared.jsx"></script>
+<script type="text/babel" src="../shared/nav-footer.jsx"></script>
+<script type="text/babel" src="../shared/sections.jsx"></script>
+<script type="text/babel" src="../shared/how-we-work.jsx"></script>
+<script type="text/babel" src="../shared/pages.jsx"></script>
+<script type="text/babel" src="../shared/app.jsx"></script>
+
+<script type="text/babel">
+  // Restore real createRoot and render Variation directly
+  ReactDOM.createRoot = window.__realCreateRoot;
+
+  function PrintApp() {
+    return (
+      <div style={{width: "100%"}}>
+        <Variation variant="safe" />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<PrintApp />);
+
+  const printBtn = document.getElementById("printbtn");
+  const printStat = document.getElementById("printstat");
+  let didAutoPrint = false;
+
+  async function readyAndPrint() {
+    printStat.textContent = "loading fonts…";
+    try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+    printStat.textContent = "rendering…";
+    let tries = 0;
+    while (tries < 80 && document.querySelector("#root .page") === null) {
+      await new Promise(r => setTimeout(r, 100));
+      tries++;
+    }
+    await new Promise(r => setTimeout(r, 1000));
+    printStat.textContent = "ready";
+    printBtn.disabled = false;
+    if (!didAutoPrint) {
+      didAutoPrint = true;
+      window.print();
+    }
+  }
+  printBtn.addEventListener("click", () => window.print());
+  readyAndPrint();
+</script>
+
+</body>
+</html>
