@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vis Technologie — design preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#F4F1EA; --fg:#0E1116; --muted:#5b5b5b; --accent:#1746A0; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"Inter",system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.5; }
+  .wrap { max-width:880px; margin:0 auto; padding:64px 24px 96px; }
+  h1 { font-family:"Instrument Serif",Georgia,serif; font-size:64px; line-height:1; margin:0 0 8px; font-weight:400; }
+  h1 em { font-style:italic; color:var(--accent); }
+  .lede { color:var(--muted); font-size:18px; margin:0 0 48px; max-width:60ch; }
+  h2 { font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:40px 0 16px; font-weight:500; }
+  ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+  li a { display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:14px 18px; background:#fff; border:1px solid #e5e1d6; border-radius:12px; text-decoration:none; color:var(--fg); transition:transform .15s, border-color .15s; }
+  li a:hover { transform:translateX(4px); border-color:var(--accent); }
+  li a .label { font-weight:500; }
+  li a .meta { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--muted); letter-spacing:.06em; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+  .grid a { display:block; padding:14px 16px; background:#fff; border:1px solid #e5e1d6; border-radius:12px; text-decoration:none; color:var(--fg); }
+  .grid a:hover { border-color:var(--accent); }
+  .grid a .code { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--accent); letter-spacing:.06em; }
+  .grid a .name { font-weight:500; margin-top:4px; }
+  .grid a .desc { font-size:13px; color:var(--muted); margin-top:2px; }
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid #e5e1d6; font-size:13px; color:var(--muted); }
+  code { font-family:"JetBrains Mono",monospace; font-size:12px; background:#fff; padding:2px 6px; border-radius:4px; border:1px solid #e5e1d6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>vis<em>tech</em></h1>
+  <p class="lede">Podgląd designu strony Vis Technologie — 8 wariantów wyeksportowanych z Claude Designer.</p>
+
+  <h2>Canvas</h2>
+  <ul>
+    <li><a href="visualizations/canvas/"><span class="label">Wszystkie warianty na artboardach</span><span class="meta">canvas/</span></a></li>
+    <li><a href="visualizations/print/"><span class="label">Wersja PDF wariantu A (Safe)</span><span class="meta">print/</span></a></li>
+  </ul>
+
+  <h2>Warianty A–H</h2>
+  <div class="grid">
+    <a href="visualizations/canvas/#safe"><span class="code">A · Safe</span><div class="name">Light corporate</div><div class="desc">TELUS-leaning</div></a>
+    <a href="visualizations/canvas/#bold"><span class="code">B · Bold</span><div class="name">Dark editorial</div><div class="desc">Diffco-leaning</div></a>
+    <a href="visualizations/canvas/#journey"><span class="code">C · TELUS</span><div class="name">TELUS + Empat + Diffco</div><div class="desc">Light, korporacyjny</div></a>
+    <a href="visualizations/canvas/#diffco"><span class="code">D · Diffco</span><div class="name">AI-engineering</div><div class="desc">Dark, techniczny</div></a>
+    <a href="visualizations/canvas/#premium"><span class="code">E · Premium</span><div class="name">Quiet minimal</div><div class="desc">Whitespace, teatralny</div></a>
+    <a href="visualizations/canvas/#saas"><span class="code">F · SaaS</span><div class="name">Productivity</div><div class="desc">Bright, illustrative</div></a>
+    <a href="visualizations/canvas/#remix"><span class="code">G · Remix</span><div class="name">Best-of A–F</div><div class="desc">Editorial</div></a>
+    <a href="visualizations/canvas/#codewars"><span class="code">H · Codewars</span><div class="name">Dark terminal</div><div class="desc">Kata cards</div></a>
+  </div>
+
+  <h2>Standalone (bundled)</h2>
+  <ul>
+    <li><a href="visualizations/standalone/wizualizacje.html"><span class="label">wizualizacje.html</span><span class="meta">~2.0 MB</span></a></li>
+    <li><a href="visualizations/standalone/standalone.html"><span class="label">standalone.html</span><span class="meta">~1.9 MB</span></a></li>
+  </ul>
+
+  <footer>
+    Repo: <code>VIS-Technologie/website</code> · branch <code>main</code>
+  </footer>
+</div>
+</body>
+</html>
