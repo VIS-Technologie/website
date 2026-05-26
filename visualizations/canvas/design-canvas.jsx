@@ -50,6 +50,12 @@ if (typeof document !== 'undefined' && !document.getElementById('dc-styles')) {
     '  background:transparent;color:rgba(60,50,40,.7);display:flex;align-items:center;justify-content:center}',
     '.dc-expand:hover{background:rgba(0,0,0,.06);color:#2a251f}',
     '[data-dc-slot]:hover .dc-expand{opacity:1}',
+    '.dc-clickbridge{position:absolute;inset:0;z-index:1;cursor:pointer}',
+    '.dc-openhint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);',
+    '  background:rgba(20,20,20,.78);color:#fff;padding:10px 18px;border-radius:24px;',
+    '  font-size:14px;font-weight:500;letter-spacing:.2px;pointer-events:none;',
+    '  opacity:0;transition:opacity .18s;z-index:3;white-space:nowrap;backdrop-filter:blur(6px)}',
+    '[data-dc-slot]:hover .dc-openhint{opacity:1;transition-delay:.18s}',
   ].join('\n');
   document.head.appendChild(s);
 }
@@ -438,6 +444,27 @@ function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorde
     document.addEventListener('pointerup', up);
   };
 
+  // Click-vs-drag detection na całej karcie: pointerdown zapisuje pozycję,
+  // pointerup w pobliżu (≤5px, ≤500ms) traktujemy jako klik → otwórz preview
+  // w nowej karcie. Inaczej event nie robi nic (drag pan canvasa działa,
+  // bo bridge nie woła preventDefault i pointerdown wciąż propaguje do viewportu).
+  const previewFolder = (typeof window !== 'undefined' && window.previewFolderFor)
+    ? window.previewFolderFor(id) : null;
+  const onBridgeDown = (e) => {
+    if (e.button !== 0 || !previewFolder) return;
+    const startX = e.clientX, startY = e.clientY, t0 = Date.now();
+    const onUp = (ev) => {
+      window.removeEventListener('pointerup', onUp, true);
+      const dx = Math.abs(ev.clientX - startX);
+      const dy = Math.abs(ev.clientY - startY);
+      const dt = Date.now() - t0;
+      if (dx <= 5 && dy <= 5 && dt <= 500) {
+        window.open(`../preview/${previewFolder}/`, '_blank', 'noopener');
+      }
+    };
+    window.addEventListener('pointerup', onUp, true);
+  };
+
   return (
     <div ref={ref} data-dc-slot={id} style={{ position: 'relative', flexShrink: 0 }}>
       <div className="dc-labelrow" style={{ position: 'absolute', bottom: '100%', left: -4, marginBottom: 4, color: DC.label }}>
@@ -449,12 +476,14 @@ function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorde
             style={{ fontSize: 15, fontWeight: 500, color: DC.label, lineHeight: 1 }} />
         </div>
       </div>
-      <button className="dc-expand" onClick={onFocus} onPointerDown={(e) => e.stopPropagation()} title="Focus">
+      <button className="dc-expand" onClick={onFocus} onPointerDown={(e) => e.stopPropagation()} title="Focus (overlay)">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M7 1h4v4M5 11H1V7M11 1L7.5 4.5M1 11l3.5-3.5"/></svg>
       </button>
       <div className="dc-card"
-        style={{ borderRadius: 2, boxShadow: '0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06)', overflow: 'hidden', width, height, background: '#fff', ...style }}>
+        style={{ borderRadius: 2, boxShadow: '0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06)', overflow: 'hidden', width, height, background: '#fff', position: 'relative', ...style }}>
         {children || <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#bbb', fontSize: 13, fontFamily: DC.font }}>{id}</div>}
+        {previewFolder && <div className="dc-clickbridge" onPointerDown={onBridgeDown} title="Kliknij, aby otworzyć preview" />}
+        {previewFolder && <div className="dc-openhint">Otwórz preview ↗</div>}
       </div>
     </div>
   );

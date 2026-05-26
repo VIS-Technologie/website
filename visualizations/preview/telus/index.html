@@ -1,0 +1,55 @@
+        <!doctype html>
+        <html lang="pl">
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Vis Technologie — preview: C · TELUS</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../shared/styles.css" />
+<link rel="stylesheet" href="../../variations/telus/telus-styles.css" />
+<link rel="stylesheet" href="../../variations/telus/telus-pages-styles.css" />
+<link rel="stylesheet" href="../../variations/diffco/diffco-styles.css" />
+<link rel="stylesheet" href="../../variations/diffco/diffco-pages-styles.css" />
+<link rel="stylesheet" href="../../variations/premium/premium-styles.css" />
+<link rel="stylesheet" href="../../variations/premium/premium-pages-styles.css" />
+<link rel="stylesheet" href="../../variations/dx/dx-styles.css" />
+<link rel="stylesheet" href="../../variations/remix/remix-styles.css" />
+<link rel="stylesheet" href="../../variations/codewars/codewars-styles.css" />
+        <style>
+          body { margin: 0; }
+          .preview-back {
+            position: fixed; top: 12px; right: 12px; z-index: 9999;
+            padding: 6px 12px; font: 13px/1 system-ui, sans-serif;
+            background: rgba(20,20,20,0.7); color: rgba(255,255,255,0.9);
+            text-decoration: none; border-radius: 6px; backdrop-filter: blur(8px);
+          }
+          .preview-back:hover { background: rgba(20,20,20,0.9); }
+        </style>
+        </head>
+        <body>
+        <a class="preview-back" href="../../canvas/" aria-label="Powrót do canvas">← canvas</a>
+        <div id="root"></div>
+
+        <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+        <script type="text/babel" src="../../shared/shared.jsx"></script>
+<script type="text/babel" src="../../shared/nav-footer.jsx"></script>
+<script type="text/babel" src="../../shared/sections.jsx"></script>
+<script type="text/babel" src="../../shared/how-we-work.jsx"></script>
+<script type="text/babel" src="../../shared/pages.jsx"></script>
+<script type="text/babel" src="../../shared/tweaks-panel.jsx"></script>
+<script type="text/babel" src="../../shared/variation.jsx"></script>
+<script type="text/babel" src="../../variations/telus/telus-variation.jsx"></script>
+<script type="text/babel" src="../../variations/telus/telus-pages.jsx"></script>
+
+        <script type="text/babel">
+  const props = {};
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(TelusVariation, props));
+</script>
+        </body>
+        </html>
