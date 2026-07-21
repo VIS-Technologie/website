@@ -584,6 +584,7 @@ function DxVariation() {
           <DxPull lang={lang} />
           <DxRibbon lang={lang} />
           <DxProcess lang={lang} />
+          <DxAbout lang={lang} />
           <DxClose lang={lang} setRoute={setRoute} />
         </>
       )}
@@ -761,6 +762,45 @@ function DxProcess({ lang }) {
           <h3>{c.process.billingTitle}</h3>
           <p>{c.process.billing}</p>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function DxAbout({ lang }) {
+  const c = DX_COPY[lang];
+  return (
+    <section className="dx-about" id="dx-about">
+      <div className="dx-about-inner">
+        <div className="dx-about-head">
+          <span className="dx-eyebrow">{c.about.eyebrow}</span>
+          <h2 className="dx-h1" style={{ marginTop: 12 }}>{c.about.title}</h2>
+        </div>
+        <div className="dx-about-cols">
+          <div className="dx-about-text">
+            {c.about.paras.map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+          <aside className="dx-about-aside">
+            <div className="dx-about-mission">
+              <span className="dx-eyebrow">{c.about.missionLabel}</span>
+              <p>{c.about.mission}</p>
+            </div>
+            <p className="dx-about-team">{c.about.team}</p>
+            <p className="dx-about-loc">{c.about.location}</p>
+          </aside>
+        </div>
+        <span className="dx-eyebrow" style={{ display: "block", marginBottom: 20 }}>{c.about.foundersLabel}</span>
+        <div className="dx-founders">
+          {c.about.founders.map((f) => (
+            <div key={f.name} className="dx-founder">
+              <div className="dx-founder-photo"><span>{f.photoLabel}</span></div>
+              <div className="dx-founder-name">{f.name}</div>
+              <div className="dx-founder-role">{f.role}</div>
+              {f.note ? <p className="dx-founder-note">{f.note}</p> : null}
+            </div>
+          ))}
+        </div>
+        <p className="dx-about-lead-note">{c.about.leadNote}</p>
       </div>
     </section>
   );

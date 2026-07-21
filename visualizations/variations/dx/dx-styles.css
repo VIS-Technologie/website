@@ -423,6 +423,39 @@
 .dx-billing h3 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
 .dx-billing p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--dx-fg-2); }
 
+/* about */
+.dx-about { padding: 96px 32px; background: var(--dx-bg); }
+.dx-about-inner { max-width: 1320px; margin: 0 auto; }
+.dx-about-head { margin-bottom: 48px; max-width: 30ch; }
+.dx-about-cols {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px;
+  align-items: start; margin-bottom: 64px;
+}
+.dx-about-text p { font-size: 17px; line-height: 1.6; color: var(--dx-fg); margin: 0 0 20px; max-width: 60ch; }
+.dx-about-aside { display: flex; flex-direction: column; gap: 24px; }
+.dx-about-mission { background: var(--dx-surface-2); border-radius: 20px; padding: 32px; }
+.dx-about-mission p { margin: 12px 0 0; font-size: 16px; line-height: 1.55; font-weight: 500; }
+.dx-about-team, .dx-about-loc { margin: 0; font-size: 14px; color: var(--dx-fg-2); }
+.dx-founders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.dx-founder { background: var(--dx-surface); border-radius: 20px; padding: 24px; }
+.dx-founder-photo {
+  aspect-ratio: 4/5; border-radius: 12px; background: var(--dx-bg);
+  border: 1px dashed var(--dx-line-strong);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.dx-founder-photo span {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--dx-fg-2); font-weight: 600;
+}
+.dx-founder-name { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.dx-founder-role { font-size: 13px; color: var(--dx-blue-ink); font-weight: 600; margin-top: 4px; }
+.dx-founder-note { font-size: 13px; color: var(--dx-fg-2); line-height: 1.5; margin: 10px 0 0; }
+.dx-about-lead-note {
+  font-size: 15px; font-weight: 500; color: var(--dx-fg);
+  background: var(--dx-surface-3); border-radius: 12px;
+  padding: 16px 24px; display: inline-block; margin: 0;
+}
+
 /* closing CTA */
 .dx-close {
   background: var(--dx-blue);
@@ -496,5 +529,7 @@
   .dx-ribbon-grid { grid-template-columns: 1fr 1fr; }
   .dx-proc-grid { grid-template-columns: 1fr; }
   .dx-billing { grid-template-columns: 1fr; }
+  .dx-about-cols { grid-template-columns: 1fr; gap: 32px; }
+  .dx-founders { grid-template-columns: 1fr; }
   .dx-footer-grid { grid-template-columns: 1fr 1fr; }
 }
