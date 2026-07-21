@@ -914,34 +914,51 @@ function DxServicesPage({ lang, setRoute }) {
 }
 
 function DxWorkPage({ lang, setRoute }) {
-  const c = COPY[lang];
-  const tints = ["tint-blue", "tint-pink", "tint-yellow", ""];
+  const c = DX_COPY[lang];
+  const tints = ["tint-blue", "tint-yellow"];
   return (
     <>
       <section className="dx-hero" style={{ background: "var(--dx-surface-2)", paddingBottom: 80 }}>
         <div className="dx-hero-inner" style={{ minHeight: "auto", display: "block" }}>
-          <span className="dx-hero-eyebrow">{c.workEyebrow}</span>
-          <h1 className="dx-display" style={{ maxWidth: "20ch" }}>
-            {lang === "pl" ? "Realizacje, które bronią się liczbami." : "Work that holds up to scrutiny."}
-          </h1>
+          <span className="dx-hero-eyebrow">{c.workPage.eyebrow}</span>
+          <h1 className="dx-display" style={{ maxWidth: "20ch" }}>{c.workPage.title}</h1>
         </div>
       </section>
-      <section className="dx-features">
-        <div className="dx-features-inner">
-          {c.work.map((w, i) => (
-            <div key={i} className={`dx-feature ${tints[i]} ${i % 2 ? "flip" : ""}`}>
-              <div>
-                <div className="dx-feature-eyebrow">{w.tag} · {w.year}</div>
-                <h3 className="dx-h1">{w.title}</h3>
-                <button className="dx-btn dx-btn-dark" style={{ marginTop: 24 }}>
-                  {lang === "pl" ? "Zobacz case" : "View case"} →
-                </button>
-              </div>
-              <div className="dx-feature-art">
+      <section className="dx-cases">
+        <div className="dx-cases-inner">
+          {c.workPage.cases.map((w, i) => (
+            <article key={i} className={`dx-case ${tints[i]}`}>
+              <header>
+                <div className="dx-feature-eyebrow">{w.tag}</div>
+                <h2 className="dx-case-title">{w.title}</h2>
+              </header>
+              <div className="dx-case-art">
                 <div className="stripes" />
-                <span className="label">{w.placeholder}</span>
+                <span className="label">{w.artLabel}</span>
               </div>
-            </div>
+              <div className="dx-case-cols">
+                <div className="dx-case-block">
+                  <h3>{w.challenge.h}</h3>
+                  {w.challenge.ps.map((p, j) => <p key={j}>{p}</p>)}
+                </div>
+                <div className="dx-case-block">
+                  <h3>{w.did.h}</h3>
+                  {w.did.ps.map((p, j) => <p key={j}>{p}</p>)}
+                  {w.did.items ? (
+                    <ul className="dx-case-list">
+                      {w.did.items.map((it, j) => <li key={j}><strong>{it.t}</strong> — {it.d}</li>)}
+                    </ul>
+                  ) : null}
+                </div>
+                <div className="dx-case-block">
+                  <h3>{w.effects.h}</h3>
+                  <ul className="dx-case-list">
+                    {w.effects.items.map((e, j) => <li key={j}>{e}</li>)}
+                  </ul>
+                </div>
+              </div>
+              <p className="dx-case-closing">{w.closing}</p>
+            </article>
           ))}
         </div>
       </section>

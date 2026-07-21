@@ -482,6 +482,46 @@
 }
 .dx-close .dx-btn-yellow:hover { background: #fff; transform: translateY(-1px); }
 
+/* case studies */
+.dx-cases { padding: 96px 32px; }
+.dx-cases-inner { max-width: 1320px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+.dx-case { border-radius: 28px; padding: 64px; background: var(--dx-surface); }
+.dx-case.tint-blue { background: var(--dx-surface-3); }
+.dx-case.tint-yellow { background: var(--dx-surface-2); }
+.dx-case-title {
+  font-family: var(--sans); font-weight: 700; letter-spacing: -0.025em;
+  line-height: 1.05; font-size: clamp(30px, 3.4vw, 52px);
+  margin: 0; max-width: 26ch;
+}
+.dx-case-art {
+  aspect-ratio: 21/9; border-radius: 16px; background: var(--dx-bg);
+  border: 1px solid var(--dx-line); position: relative; overflow: hidden;
+  margin: 40px 0;
+}
+.dx-case-art .stripes {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg, var(--dx-line) 0, var(--dx-line) 1px, transparent 1px, transparent 14px);
+  opacity: 0.45;
+}
+.dx-case-art .label {
+  position: absolute; bottom: 14px; left: 14px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--dx-fg-2);
+  background: rgba(255,255,255,0.85);
+  padding: 4px 8px; border-radius: 4px;
+}
+.dx-case-cols { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 48px; }
+.dx-case-block h3 {
+  font-size: 14px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--dx-blue-ink); margin: 0 0 16px;
+}
+.dx-case-block p { font-size: 15px; line-height: 1.6; margin: 0 0 14px; }
+.dx-case-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.dx-case-list li { font-size: 14px; line-height: 1.5; display: flex; gap: 10px; }
+.dx-case-list li::before { content: "✓"; font-weight: 700; color: var(--dx-blue); flex-shrink: 0; }
+.dx-case-closing { margin: 40px 0 0; font-size: 16px; font-weight: 600; max-width: 70ch; }
+
 /* footer */
 .dx-footer {
   background: var(--dx-fg);
@@ -532,4 +572,6 @@
   .dx-about-cols { grid-template-columns: 1fr; gap: 32px; }
   .dx-founders { grid-template-columns: 1fr; }
   .dx-footer-grid { grid-template-columns: 1fr 1fr; }
+  .dx-case { padding: 40px; }
+  .dx-case-cols { grid-template-columns: 1fr; gap: 32px; }
 }
