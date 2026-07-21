@@ -6,3 +6,6 @@ Thumbs.db
 .env
 .vscode/
 .idea/
+__pycache__/
+/BRIEF-_1.DOC
+/VISTEC_1.DOC
