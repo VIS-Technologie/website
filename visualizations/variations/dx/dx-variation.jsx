@@ -571,7 +571,6 @@ const DX_COPY = {
 function DxVariation() {
   const [lang, setLang] = useState("pl");
   const [route, setRoute] = useState("home");
-  const c = COPY[lang];
 
   return (
     <div className="page dx" data-screen-label="Vis Technologie · saas">
