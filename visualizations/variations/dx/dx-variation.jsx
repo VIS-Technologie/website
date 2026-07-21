@@ -879,7 +879,8 @@ function DxFooter({ lang, setRoute }) {
 
 // ---- Subpages ----
 function DxServicesPage({ lang, setRoute }) {
-  const c = COPY[lang];
+  const c = DX_COPY[lang];
+  const tints = ["tint-yellow", "tint-pink", "tint-blue", "", "tint-yellow", "tint-pink", "tint-blue", ""];
   return (
     <>
       <section className="dx-hero" style={{ background: "var(--dx-surface-3)", paddingBottom: 80 }}>
@@ -891,12 +892,13 @@ function DxServicesPage({ lang, setRoute }) {
       <section className="dx-features">
         <div className="dx-features-inner">
           {c.services.items.map((it, i) => (
-            <div key={it.num} className={`dx-feature ${["tint-yellow","tint-pink","tint-blue","","tint-yellow","tint-pink"][i]} ${i % 2 ? "flip" : ""}`}>
+            <div key={it.num} className={`dx-feature ${tints[i]} ${i % 2 ? "flip" : ""}`}>
               <div>
                 <div className="dx-feature-eyebrow">{it.num}</div>
                 <h3 className="dx-h1">{it.title}</h3>
                 <p className="dx-body-lg">{it.desc}</p>
-                <button className="dx-btn dx-btn-dark" onClick={() => setRoute("contact")} style={{ marginTop: 24 }}>
+                <p className="dx-feature-for">{it.forWho}</p>
+                <button className="dx-btn dx-btn-dark" onClick={() => setRoute("contact")}>
                   {lang === "pl" ? "Zapytaj" : "Inquire"} →
                 </button>
               </div>
@@ -906,6 +908,14 @@ function DxServicesPage({ lang, setRoute }) {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+      <section className="dx-tech">
+        <div className="dx-tech-inner">
+          <div className="dx-tech-row">
+            {c.tech.list.map((t) => <span key={t} className="dx-tech-pill">{t}</span>)}
+          </div>
+          <p className="dx-tech-motto">{c.tech.motto}</p>
         </div>
       </section>
       <DxClose lang={lang} setRoute={setRoute} />

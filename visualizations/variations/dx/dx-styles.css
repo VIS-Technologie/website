@@ -522,6 +522,22 @@
 .dx-case-list li::before { content: "✓"; font-weight: 700; color: var(--dx-blue); flex-shrink: 0; }
 .dx-case-closing { margin: 40px 0 0; font-size: 16px; font-weight: 600; max-width: 70ch; }
 
+/* tech strip */
+.dx-tech { padding: 0 32px 96px; }
+.dx-tech-inner {
+  max-width: 1320px; margin: 0 auto;
+  background: var(--dx-fg); color: #fff;
+  border-radius: 28px; padding: 48px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.dx-tech-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.dx-tech-pill {
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 999px;
+  padding: 10px 18px; font-size: 14px; font-weight: 600; white-space: nowrap;
+}
+.dx-tech-motto { margin: 0; font-size: 15px; color: rgba(255,255,255,0.7); max-width: 30ch; }
+
 /* footer */
 .dx-footer {
   background: var(--dx-fg);
