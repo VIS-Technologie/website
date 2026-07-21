@@ -579,7 +579,7 @@ function DxVariation() {
       {route === "home" && (
         <>
           <DxHero lang={lang} setRoute={setRoute} />
-          <DxLogos lang={lang} />
+          <DxPartners lang={lang} />
           <DxFeatures lang={lang} setRoute={setRoute} />
           <DxPull lang={lang} />
           <DxRibbon lang={lang} />
@@ -596,7 +596,7 @@ function DxVariation() {
 }
 
 function DxNav({ lang, setLang, route, setRoute }) {
-  const c = COPY[lang];
+  const c = DX_COPY[lang];
   const go = (r) => { setRoute(r); window.scrollTo({ top: 0 }); };
   return (
     <nav className="dx-nav">
@@ -608,7 +608,7 @@ function DxNav({ lang, setLang, route, setRoute }) {
         <div className="dx-nav-links">
           <button className={route === "services" ? "on" : ""} onClick={() => go("services")}>{c.nav.services}</button>
           <button className={route === "case" ? "on" : ""} onClick={() => go("case")}>{c.nav.work}</button>
-          <button onClick={() => go("home")}>{c.nav.about}</button>
+          <button onClick={() => { go("home"); setTimeout(() => { const el = document.getElementById("dx-about"); el && el.scrollIntoView({ behavior: "smooth" }); }, 80); }}>{c.nav.about}</button>
           <button className={route === "contact" ? "on" : ""} onClick={() => go("contact")}>{c.nav.contact}</button>
         </div>
         <div className="dx-nav-side">
@@ -625,35 +625,30 @@ function DxNav({ lang, setLang, route, setRoute }) {
 }
 
 function DxHero({ lang, setRoute }) {
-  const c = COPY[lang];
-  const head = lang === "pl"
-    ? <>Twój zespół dostarcza szybciej, gdy <em>wszystko</em> jest na miejscu.</>
-    : <>Your team ships faster when <em>everything</em> is in one place.</>;
+  const c = DX_COPY[lang];
   return (
     <section className="dx-hero">
       <div className="dx-hero-inner">
         <div className="dx-hero-left">
-          <span className="dx-hero-eyebrow">
-            {lang === "pl" ? "Studio inżynierii oprogramowania" : "Software engineering studio"}
-          </span>
-          <h1 className="dx-display">{head}</h1>
-          <p>{c.heroSub}</p>
+          <span className="dx-hero-eyebrow">{c.hero.eyebrow}</span>
+          <h1 className="dx-display">{c.hero.pre}<em>{c.hero.em}</em>{c.hero.post}</h1>
+          <p>{c.hero.sub}</p>
           <div className="dx-hero-actions">
             <button className="dx-btn dx-btn-primary" onClick={() => setRoute("contact")}>
-              {lang === "pl" ? "Zacznij projekt" : "Start a project"} →
+              {c.hero.ctaPrimary} →
             </button>
             <button className="dx-btn dx-btn-ghost" onClick={() => setRoute("case")}>
-              {lang === "pl" ? "Zobacz realizacje" : "See our work"}
+              {c.hero.ctaSecondary}
             </button>
           </div>
         </div>
         <div className="dx-hero-art">
           <div className="dx-hero-art-frame">
             <div className="dx-hero-art-shapes">
-              <div className="dx-shape-blue"><span className="dx-hero-tag">aplikacja</span></div>
-              <div className="dx-shape-yellow"><span className="dx-hero-tag">dashboard</span></div>
-              <div className="dx-shape-pink"><span className="dx-hero-tag">mobile</span></div>
-              <div className="dx-shape-green"><span className="dx-hero-tag">cloud</span></div>
+              <div className="dx-shape-blue"><span className="dx-hero-tag">{c.hero.tags[0]}</span></div>
+              <div className="dx-shape-yellow"><span className="dx-hero-tag">{c.hero.tags[1]}</span></div>
+              <div className="dx-shape-pink"><span className="dx-hero-tag">{c.hero.tags[2]}</span></div>
+              <div className="dx-shape-green"><span className="dx-hero-tag">{c.hero.tags[3]}</span></div>
             </div>
           </div>
         </div>
@@ -662,17 +657,16 @@ function DxHero({ lang, setRoute }) {
   );
 }
 
-function DxLogos({ lang }) {
+function DxPartners({ lang }) {
+  const c = DX_COPY[lang];
   return (
     <section className="dx-logos">
       <div className="dx-logos-inner">
-        <div className="dx-logos-eyebrow">
-          {lang === "pl" ? "Zaufały nam zespoły z 26 krajów" : "Trusted by teams in 26 countries"}
-        </div>
+        <div className="dx-logos-eyebrow">{c.partners.title}</div>
         <div className="dx-logos-row">
-          <span>Northwind</span><span>Aurora Bank</span><span>Helio Logistics</span>
-          <span>Vespro</span><span>Kettlepoint</span><span>Foundry 14</span>
+          {c.partners.names.map((n) => <span key={n}>{n}</span>)}
         </div>
+        <p className="dx-partners-note">{c.partners.note}</p>
       </div>
     </section>
   );

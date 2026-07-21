@@ -256,6 +256,12 @@
   opacity: 0.7;
 }
 .dx-logos-row span { white-space: nowrap; }
+.dx-partners-note {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--dx-fg-2);
+}
 
 /* feature blocks (alternating, surface-tinted) */
 .dx-features { padding: 96px 32px; }
