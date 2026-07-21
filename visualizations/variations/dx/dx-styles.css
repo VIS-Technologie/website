@@ -373,7 +373,6 @@
   letter-spacing: -0.03em;
   line-height: 0.9;
 }
-.dx-ribbon-num .unit { font-size: 0.55em; opacity: 0.5; margin-left: 2px; }
 .dx-ribbon-num-text {
   font-size: clamp(26px, 2.6vw, 40px);
   line-height: 1.12;

@@ -998,7 +998,7 @@ function DxContactPage({ lang, setRoute }) {
                 {[["name", c.contact.formLabels.name], ["email", c.contact.formLabels.email], ["company", c.contact.formLabels.company], ["topic", c.contact.formLabels.topic]].map(([k, l]) => (
                   <div key={k} style={{ marginBottom: 24 }}>
                     <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>{l}</label>
-                    <input value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} style={fieldStyle} />
+                    <input type={k === "email" ? "email" : "text"} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} style={fieldStyle} />
                   </div>
                 ))}
                 <div style={{ marginBottom: 24 }}>
@@ -1012,7 +1012,7 @@ function DxContactPage({ lang, setRoute }) {
                 <button type="submit" className="dx-btn dx-btn-primary">{c.contact.formLabels.send} →</button>
                 <p style={{ fontSize: 12, color: "var(--dx-fg-2)", lineHeight: 1.5, margin: "24px 0 0", maxWidth: "60ch" }}>
                   {c.contact.clausePre}
-                  <a onClick={() => setRoute("legal")} style={{ color: "var(--dx-blue)", cursor: "pointer", fontWeight: 600 }}>{c.contact.clauseLink}</a>
+                  <a onClick={() => { setRoute("legal"); window.scrollTo({ top: 0 }); }} style={{ color: "var(--dx-blue)", cursor: "pointer", fontWeight: 600 }}>{c.contact.clauseLink}</a>
                   {c.contact.clausePost}
                 </p>
               </form>
@@ -1080,7 +1080,7 @@ function DxCookieNote({ lang, setRoute }) {
     <div className="dx-cookie-note">
       <p>
         {c.cookieNote.text}{" "}
-        <a onClick={() => setRoute("legal")}>{c.cookieNote.link}</a>
+        <a onClick={() => { setRoute("legal"); window.scrollTo({ top: 0 }); setTimeout(() => { const el = document.getElementById("dx-cookies"); el && el.scrollIntoView(); }, 80); }}>{c.cookieNote.link}</a>
       </p>
       <button className="dx-btn dx-btn-dark" onClick={dismiss}>{c.cookieNote.btn}</button>
     </div>
