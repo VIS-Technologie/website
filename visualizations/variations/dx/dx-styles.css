@@ -289,19 +289,12 @@
 }
 .dx-feature h3 { max-width: 14ch; margin-bottom: 16px; }
 .dx-feature p { max-width: 44ch; }
-.dx-feature-list {
-  list-style: none; padding: 0; margin: 24px 0 32px;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.dx-feature-list li {
-  font-size: 15px; font-weight: 500; color: var(--dx-fg);
-  display: flex; align-items: center; gap: 12px;
-}
-.dx-feature-list li::before {
-  content: ""; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--dx-fg);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><path d='M5 9l3 3 5-6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  flex-shrink: 0;
+.dx-feature-for {
+  margin: 20px 0 28px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dx-fg-2);
+  max-width: 44ch;
 }
 .dx-feature-art {
   aspect-ratio: 4/3;
@@ -381,6 +374,11 @@
   line-height: 0.9;
 }
 .dx-ribbon-num .unit { font-size: 0.55em; opacity: 0.5; margin-left: 2px; }
+.dx-ribbon-num-text {
+  font-size: clamp(26px, 2.6vw, 40px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
 .dx-ribbon-label {
   font-size: 14px; font-weight: 500; line-height: 1.4;
   color: var(--dx-fg);

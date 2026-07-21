@@ -673,7 +673,7 @@ function DxPartners({ lang }) {
 }
 
 function DxFeatures({ lang, setRoute }) {
-  const c = COPY[lang];
+  const c = DX_COPY[lang];
   const items = c.services.items.slice(0, 4);
   const tints = ["tint-blue", "tint-yellow", "tint-pink", ""];
   return (
@@ -685,18 +685,14 @@ function DxFeatures({ lang, setRoute }) {
               <div className="dx-feature-eyebrow">{it.num} · {c.services.eyebrow}</div>
               <h3 className="dx-h1">{it.title}</h3>
               <p className="dx-body-lg">{it.desc}</p>
-              <ul className="dx-feature-list">
-                <li>{lang === "pl" ? "Wdrożenie w 14 dni od kickoffu" : "Deployed in 14 days from kickoff"}</li>
-                <li>{lang === "pl" ? "Dedykowany product owner" : "Dedicated product owner"}</li>
-                <li>{lang === "pl" ? "SLA i monitoring 24/7" : "SLA & 24/7 monitoring"}</li>
-              </ul>
+              <p className="dx-feature-for">{it.forWho}</p>
               <button className="dx-btn dx-btn-dark" onClick={() => setRoute("services")}>
-                {lang === "pl" ? "Dowiedz się więcej" : "Learn more"} →
+                {lang === "pl" ? "Zobacz wszystkie usługi" : "See all services"} →
               </button>
             </div>
             <div className="dx-feature-art">
               <div className="stripes" />
-              <span className="label">{it.title.toLowerCase()} · screenshot</span>
+              <span className="label">{it.title.toLowerCase()}</span>
             </div>
           </div>
         ))}
@@ -706,41 +702,31 @@ function DxFeatures({ lang, setRoute }) {
 }
 
 function DxPull({ lang }) {
+  const c = DX_COPY[lang];
   return (
     <section className="dx-pull">
       <div className="dx-pull-inner">
-        <h2>
-          {lang === "pl"
-            ? <>"Dostarczyli to, w co przestaliśmy wierzyć po dwóch latach z poprzednim dostawcą. <em>Bez paniki, bez przesuwanych terminów.</em>"</>
-            : <>"They delivered what we'd stopped believing was possible. <em>No panic, no slipped deadlines.</em>"</>}
-        </h2>
-        <div className="dx-pull-attr">
-          — CTO · {lang === "pl" ? "Operator rozliczeń, DACH" : "Settlement operator, DACH"}
-        </div>
+        <h2>{c.pull.text}<em>{c.pull.em}</em></h2>
+        <div className="dx-pull-attr">{c.pull.attr}</div>
       </div>
     </section>
   );
 }
 
 function DxRibbon({ lang }) {
-  const c = COPY[lang];
+  const c = DX_COPY[lang];
   const tints = ["tint-yellow", "tint-blue", "tint-pink", ""];
   return (
     <section className="dx-ribbon">
       <div className="dx-ribbon-inner">
         <div style={{ marginBottom: 48, maxWidth: "26ch" }}>
-          <span className="dx-eyebrow">
-            {lang === "pl" ? "SKALA" : "SCALE"}
-          </span>
-          <h2 className="dx-h1" style={{ marginTop: 12 }}>{c.statsTitle}</h2>
+          <span className="dx-eyebrow">{c.stats.eyebrow}</span>
+          <h2 className="dx-h1" style={{ marginTop: 12 }}>{c.stats.title}</h2>
         </div>
         <div className="dx-ribbon-grid">
-          {c.stats.map((s, i) => (
+          {c.stats.items.map((s, i) => (
             <div key={i} className={`dx-ribbon-card ${tints[i]}`}>
-              <div className="dx-ribbon-num">
-                {Number.isInteger(s.num) ? s.num : s.num.toFixed(2)}
-                {s.unit && <span className="unit">{s.unit}</span>}
-              </div>
+              <div className="dx-ribbon-num dx-ribbon-num-text">{s.big}</div>
               <div className="dx-ribbon-label">{s.label}</div>
             </div>
           ))}
