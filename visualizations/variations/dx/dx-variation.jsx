@@ -591,6 +591,8 @@ function DxVariation() {
       {route === "services" && <DxServicesPage lang={lang} setRoute={setRoute} />}
       {route === "case" && <DxWorkPage lang={lang} setRoute={setRoute} />}
       {route === "contact" && <DxContactPage lang={lang} setRoute={setRoute} />}
+      {route === "legal" && <DxLegalPage lang={lang} />}
+      <DxCookieNote lang={lang} setRoute={setRoute} />
       <DxFooter lang={lang} setRoute={setRoute} />
     </div>
   );
@@ -822,49 +824,41 @@ function DxClose({ lang, setRoute }) {
 }
 
 function DxFooter({ lang, setRoute }) {
-  const c = COPY[lang];
+  const c = DX_COPY[lang];
   const go = (r) => { setRoute(r); window.scrollTo({ top: 0 }); };
+  const goAnchor = (r, id) => { go(r); setTimeout(() => { const el = document.getElementById(id); el && el.scrollIntoView(); }, 80); };
   return (
     <footer className="dx-footer">
       <div className="dx-footer-inner">
         <div className="dx-footer-mark">vistechnologie</div>
         <div className="dx-footer-grid">
           <div>
-            <h5>Studio</h5>
-            <p style={{ fontSize: 14, lineHeight: 1.55, color: "rgba(255,255,255,0.65)", maxWidth: "30ch", margin: 0 }}>
-              {c.footer.addr}
+            <h5>{c.footer.studioH}</h5>
+            <p style={{ fontSize: 14, lineHeight: 1.55, color: "rgba(255,255,255,0.65)", maxWidth: "30ch", margin: 0, whiteSpace: "pre-line" }}>
+              {c.footer.studioLines}
             </p>
           </div>
           <div>
             <h5>{c.nav.services}</h5>
             <ul>
-              {c.services.items.slice(0, 4).map(s => (
+              {c.services.items.slice(0, 4).map((s) => (
                 <li key={s.num}><a onClick={() => go("services")}>{s.title}</a></li>
               ))}
             </ul>
           </div>
           <div>
-            <h5>{lang === "pl" ? "Firma" : "Company"}</h5>
+            <h5>{c.footer.companyH}</h5>
             <ul>
-              <li><a onClick={() => go("home")}>{c.nav.about}</a></li>
+              <li><a onClick={() => goAnchor("home", "dx-about")}>{c.nav.about}</a></li>
               <li><a onClick={() => go("case")}>{c.nav.work}</a></li>
               <li><a onClick={() => go("contact")}>{c.nav.contact}</a></li>
             </ul>
           </div>
           <div>
-            <h5>{lang === "pl" ? "Zasoby" : "Resources"}</h5>
+            <h5>{c.footer.legalH}</h5>
             <ul>
-              <li><a>Blog ↗</a></li>
-              <li><a>Newsletter ↗</a></li>
-              <li><a>Open source ↗</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5>Social</h5>
-            <ul>
-              <li><a>LinkedIn ↗</a></li>
-              <li><a>GitHub ↗</a></li>
-              <li><a>Dribbble ↗</a></li>
+              <li><a onClick={() => go("legal")}>{c.footer.privacyLink}</a></li>
+              <li><a onClick={() => goAnchor("legal", "dx-cookies")}>{c.footer.cookiesLink}</a></li>
             </ul>
           </div>
         </div>
@@ -1036,6 +1030,61 @@ function DxContactPage({ lang, setRoute }) {
         </div>
       </section>
     </>
+  );
+}
+
+function DxLegalSectionList({ sections }) {
+  return (
+    <>
+      {sections.map((s, i) => (
+        <div key={i} className="dx-legal-section">
+          <h3>{s.h}</h3>
+          {s.blocks.map((b, j) =>
+            b.ul
+              ? <ul key={j}>{b.ul.map((li, k) => <li key={k}>{li}</li>)}</ul>
+              : <p key={j}>{b.p}</p>
+          )}
+        </div>
+      ))}
+    </>
+  );
+}
+
+function DxLegalPage({ lang }) {
+  const c = DX_COPY[lang];
+  return (
+    <section className="dx-legal">
+      <div className="dx-legal-inner">
+        <span className="dx-hero-eyebrow">{c.legal.eyebrow}</span>
+        <h1 className="dx-legal-title">{c.legal.title}</h1>
+        <p className="dx-legal-updated">{c.legal.updated}</p>
+        <h2>{c.legal.privacy.title}</h2>
+        <DxLegalSectionList sections={c.legal.privacy.sections} />
+        <h2 id="dx-cookies">{c.legal.cookies.title}</h2>
+        <DxLegalSectionList sections={c.legal.cookies.sections} />
+      </div>
+    </section>
+  );
+}
+
+function DxCookieNote({ lang, setRoute }) {
+  const c = DX_COPY[lang];
+  const [hidden, setHidden] = useState(() => {
+    try { return localStorage.getItem("dx-cookie-note") === "1"; } catch (e) { return false; }
+  });
+  if (hidden) return null;
+  const dismiss = () => {
+    try { localStorage.setItem("dx-cookie-note", "1"); } catch (e) {}
+    setHidden(true);
+  };
+  return (
+    <div className="dx-cookie-note">
+      <p>
+        {c.cookieNote.text}{" "}
+        <a onClick={() => setRoute("legal")}>{c.cookieNote.link}</a>
+      </p>
+      <button className="dx-btn dx-btn-dark" onClick={dismiss}>{c.cookieNote.btn}</button>
+    </div>
   );
 }
 
