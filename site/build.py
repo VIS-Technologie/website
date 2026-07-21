@@ -500,8 +500,14 @@ RENDERERS = {
 # ---------- build ----------
 
 def build():
-    shutil.rmtree(DIST, ignore_errors=True)
-    DIST.mkdir(parents=True)
+    # Czyszczenie zawartości zamiast rmtree(DIST): na Windows katalog bywa
+    # otwarty jako CWD serwera podglądu i nie da się go usunąć w całości.
+    DIST.mkdir(parents=True, exist_ok=True)
+    for child in DIST.iterdir():
+        if child.is_dir():
+            shutil.rmtree(child)
+        else:
+            child.unlink()
     shutil.copytree(SITE / "static", DIST, dirs_exist_ok=True)
 
     for key, pl_path, en_path in PAGES:
