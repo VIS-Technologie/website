@@ -98,7 +98,6 @@ button, input, textarea, select { font: inherit; }
   background: color-mix(in oklab, var(--dx-bg) 90%, transparent);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--dx-line);
-  position: relative;
 }
 .dx-nav-inner {
   max-width: 1320px;
