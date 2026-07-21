@@ -590,7 +590,7 @@ function DxVariation() {
       )}
       {route === "services" && <DxServicesPage lang={lang} setRoute={setRoute} />}
       {route === "case" && <DxWorkPage lang={lang} setRoute={setRoute} />}
-      {route === "contact" && <DxContactPage lang={lang} />}
+      {route === "contact" && <DxContactPage lang={lang} setRoute={setRoute} />}
       <DxFooter lang={lang} setRoute={setRoute} />
     </div>
   );
@@ -977,18 +977,19 @@ function DxWorkPage({ lang, setRoute }) {
   );
 }
 
-function DxContactPage({ lang }) {
-  const c = COPY[lang];
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+function DxContactPage({ lang, setRoute }) {
+  const c = DX_COPY[lang];
+  const [form, setForm] = useState({ name: "", email: "", company: "", topic: "", message: "", rodo: false });
   const [sent, setSent] = useState(false);
-  const submit = (e) => { e.preventDefault(); if (form.name && form.email && form.message) setSent(true); };
+  const submit = (e) => { e.preventDefault(); if (form.name && form.email && form.message && form.rodo) setSent(true); };
+  const fieldStyle = { width: "100%", padding: "12px 16px", border: "1px solid var(--dx-line-strong)", borderRadius: 8, fontSize: 16, fontFamily: "var(--sans)", background: "var(--dx-bg)" };
   return (
     <>
       <section className="dx-hero" style={{ background: "var(--dx-surface-4)", paddingBottom: 80 }}>
         <div className="dx-hero-inner" style={{ minHeight: "auto", display: "block" }}>
           <span className="dx-hero-eyebrow">{c.nav.contact}</span>
-          <h1 className="dx-display" style={{ maxWidth: "16ch" }}>{c.contactTitle}</h1>
-          <p style={{ maxWidth: "50ch", marginTop: 24 }}>{c.contactSub}</p>
+          <h1 className="dx-display" style={{ maxWidth: "16ch" }}>{c.contact.title}</h1>
+          <p style={{ maxWidth: "50ch", marginTop: 24 }}>{c.contact.sub}</p>
         </div>
       </section>
       <section style={{ padding: "80px 32px", maxWidth: 1320, margin: "0 auto" }}>
@@ -996,38 +997,36 @@ function DxContactPage({ lang }) {
           <div>
             {sent ? (
               <div>
-                <h2 className="dx-h1">{lang === "pl" ? "Dziękujemy." : "Thank you."}</h2>
-                <p className="dx-body-lg" style={{ marginTop: 16 }}>
-                  {lang === "pl" ? "Odezwiemy się w ciągu 48 godzin." : "We'll be in touch within 48 hours."}
-                </p>
+                <h2 className="dx-h1">{c.contact.sentTitle}</h2>
+                <p className="dx-body-lg" style={{ marginTop: 16 }}>{c.contact.sentSub}</p>
               </div>
             ) : (
               <form onSubmit={submit}>
-                {[["name", c.formLabels.name], ["email", c.formLabels.email], ["company", c.formLabels.company]].map(([k, l]) => (
+                {[["name", c.contact.formLabels.name], ["email", c.contact.formLabels.email], ["company", c.contact.formLabels.company], ["topic", c.contact.formLabels.topic]].map(([k, l]) => (
                   <div key={k} style={{ marginBottom: 24 }}>
                     <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>{l}</label>
-                    <input
-                      value={form[k]}
-                      onChange={e => setForm({ ...form, [k]: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--dx-line-strong)", borderRadius: 8, fontSize: 16, fontFamily: "var(--sans)", background: "var(--dx-bg)" }}
-                    />
+                    <input value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} style={fieldStyle} />
                   </div>
                 ))}
                 <div style={{ marginBottom: 24 }}>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>{c.formLabels.message}</label>
-                  <textarea
-                    rows="5"
-                    value={form.message}
-                    onChange={e => setForm({ ...form, message: e.target.value })}
-                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--dx-line-strong)", borderRadius: 8, fontSize: 16, fontFamily: "var(--sans)", background: "var(--dx-bg)", resize: "vertical" }}
-                  />
+                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>{c.contact.formLabels.message}</label>
+                  <textarea rows="5" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} style={{ ...fieldStyle, resize: "vertical" }} />
                 </div>
-                <button type="submit" className="dx-btn dx-btn-primary">{c.formLabels.send} →</button>
+                <label style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 24, fontSize: 13, lineHeight: 1.5, cursor: "pointer", maxWidth: "60ch" }}>
+                  <input type="checkbox" checked={form.rodo} onChange={(e) => setForm({ ...form, rodo: e.target.checked })} style={{ marginTop: 3 }} />
+                  <span>{c.contact.rodoCheckbox}</span>
+                </label>
+                <button type="submit" className="dx-btn dx-btn-primary">{c.contact.formLabels.send} →</button>
+                <p style={{ fontSize: 12, color: "var(--dx-fg-2)", lineHeight: 1.5, margin: "24px 0 0", maxWidth: "60ch" }}>
+                  {c.contact.clausePre}
+                  <a onClick={() => setRoute("legal")} style={{ color: "var(--dx-blue)", cursor: "pointer", fontWeight: 600 }}>{c.contact.clauseLink}</a>
+                  {c.contact.clausePost}
+                </p>
               </form>
             )}
           </div>
           <div>
-            {c.contactInfo.map(([k, v]) => (
+            {c.contact.info.map(([k, v]) => (
               <div key={k} style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 24, padding: "20px 0", borderTop: "1px solid var(--dx-line)" }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: "var(--dx-fg-2)", letterSpacing: "0.04em", textTransform: "uppercase" }}>{k}</span>
                 <span style={{ whiteSpace: "pre-line", fontSize: 16, fontWeight: 500 }}>{v}</span>
