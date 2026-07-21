@@ -583,7 +583,7 @@ function DxVariation() {
           <DxFeatures lang={lang} setRoute={setRoute} />
           <DxPull lang={lang} />
           <DxRibbon lang={lang} />
-          <DxPlans lang={lang} setRoute={setRoute} />
+          <DxProcess lang={lang} />
           <DxClose lang={lang} setRoute={setRoute} />
         </>
       )}
@@ -736,63 +736,30 @@ function DxRibbon({ lang }) {
   );
 }
 
-function DxPlans({ lang, setRoute }) {
-  const isPl = lang === "pl";
-  const plans = [
-    {
-      name: isPl ? "Discovery" : "Discovery",
-      price: isPl ? "12 tys." : "€2.5k",
-      desc: isPl ? "Warsztat i prototyp w 14 dni. Decyzja go/no-go zanim ruszy budżet." : "Workshop and prototype in 14 days. Go/no-go before any budget is spent.",
-      bullets: isPl
-        ? ["Warsztat z zespołem klienta", "Klikalny prototyp w Figma", "Roadmapa i wycena"]
-        : ["Workshop with your team", "Clickable Figma prototype", "Roadmap & estimate"],
-    },
-    {
-      name: isPl ? "Build" : "Build",
-      price: isPl ? "od 80 tys./mc" : "from €18k/mo",
-      desc: isPl ? "Pełny zespół wytwórczy. Sprinty dwutygodniowe i demo na żywo." : "Full delivery team. Two-week sprints and live demos.",
-      bullets: isPl
-        ? ["3–6 osób w stałym zespole", "Sprinty dwutygodniowe", "CI/CD od pierwszego dnia", "Pokrycie testami ≥ 80%"]
-        : ["3–6 dedicated engineers", "Two-week sprints", "CI/CD from day one", "≥ 80% test coverage"],
-      featured: true,
-    },
-    {
-      name: isPl ? "Run" : "Run",
-      price: isPl ? "indywidualnie" : "custom",
-      desc: isPl ? "Wsparcie po wdrożeniu, SLA i ciągły rozwój produktu." : "Post-launch support, SLA and continuous product growth.",
-      bullets: isPl
-        ? ["SLA i on-call 24/7", "Miesięczne raporty zdrowia", "Wspólny backlog rozwoju"]
-        : ["SLA & on-call 24/7", "Monthly health reports", "Shared growth backlog"],
-    },
-  ];
+function DxProcess({ lang }) {
+  const c = DX_COPY[lang];
+  const tints = ["", "tint-yellow", "tint-blue", "featured", "tint-pink"];
   return (
     <section className="dx-plans">
       <div className="dx-plans-inner">
         <div className="dx-plans-head">
-          <span className="dx-eyebrow">{isPl ? "Modele współpracy" : "Engagement models"}</span>
-          <h2 className="dx-h1" style={{ marginTop: 12 }}>
-            {isPl ? "Trzy sposoby, w jakie możemy pomóc." : "Three ways we can help."}
-          </h2>
-          <p className="dx-body">
-            {isPl
-              ? "Wybierz format, który pasuje do etapu Twojego produktu. Możesz przejść między nimi bez zmiany zespołu."
-              : "Pick the format that fits your product stage. You can switch between them without changing the team."}
-          </p>
+          <span className="dx-eyebrow">{c.process.eyebrow}</span>
+          <h2 className="dx-h1" style={{ marginTop: 12 }}>{c.process.title}</h2>
+          <p className="dx-body">{c.process.sub}</p>
         </div>
-        <div className="dx-plans-grid">
-          {plans.map((p) => (
-            <div key={p.name} className={`dx-plan ${p.featured ? "featured" : ""}`} data-en={lang === "en"}>
-              <div className="dx-plan-name">{p.name}</div>
-              <div className="dx-plan-price">{p.price}</div>
-              <div className="dx-plan-desc">{p.desc}</div>
-              <ul>
-                {p.bullets.map((b) => <li key={b}>{b}</li>)}
-              </ul>
-              <button className="dx-plan-cta" onClick={() => setRoute("contact")}>
-                {isPl ? "Porozmawiajmy" : "Let's talk"} →
-              </button>
+        <div className="dx-proc-grid">
+          {c.process.steps.map((s, i) => (
+            <div key={s.num} className={`dx-proc-card ${tints[i]}`}>
+              <div className="dx-proc-num">{s.num}</div>
+              <div className="dx-proc-name">{s.t}</div>
+              <div className="dx-proc-desc">{s.d}</div>
+              <div className="dx-proc-dur">{s.dur}</div>
             </div>
           ))}
+        </div>
+        <div className="dx-billing">
+          <h3>{c.process.billingTitle}</h3>
+          <p>{c.process.billing}</p>
         </div>
       </div>
     </section>
@@ -800,21 +767,14 @@ function DxPlans({ lang, setRoute }) {
 }
 
 function DxClose({ lang, setRoute }) {
+  const c = DX_COPY[lang];
   return (
     <section className="dx-close">
       <div className="dx-close-inner">
-        <h2>
-          {lang === "pl"
-            ? "Gotowy, by zacząć szybciej dostarczać?"
-            : "Ready to start shipping faster?"}
-        </h2>
-        <p>
-          {lang === "pl"
-            ? "Opisz, czego potrzebujesz. Odpowiadamy w ciągu 48 godzin roboczych — konkretem, nie ofertą sprzedażową."
-            : "Tell us what you need. We reply within 48 business hours — with substance, not sales pitch."}
-        </p>
+        <h2>{c.close.title}</h2>
+        <p>{c.close.sub}</p>
         <button className="dx-btn dx-btn-yellow" onClick={() => setRoute("contact")}>
-          {lang === "pl" ? "Umów rozmowę" : "Book a call"} →
+          {c.close.cta} →
         </button>
       </div>
     </section>
