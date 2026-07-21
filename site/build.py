@@ -27,7 +27,7 @@ PAGES = [
     ("thanks", "/kontakt/dziekujemy/", "/en/contact/thank-you/"),
     ("legal", "/polityka-prywatnosci/", "/en/privacy-policy/"),
 ]
-NOINDEX = {"thanks"}
+NOINDEX = {"thanks", "notfound"}
 PATHS = {
     "pl": {k: pl for k, pl, _ in PAGES},
     "en": {k: en for k, _, en in PAGES},
@@ -46,6 +46,12 @@ def head(lang, key, path, other_path):
     other = "en" if lang == "pl" else "pl"
     xdef = path if lang == "pl" else other_path
     robots = '<meta name="robots" content="noindex,nofollow">\n' if key in NOINDEX else ""
+    canonical = "" if key == "notfound" else (
+        f'<link rel="canonical" href="{DOMAIN}{path}">\n'
+        f'<link rel="alternate" hreflang="{lang}" href="{DOMAIN}{path}">\n'
+        f'<link rel="alternate" hreflang="{other}" href="{DOMAIN}{other_path}">\n'
+        f'<link rel="alternate" hreflang="x-default" href="{DOMAIN}{xdef}">\n'
+    )
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -53,11 +59,7 @@ def head(lang, key, path, other_path):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(m["title"])}</title>
 <meta name="description" content="{e(m["desc"])}">
-{robots}<link rel="canonical" href="{DOMAIN}{path}">
-<link rel="alternate" hreflang="{lang}" href="{DOMAIN}{path}">
-<link rel="alternate" hreflang="{other}" href="{DOMAIN}{other_path}">
-<link rel="alternate" hreflang="x-default" href="{DOMAIN}{xdef}">
-<meta property="og:title" content="{e(m["title"])}">
+{robots}{canonical}<meta property="og:title" content="{e(m["title"])}">
 <meta property="og:description" content="{e(m["desc"])}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{DOMAIN}{path}">
@@ -472,7 +474,7 @@ def page_404():
     s = C["pl"]["site"]
     en = C["en"]["site"]
     return (head("pl", "notfound", "/404.html", "/404.html")
-            + f'<body class="dx">\n'
+            + f'<body class="dx">\n<a class="skip-link" href="#tresc">{e(s["skip"])}</a>\n'
             + nav("pl", None, "/", "/en/")
             + f"""<main id="tresc">
 <section class="dx-simple">
@@ -483,6 +485,7 @@ def page_404():
 </section>
 </main>
 """
+            + cookie_note("pl")
             + footer("pl")
             + '<script src="/assets/site.js"></script>\n</body>\n</html>\n')
 
@@ -531,7 +534,7 @@ def build():
 
 # ---------- checker ----------
 
-FORBIDDEN = ["TAURON", "PYXIS", "unpkg.com", "fonts.googleapis", "gstatic.com", "Wrocław", "Northwind"]
+FORBIDDEN = ["tauron", "pyxis", "unpkg.com", "fonts.googleapis", "gstatic.com", "wrocław", "northwind"]
 
 
 def check():
@@ -542,14 +545,19 @@ def check():
         txt = f.read_text(encoding="utf-8")
         ids[f] = set(re.findall(r'id="([^"]+)"', txt))
 
+    text_files = sorted(p for ext in ("*.html", "*.css", "*.js", "*.php", "*.txt", "*.svg", "*.xml") for p in DIST.rglob(ext))
+    for f in text_files:
+        low = f.read_text(encoding="utf-8").lower()
+        rel = f.relative_to(DIST).as_posix()
+        for bad in FORBIDDEN:
+            if bad in low:
+                errors.append(f"{rel}: zakazany string '{bad}'")
+
     for f in html_files:
         txt = f.read_text(encoding="utf-8")
         rel = f.relative_to(DIST).as_posix()
 
-        for bad in FORBIDDEN:
-            if bad in txt:
-                errors.append(f"{rel}: zakazany string '{bad}'")
-        if 'hreflang="' not in txt:
+        if rel != "404.html" and 'hreflang="' not in txt:
             errors.append(f"{rel}: brak hreflang")
         if rel.endswith("index.html") and ("polityka-prywatnosci" in rel or "privacy-policy" in rel):
             if "0000565307" not in txt:

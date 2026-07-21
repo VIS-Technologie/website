@@ -4,10 +4,14 @@ declare(strict_types=1);
 const RECIPIENT = 'biuro@vistechnologie.pl';
 const SENDER    = 'formularz@vistechnologie.pl'; // skrzynka/alias w domenie — wymóg SPF (patrz docs/wdrozenie.md)
 
+function cut(string $v, int $max): string {
+    return function_exists('mb_substr') ? mb_substr($v, 0, $max, 'UTF-8') : substr($v, 0, $max);
+}
+
 function field(string $k, int $max = 200): string {
     $v = isset($_POST[$k]) && is_string($_POST[$k]) ? trim($_POST[$k]) : '';
     $v = str_replace(["\r", "\n"], ' ', $v); // ochrona przed header injection
-    return mb_substr($v, 0, $max);
+    return cut($v, $max);
 }
 
 $lang   = field('lang') === 'en' ? 'en' : 'pl';
@@ -24,7 +28,7 @@ $email   = field('email');
 $company = field('company');
 $topic   = field('topic');
 $message = isset($_POST['message']) && is_string($_POST['message']) ? trim($_POST['message']) : '';
-$message = mb_substr($message, 0, 5000);
+$message = cut($message, 5000);
 $rodo    = isset($_POST['rodo']);
 
 if ($name === '' || $message === '' || !$rodo || !filter_var($email, FILTER_VALIDATE_EMAIL)) {

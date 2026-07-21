@@ -12,5 +12,5 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
+  Header always set X-Content-Type-Options "nosniff"
 </IfModule>
