@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /kontakt/dziekujemy/
+Disallow: /en/contact/thank-you/
+
+Sitemap: https://vistechnologie.pl/sitemap.xml
