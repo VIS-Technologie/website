@@ -18,6 +18,14 @@ C = json.loads((SITE / "content.json").read_text(encoding="utf-8"))
 DOMAIN = "https://vistechnologie.pl"
 FORM_ACTION = "/kontakt/wyslij.php"
 
+# Tryb podglądu (--base /prefiks): serwis hostowany spod podścieżki (np. GitHub Pages).
+# Pusty BASE = produkcja (root domeny) — postprocess() jest wtedy no-opem.
+BASE = ""
+PREVIEW_NOTE = {
+    "pl": "Wersja podglądowa strony — formularz kontaktowy jest tu nieaktywny. Napisz bezpośrednio na biuro@vistechnologie.pl.",
+    "en": "Preview version — the contact form is inactive here. Write to us directly at biuro@vistechnologie.pl.",
+}
+
 # klucz, ścieżka PL, ścieżka EN
 PAGES = [
     ("home", "/", "/en/"),
@@ -502,6 +510,22 @@ RENDERERS = {
 
 # ---------- build ----------
 
+def postprocess(html, lang=None, key=None):
+    """W trybie podglądu: prefiksuje wewnętrzne ścieżki, dodaje noindex i notkę o formularzu.
+    Linki canonical/hreflang/og zostają absolutne do domeny produkcyjnej."""
+    if not BASE:
+        return html
+    html = re.sub(r'(href|src|action)="/', rf'\1="{BASE}/', html)
+    if '<meta name="robots"' not in html:
+        html = html.replace("<title>", '<meta name="robots" content="noindex,nofollow">\n<title>', 1)
+    if key == "contact" and lang in PREVIEW_NOTE:
+        note = ('<div style="background:var(--dx-surface-2);border:1px solid var(--dx-yellow);'
+                'border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:14px">'
+                + e(PREVIEW_NOTE[lang]) + "</div>\n")
+        html = html.replace('<div class="dx-form-error"', note + '<div class="dx-form-error"', 1)
+    return html
+
+
 def build():
     # Czyszczenie zawartości zamiast rmtree(DIST): na Windows katalog bywa
     # otwarty jako CWD serwera podglądu i nie da się go usunąć w całości.
@@ -517,9 +541,14 @@ def build():
         for lang, path in (("pl", pl_path), ("en", en_path)):
             out = DIST / path.lstrip("/") / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(layout(lang, key, RENDERERS[key](lang)), encoding="utf-8", newline="\n")
+            out.write_text(postprocess(layout(lang, key, RENDERERS[key](lang)), lang, key),
+                           encoding="utf-8", newline="\n")
 
-    (DIST / "404.html").write_text(page_404(), encoding="utf-8", newline="\n")
+    (DIST / "404.html").write_text(postprocess(page_404()), encoding="utf-8", newline="\n")
+
+    if BASE:
+        (DIST / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8", newline="\n")
+        (DIST / ".nojekyll").write_text("", encoding="utf-8")
 
     urls = [DOMAIN + p for k, pl, en in PAGES if k not in NOINDEX for p in (pl, en)]
     items = "\n".join(f"<url><loc>{u}</loc></url>" for u in urls)
@@ -575,6 +604,8 @@ def check():
                 continue
             path, _, frag = url.partition("#")
             path = path.split("?")[0]
+            if BASE and path.startswith(BASE + "/"):
+                path = path[len(BASE):]
             if not path.startswith("/"):
                 errors.append(f"{rel}: względny URL {url}")
                 continue
@@ -597,6 +628,20 @@ def check():
 
 
 def main():
+    global BASE, DIST
+    import argparse
+    ap = argparse.ArgumentParser(description="Generator statyczny vistechnologie.pl")
+    ap.add_argument("--base", default="", help='prefiks ścieżek dla podglądu spod podścieżki (np. "/website" dla GitHub Pages)')
+    ap.add_argument("--out", default=None, help="katalog wyjściowy (domyślnie dist/)")
+    args = ap.parse_args()
+    BASE = args.base.rstrip("/")
+    if BASE and not BASE.startswith("/"):
+        # m.in. Git Bash (MSYS) potrafi zamienić "/website" na "C:/Program Files/Git/website"
+        sys.exit(f'BŁĄD: --base musi zaczynać się od "/" (otrzymano: {BASE}). '
+                 'W Git Bash uruchom z MSYS_NO_PATHCONV=1 albo użyj PowerShella.')
+    if args.out:
+        DIST = Path(args.out).resolve()
+
     build()
     errors = check()
     pages = len(list(DIST.rglob("*.html")))
@@ -605,7 +650,8 @@ def main():
         for err in errors:
             print(" -", err)
         sys.exit(1)
-    print(f"OK: {pages} stron HTML, checker czysty.")
+    tryb = f"podgląd (base={BASE})" if BASE else "produkcja"
+    print(f"OK: {pages} stron HTML, checker czysty ({tryb} -> {DIST.name}/).")
 
 
 if __name__ == "__main__":

@@ -33,6 +33,21 @@ python -m http.server 8001
 
 → http://localhost:8001/
 
+## Podgląd na GitHub Pages (dla klienta)
+
+Produkcyjny `dist/` używa ścieżek od roota domeny, więc pod adresem Pages
+(`https://vis-technologie.github.io/website/` — podścieżka!) potrzebny jest osobny build z prefiksem:
+
+```powershell
+python site/build.py --base /website --out preview-build
+```
+
+Zawartość `preview-build/` wypycha się (force) na gałąź `gh-pages` — to ona jest źródłem Pages.
+Podgląd ma `noindex`, robots `Disallow: /` i nieaktywny formularz (Pages nie wykonuje PHP) z widoczną notką.
+
+Uwaga (Git Bash): MSYS potrafi zamienić argument `/website` na ścieżkę windowsową — uruchamiaj
+build podglądu w PowerShellu albo z `MSYS_NO_PATHCONV=1` (build.py wykrywa to i przerywa z błędem).
+
 ## Wdrożenie
 
 Patrz `docs/wdrozenie.md` (FTP Kylos, konfiguracja PHP, checklist po wdrożeniu).
