@@ -2,8 +2,8 @@
 import struct
 import zlib
 
-BLUE = (0, 97, 254)
-WHITE = (255, 255, 255)
+BLUE = (10, 22, 31)      # petrol ink (marka „Sygnał”)
+WHITE = (43, 217, 169)   # mint
 
 
 def _art(size):

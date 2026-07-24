@@ -183,6 +183,8 @@ def sec_hero(lang):
         f'<div class="dx-shape-{col}"><span class="dx-hero-tag">{e(t)}</span></div>'
         for col, t in zip(["blue", "yellow", "pink", "green"], h["tags"])
     )
+    art = ('<img src="/assets/img/hero-art.svg" alt="" width="1200" height="900" fetchpriority="high">'
+           f'<div class="dx-hero-art-shapes">{tags}</div>')
     return f"""<section class="dx-hero">
 <div class="dx-hero-inner">
 <div class="dx-hero-left">
@@ -194,7 +196,7 @@ def sec_hero(lang):
 <a class="dx-btn dx-btn-ghost" href="{p["cases"]}">{e(h["ctaSecondary"])}</a>
 </div>
 </div>
-<div class="dx-hero-art"><div class="dx-hero-art-frame"><div class="dx-hero-art-shapes">{tags}</div></div></div>
+<div class="dx-hero-art"><div class="dx-hero-art-frame">{art}</div></div>
 </div>
 </section>
 """
@@ -224,7 +226,7 @@ def _feature(lang, it, i, eyebrow, btn_label, btn_href):
 <p class="dx-feature-for">{e(it["forWho"])}</p>
 <a class="dx-btn dx-btn-dark" href="{btn_href}">{e(btn_label)} →</a>
 </div>
-<div class="dx-feature-art"><div class="stripes"></div><span class="label">{e(it["title"].lower())}</span></div>
+<div class="dx-feature-art"><img src="/assets/img/service-{e(it["num"])}.svg" alt="" loading="lazy" width="800" height="600"></div>
 </div>
 """
 
@@ -296,11 +298,12 @@ def sec_about(lang):
     sid = "o-nas" if lang == "pl" else "about"
     paras = "".join(f"<p>{e(p)}</p>" for p in c["paras"])
     founders = "".join(
-        f'<div class="dx-founder"><div class="dx-founder-photo"><span>{e(f["photoLabel"])}</span></div>'
+        f'<div class="dx-founder"><div class="dx-founder-photo">'
+        f'<img src="/assets/img/team-{i + 1:02d}.svg" alt="{e(f["name"])}" loading="lazy" width="480" height="600"></div>'
         f'<div class="dx-founder-name">{e(f["name"])}</div><div class="dx-founder-role">{e(f["role"])}</div>'
         + (f'<p class="dx-founder-note">{e(f["note"])}</p>' if f["note"] else "")
         + "</div>"
-        for f in c["founders"]
+        for i, f in enumerate(c["founders"])
     )
     return f"""<section class="dx-about" id="{sid}">
 <div class="dx-about-inner">
@@ -386,7 +389,7 @@ def page_cases(lang):
         eff = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"])
         arts.append(f"""<article class="dx-case {tints[i]}">
 <header><div class="dx-feature-eyebrow">{e(w["tag"])}</div><h2 class="dx-case-title">{e(w["title"])}</h2></header>
-<div class="dx-case-art"><div class="stripes"></div><span class="label">{e(w["artLabel"])}</span></div>
+<div class="dx-case-art"><img src="/assets/img/case-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1680" height="720"></div>
 <div class="dx-case-cols">
 <div class="dx-case-block"><h3>{e(w["challenge"]["h"])}</h3>{ch_ps}</div>
 <div class="dx-case-block"><h3>{e(w["did"]["h"])}</h3>{did_ps}{did_items}</div>
