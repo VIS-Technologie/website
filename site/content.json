@@ -12,7 +12,7 @@
       "pre": "Technologia, która przekłada się na ",
       "em": "wynik",
       "post": " Twojej firmy",
-      "sub": "Zamieniamy realne problemy Twojej firmy w technologię, która na siebie zarabia.",
+      "sub": "Projektujemy i utrzymujemy systemy, na których firmy przemysłowe, logistyczne i energetyczne pracują codziennie.",
       "ctaPrimary": "Porozmawiajmy o projekcie",
       "ctaSecondary": "Zobacz realizacje",
       "tags": [
@@ -292,7 +292,7 @@
     },
     "contact": {
       "title": "Porozmawiajmy o projekcie.",
-      "sub": "Wypełnij formularz albo napisz bezpośrednio na biuro@vistechnologie.pl.",
+      "sub": "Napisz na biuro@vistechnologie.pl albo zostaw wiadomość — odpowiada osoba techniczna z zarządu.",
       "info": [
         [
           "Firma",
@@ -338,6 +338,7 @@
       "legalH": "Prawne",
       "privacyLink": "Polityka prywatności",
       "cookiesLink": "Polityka cookies",
+      "reg": "Vis Technologie Sp. z o.o. \u00b7 KRS 0000565307",
       "rights": "© 2026 Vis Technologie Sp. z o.o.",
       "made": "Banino koło Gdańska, Polska"
     },
@@ -556,7 +557,7 @@
       "pre": "Technology that translates into your company's ",
       "em": "bottom line",
       "post": "",
-      "sub": "We turn your company's real problems into technology that pays for itself.",
+      "sub": "We build and run the systems that industrial, logistics and energy companies rely on every day.",
       "ctaPrimary": "Let's talk about your project",
       "ctaSecondary": "See our work",
       "tags": [
@@ -836,7 +837,7 @@
     },
     "contact": {
       "title": "Let's talk about your project.",
-      "sub": "Fill in the form or write to us directly at biuro@vistechnologie.pl.",
+      "sub": "Write to biuro@vistechnologie.pl or leave a message — a technical board member replies.",
       "info": [
         [
           "Company",
@@ -882,6 +883,7 @@
       "legalH": "Legal",
       "privacyLink": "Privacy policy",
       "cookiesLink": "Cookie policy",
+      "reg": "Vis Technologie Sp. z o.o. \u00b7 KRS 0000565307",
       "rights": "© 2026 Vis Technologie Sp. z o.o.",
       "made": "Banino near Gdańsk, Poland"
     },

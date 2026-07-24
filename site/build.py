@@ -136,7 +136,7 @@ def footer(lang):
 <div class="dx-footer-inner">
 <div class="dx-footer-mark">vistechnologie</div>
 <div class="dx-footer-grid">
-<div><h5>{e(f["studioH"])}</h5><p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.65);max-width:30ch;margin:0">{studio}</p></div>
+<div><h5>{e(f["studioH"])}</h5><p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.65);max-width:30ch;margin:0">{studio}</p><p class="dx-footer-reg">{e(f["reg"])}</p></div>
 <div><h5>{e(n["services"])}</h5><ul>
 {services_links}
 </ul></div>
@@ -194,7 +194,7 @@ def sec_hero(lang):
 <p>{e(h["sub"])}</p>
 <div class="dx-hero-actions">
 <a class="dx-btn dx-btn-primary" href="{p["contact"]}">{e(h["ctaPrimary"])} →</a>
-<a class="dx-btn dx-btn-ghost" href="{p["cases"]}">{e(h["ctaSecondary"])}</a>
+<a class="dx-link-quiet" href="{p["cases"]}">{e(h["ctaSecondary"])} →</a>
 </div>
 </div>
 <div class="dx-hero-art"><div class="dx-hero-art-frame">{art}</div></div>
@@ -271,6 +271,8 @@ def sec_stats(lang):
         f'<div class="dx-ribbon-card {tints[i]}" data-reveal><div class="dx-ribbon-num dx-ribbon-num-text">{big(s["big"])}</div><div class="dx-ribbon-label">{e(s["label"])}</div></div>'
         for i, s in enumerate(c["items"])
     )
+    pr = C[lang]["partners"]
+    pnames = " · ".join(pr["names"])
     return f"""<section class="dx-ribbon" data-zone="warm">
 <div class="dx-ribbon-inner">
 <div style="margin-bottom:48px;max-width:26ch">
@@ -278,6 +280,7 @@ def sec_stats(lang):
 <h2 class="dx-h1" style="margin-top:12px">{e(c["title"])}</h2>
 </div>
 <div class="dx-ribbon-grid">{cards}</div>
+<p class="dx-proof-partners"><span class="dx-eyebrow">{e(pr["title"])}</span> <span>{e(pnames)}</span> <span class="dx-proof-note">{e(pr["note"])}</span></p>
 </div>
 </section>
 """
@@ -343,7 +346,6 @@ def sec_close(lang):
     p = PATHS[lang]
     return f"""<section class="dx-close">
 <div class="dx-close-inner" data-reveal>
-<canvas class="vt-gl" aria-hidden="true" data-vibrance="0.4"></canvas>
 <h2>{e(c["title"])}</h2>
 <p>{e(c["sub"])}</p>
 <a class="dx-btn dx-btn-yellow" href="{p["contact"]}">{e(c["cta"])} →</a>
@@ -366,9 +368,38 @@ def page_head_block(bg, eyebrow, title, sub=None):
 
 # ---------- strony ----------
 
+def sec_cases_home(lang):
+    """Skrócone studia przypadku na stronie głównej — dowody przed usługami."""
+    c = C[lang]["workPage"]
+    p = PATHS[lang]
+    head_t = "Systemy, które mówią za nas" if lang == "pl" else "Systems that speak for us"
+    link_t = "Pełne studium przypadku" if lang == "pl" else "Full case study"
+    tints = ["tint-blue", "tint-yellow"]
+    cards = []
+    for i, w in enumerate(c["cases"]):
+        effects = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"][:3])
+        cards.append(f"""<article class="dx-minicase {tints[i]}" data-reveal>
+<div class="dx-feature-eyebrow">{e(w["tag"])}</div>
+<h3>{e(w["title"])}</h3>
+<ul class="dx-case-list">{effects}</ul>
+<p class="dx-minicase-closing">{e(w["closing"])}</p>
+<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a>
+</article>""")
+    return f"""<section class="dx-cases-home" data-zone="paper">
+<div class="dx-cases-home-inner">
+<div style="margin-bottom:48px;max-width:30ch">
+<span class="dx-eyebrow">{e(c["eyebrow"])}</span>
+<h2 class="dx-h1" style="margin-top:12px">{e(head_t)}</h2>
+</div>
+<div class="dx-minicase-grid">{"".join(cards)}</div>
+</div>
+</section>
+"""
+
+
 def page_home(lang):
-    return (sec_hero(lang) + sec_partners(lang) + sec_features(lang) + sec_pull(lang)
-            + sec_stats(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
+    return (sec_hero(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_pull(lang)
+            + sec_features(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
 
 
 def page_services(lang):
@@ -435,9 +466,7 @@ def page_contact(lang):
 <p class="dx-hp" aria-hidden="true"><label>WWW <input type="text" name="www" tabindex="-1" autocomplete="off"></label></p>
 <div class="dx-field"><label for="f-name">{e(fl["name"])}</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>
 <div class="dx-field"><label for="f-email">{e(fl["email"])}</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
-<div class="dx-field"><label for="f-company">{e(fl["company"])}</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
-<div class="dx-field"><label for="f-topic">{e(fl["topic"])}</label><input id="f-topic" name="topic" type="text"></div>
-<div class="dx-field"><label for="f-message">{e(fl["message"])}</label><textarea id="f-message" name="message" rows="5" required></textarea></div>
+<div class="dx-field"><label for="f-message">{e(fl["message"])}</label><textarea id="f-message" name="message" rows="6" required></textarea></div>
 <label class="dx-rodo"><input type="checkbox" name="rodo" required> <span>{e(ct["rodoCheckbox"])}</span></label>
 <button type="submit" class="dx-btn dx-btn-primary">{e(fl["send"])} →</button>
 <p class="dx-clause">{e(ct["clausePre"])}<a href="{p["legal"]}">{e(ct["clauseLink"])}</a>{e(ct["clausePost"])}</p>
