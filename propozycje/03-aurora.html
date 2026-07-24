@@ -1,0 +1,95 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Propozycja 03 — AURORA · vistechnologie</title>
+<style>
+:root{--ink:#171B2B;--fg2:#5A6072;--bg:#F6F7FB;--vio:#6E5BFF;--teal:#26C6A5;--amb:#FFB35C}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.aur{position:fixed;inset:0;z-index:-1;filter:blur(90px);opacity:.55}
+.aur i{position:absolute;border-radius:50%}
+.aur i:nth-child(1){width:44vw;height:44vw;background:#B9AEFF;top:-12vw;right:-8vw;animation:f1 17s ease-in-out infinite alternate}
+.aur i:nth-child(2){width:36vw;height:36vw;background:#9BEAD6;top:30vh;left:-12vw;animation:f2 21s ease-in-out infinite alternate}
+.aur i:nth-child(3){width:30vw;height:30vw;background:#FFD9AE;bottom:-10vw;right:20vw;animation:f1 25s ease-in-out infinite alternate}
+@keyframes f1{to{transform:translate(-8vw,6vh) scale(1.15)}}
+@keyframes f2{to{transform:translate(6vw,-6vh) scale(.9)}}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{font-weight:800;letter-spacing:-.02em;font-size:19px}
+.logo i{display:inline-block;width:12px;height:12px;border-radius:4px;background:linear-gradient(135deg,var(--vio),var(--teal));margin-right:8px}
+nav a.cta{background:var(--ink);color:#fff;padding:11px 20px;border-radius:12px;text-decoration:none;font-weight:600;font-size:14px}
+.hero{text-align:center;padding:10vh 0 7vh}
+.chip{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid rgba(23,27,43,.1);box-shadow:0 6px 24px rgba(23,27,43,.06);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600}
+.chip b{color:var(--teal)}
+h1{font-size:clamp(42px,6.4vw,92px);letter-spacing:-.035em;line-height:1.02;margin:26px auto 0;max-width:17ch}
+h1 .g{background:linear-gradient(100deg,var(--vio),var(--teal) 55%,var(--amb));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:52ch;margin:22px auto 0;font-size:18px;line-height:1.6;color:var(--fg2)}
+.hero .btns{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.b1{background:linear-gradient(120deg,var(--vio),#8A5BFF);color:#fff;padding:16px 30px;border-radius:14px;text-decoration:none;font-weight:700;box-shadow:0 14px 40px rgba(110,91,255,.35)}
+.b2{background:#fff;color:var(--ink);padding:16px 30px;border-radius:14px;text-decoration:none;font-weight:600;border:1px solid rgba(23,27,43,.12)}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;padding:5vh 0 8vh}
+.tile{background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 50px rgba(23,27,43,.08);border-radius:26px;padding:30px;position:relative;overflow:hidden;transition:transform .25s}
+.tile:hover{transform:translateY(-4px)}
+.t-a{grid-column:span 4;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;min-height:380px}
+.t-b{grid-column:span 2}
+.t-c{grid-column:span 2}
+.t-d{grid-column:span 2}.t-e{grid-column:span 2}.t-f{grid-column:span 2}
+.eyeb{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--vio)}
+.tile h3{font-size:clamp(20px,2vw,30px);letter-spacing:-.02em;margin-top:10px}
+.tile p{font-size:14.5px;line-height:1.55;color:var(--fg2);margin-top:10px}
+.num{font-size:clamp(38px,4vw,64px);font-weight:800;letter-spacing:-.03em;background:linear-gradient(120deg,var(--vio),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.wave{height:110px;border-radius:16px;background:#12172B;position:relative;overflow:hidden;margin-top:16px}
+.wave svg{position:absolute;inset:0}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.list span{display:flex;gap:10px;font-size:14px;color:#39405A}
+.list span::before{content:"✓";color:var(--teal);font-weight:800}
+.sec{padding:20px 0 90px;text-align:center}
+.sec h2{font-size:clamp(30px,4vw,54px);letter-spacing:-.03em}
+.team{display:flex;gap:18px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.person{background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);border-radius:22px;padding:26px 34px;box-shadow:0 16px 40px rgba(23,27,43,.07)}
+.person b{font-size:18px}
+.person span{display:block;font-size:13px;color:var(--vio);font-weight:600;margin-top:4px}
+footer{background:var(--ink);color:#fff;border-radius:32px 32px 0 0;padding:64px 24px;text-align:center}
+footer h2{font-size:clamp(30px,4.4vw,58px);letter-spacing:-.03em;max-width:20ch;margin:0 auto}
+footer p{color:#A8ADC2;margin:16px 0 30px}
+footer .cols{display:flex;justify-content:center;gap:36px;margin-top:44px;font-size:13px;color:#8A90A8;flex-wrap:wrap}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}.t-a{grid-column:span 2}.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:span 2}}
+</style></head><body>
+<div class="aur"><i></i><i></i><i></i></div>
+<div class="wrap">
+<nav><span class="logo"><i></i>vistechnologie</span><a class="cta" href="#kontakt">Porozmawiajmy →</a></nav>
+<div class="hero">
+<span class="chip"><b>●</b> 12 lat nieprzerwanej współpracy z kluczowym klientem</span>
+<h1>Technologia, która przekłada się na <span class="g">wynik</span> Twojej firmy</h1>
+<p>Systemy dedykowane, AI i IoT dla przemysłu, logistyki i energetyki. Budujemy platformy, na których firmy pracują codziennie — i zostajemy, żeby je rozwijać.</p>
+<div class="btns"><a class="b1" href="#kontakt">Porozmawiajmy o projekcie</a><a class="b2" href="#">Zobacz realizacje</a></div>
+</div>
+<div class="bento">
+<div class="tile t-a">
+<div><span class="eyeb">Studium · logistyka intermodalna</span>
+<h3>PCC Intermodal — jeden system prowadzi całą firmę</h3>
+<p>Sprzedaż, operacje terminalowe (TOS), fakturowanie, obieg dokumentów i raportowanie — od 12 lat w codziennej produkcji.</p>
+<div class="list"><span>jedno źródło prawdy dla wszystkich działów</span><span>walidacje wyłapują błędy, zanim staną się kosztem</span><span>niższe koszty pracy terminala, większa przepustowość</span></div></div>
+<div class="wave"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 60 Q40 30 80 58 T160 55 T240 62 T320 40 T400 66 T480 50 T560 58 L600 55" fill="none" stroke="#26C6A5" stroke-width="3"><animate attributeName="d" dur="4s" repeatCount="indefinite" values="M0 60 Q40 30 80 58 T160 55 T240 62 T320 40 T400 66 T480 50 T560 58 L600 55;M0 55 Q40 70 80 48 T160 62 T240 42 T320 64 T400 46 T480 62 T560 50 L600 60;M0 60 Q40 30 80 58 T160 55 T240 62 T320 40 T400 66 T480 50 T560 58 L600 55"/></path></svg></div>
+</div>
+<div class="tile t-b"><span class="eyeb">Skala</span><div class="num">12 lat</div><p>jednego systemu w produkcji — bez przerwy</p></div>
+<div class="tile t-c"><span class="eyeb">AI + OZE</span><h3>Słyszymy usterki turbin</h3><p>Sieci neuronowe na edge + akustyka: degradacja wykryta, zanim zobaczy ją SCADA.</p></div>
+<div class="tile t-d"><span class="eyeb">Usługi</span><h3>Systemy dedykowane</h3><p>Szyte pod procesy — flagowa usługa dla firm, którym nie wystarcza pudełko.</p></div>
+<div class="tile t-e"><span class="eyeb">Usługi</span><h3>Web · Mobile · IoT</h3><p>Portale, aplikacje terenowe, monitoring urządzeń w czasie rzeczywistym.</p></div>
+<div class="tile t-f"><span class="eyeb">Model pracy</span><h3>MVP w 8–12 tygodni</h3><p>Bezpłatna analiza → wycena → pierwsza działająca wersja. Potem rozwój.</p></div>
+</div>
+<div class="sec">
+<span class="eyeb">Zarząd — odpowiadają osobiście</span>
+<h2>Firmą kieruje osoba techniczna</h2>
+<div class="team">
+<div class="person"><b>Kamil Kamiński</b><span>Prezes · Dyrektor Techniczny</span></div>
+<div class="person"><b>Ireneusz Białkowski</b><span>Dyrektor Operacyjny</span></div>
+<div class="person"><b>Katarzyna Kamińska</b><span>Dyrektor Finansowy</span></div>
+</div>
+</div>
+</div>
+<footer id="kontakt">
+<h2>Szukasz partnera technologicznego?</h2>
+<p>Jeśli szukasz zespołu, który weźmie na siebie trudny projekt — odezwij się.</p>
+<a class="b1" href="mailto:biuro@vistechnologie.pl">biuro@vistechnologie.pl</a>
+<div class="cols"><span>tel. 509 375 274</span><span>Vis Technologie Sp. z o.o.</span><span>Banino k. Gdańska</span><span>KRS 0000565307</span></div>
+</footer>
+</body></html>

@@ -186,26 +186,38 @@ def sec_hero(lang):
                                      "watches terminal operations 24/7", "learns your company's processes"]),
     }[lang]
     words_attr = e(json.dumps(rot_words[1], ensure_ascii=False))
-    rotator = (f'<p class="kino-rotator"><span>{e(rot_words[0])}</span> '
+    rotator = (f'<p class="kn-rotator"><span>{e(rot_words[0])}</span> '
                f'<strong class="kino-rot-word" data-rotate="{words_attr}">{e(rot_words[1][0])}</strong>'
                f'<span class="kino-caret" aria-hidden="true"></span></p>')
-    return f"""<section class="dx-hero kino-hero">
-<img class="kino-bg" src="/assets/img/scene-hero.svg" alt="" fetchpriority="high" data-plx>
-<div class="kino-shade"></div>
-<div class="dx-hero-inner">
-<div class="dx-hero-left" data-reveal>
-<span class="dx-hero-eyebrow">{e(h["eyebrow"])}</span>
-<h1 class="dx-display">{e(h["pre"])}<em>{e(h["em"])}</em>{e(h["post"])}</h1>
-<p>{e(h["sub"])}</p>
+    pre_words = h["pre"].strip().split()
+    cut = max(1, len(pre_words) // 2)
+    l1 = " ".join(pre_words[:cut])
+    l2 = " ".join(pre_words[cut:])
+    l3a, l3b = h["em"], h["post"].strip()
+    return f"""<section class="dx-hero kn-hero">
+<h1 class="kn-h1">
+<span class="kn-line" data-k="0.22">{e(l1)}</span>
+<span class="kn-line kn-outline" data-k="-0.3">{e(l2)}</span>
+<span class="kn-line" data-k="0.16"><em>{e(l3a)}</em> {e(l3b)}</span>
+</h1>
+<p class="kn-sub">{e(h["sub"])}</p>
 {rotator}
 <div class="dx-hero-actions">
 <a class="dx-btn dx-btn-primary" href="{p["contact"]}">{e(h["ctaPrimary"])} →</a>
 <a class="dx-link-quiet" href="{p["cases"]}">{e(h["ctaSecondary"])} →</a>
 </div>
-</div>
-</div>
 </section>
 """
+
+
+def sec_band(lang):
+    items = {
+        "pl": ["12 lat jednego systemu w produkcji", "AI, które słyszy usterki turbin", "MVP w 8–12 tygodni", "systemy mission-critical 24/7"],
+        "en": ["12 years of one system in production", "AI that hears turbine faults", "MVP in 8–12 weeks", "mission-critical systems 24/7"],
+    }[lang]
+    seq = "".join(f"<span>{e(x)}</span><span>—</span>" for x in items)
+    seq2 = "".join(f'<span aria-hidden="true">{e(x)}</span><span aria-hidden="true">—</span>' for x in items)
+    return f'<div class="kn-band"><div class="kn-band-track">{seq}{seq2}</div></div>' + chr(10)
 
 
 def sec_partners(lang):
@@ -223,17 +235,13 @@ def sec_partners(lang):
 
 
 def _feature(lang, it, i, eyebrow, btn_label, btn_href):
-    flip = " flip" if i % 2 else ""
-    return f"""<div class="kino-chapter{flip}">
-<img class="kino-bg" src="/assets/img/scene-{e(it["num"])}.svg" alt="" loading="lazy" data-plx>
-<div class="kino-chapter-card" data-reveal>
-<div class="dx-feature-eyebrow">{e(eyebrow)}</div>
-<h3 class="dx-h2">{e(it["title"])}</h3>
-<p class="dx-body">{e(it["desc"])}</p>
-<p class="dx-feature-for">{e(it["forWho"])}</p>
-<a class="dx-btn dx-btn-primary" href="{btn_href}">{e(btn_label)} →</a>
-</div>
-</div>
+    return f"""<a class="kn-card" href="{btn_href}" data-reveal>
+<i>{e(it["num"])}</i>
+<h3>{e(it["title"])}</h3>
+<p>{e(it["desc"])}</p>
+<span class="kn-card-for">{e(it["forWho"])}</span>
+<span class="kn-card-arw">{e(btn_label)} →</span>
+</a>
 """
 
 
@@ -242,17 +250,17 @@ def sec_features(lang):
     p = PATHS[lang]
     label = "Zobacz wszystkie usługi" if lang == "pl" else "See all services"
     rows = "".join(
-        _feature(lang, it, i, f'{it["num"]} · {c["services"]["eyebrow"]}', label, p["services"])
-        for i, it in enumerate(c["services"]["items"][:4])
+        _feature(lang, it, i, "", label, p["services"])
+        for i, it in enumerate(c["services"]["items"][:6])
     )
-    return f'<section class="dx-features" data-zone="paper"><div class="dx-features-inner">{rows}</div></section>\n'
+    hint = "Usługi — przewiń →" if lang == "pl" else "Services — scroll →"
+    return (f'<section class="kn-services" data-zone="paper"><div class="kn-services-inner">'
+            f'<p class="kn-hint">{e(hint)}</p><div class="kn-scroll">{rows}</div></div></section>' + chr(10))
 
 
 def sec_pull(lang):
     c = C[lang]["pull"]
-    return f"""<section class="dx-pull kino-pull">
-<img class="kino-bg" src="/assets/img/scene-case-01.svg" alt="" loading="lazy" data-plx>
-<div class="kino-shade-full"></div>
+    return f"""<section class="dx-pull">
 <div class="dx-pull-inner" data-reveal>
 <h2>{e(c["text"])}<em>{e(c["em"])}</em></h2>
 <div class="dx-pull-attr">{e(c["attr"])}</div>
@@ -374,33 +382,24 @@ def page_head_block(bg, eyebrow, title, sub=None):
 # ---------- strony ----------
 
 def sec_cases_home(lang):
-    """Skrócone studia przypadku na stronie głównej — dowody przed usługami."""
     c = C[lang]["workPage"]
     p = PATHS[lang]
-    head_t = "Systemy, które mówią za nas" if lang == "pl" else "Systems that speak for us"
+    fx = {
+        "pl": ["SYSTEM OD 12 LAT →", "← AI SŁYSZY TURBINY"],
+        "en": ["RUNNING FOR 12 YEARS →", "← AI HEARS TURBINES"],
+    }[lang]
     link_t = "Pełne studium przypadku" if lang == "pl" else "Full case study"
-    tints = ["tint-blue", "tint-yellow"]
-    cards = []
+    rows = []
     for i, w in enumerate(c["cases"]):
-        effects = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"][:3])
-        cards.append(f"""<article class="dx-minicase {tints[i]}" data-reveal>
-<img class="kino-mini-thumb" src="/assets/img/scene-case-{i + 1:02d}.svg" alt="" loading="lazy">
-<div class="dx-feature-eyebrow">{e(w["tag"])}</div>
-<h3>{e(w["title"])}</h3>
-<ul class="dx-case-list">{effects}</ul>
-<p class="dx-minicase-closing">{e(w["closing"])}</p>
-<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a>
-</article>""")
-    return f"""<section class="dx-cases-home" data-zone="paper">
-<div class="dx-cases-home-inner">
-<div style="margin-bottom:48px;max-width:30ch">
-<span class="dx-eyebrow">{e(c["eyebrow"])}</span>
-<h2 class="dx-h1" style="margin-top:12px">{e(head_t)}</h2>
-</div>
-<div class="dx-minicase-grid">{"".join(cards)}</div>
-</div>
-</section>
-"""
+        eff = " · ".join(x.split(" — ")[0] for x in w["effects"]["items"][:2])
+        txt = (f'<div class="kn-case-txt"><p class="kn-hint">{e(w["tag"])}</p>'
+               f'<h3>{e(w["title"])}</h3><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
+               f'<p class="kn-case-eff">{e(eff)}</p>'
+               f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div>')
+        big = f'<div class="kn-fx" data-k="{0.06 if i % 2 == 0 else -0.06}" aria-hidden="true">{e(fx[i])}</div>'
+        inner = txt + big if i % 2 == 0 else big + txt
+        rows.append(f'<div class="kn-case" data-reveal>{inner}</div>')
+    return f'<section class="kn-cases" data-zone="paper"><div class="kn-cases-inner">{"".join(rows)}</div></section>' + chr(10)
 
 
 def sec_ai_demo(lang):
@@ -434,7 +433,7 @@ def sec_ai_demo(lang):
 
 
 def page_home(lang):
-    return (sec_hero(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
+    return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
             + sec_features(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
 
 

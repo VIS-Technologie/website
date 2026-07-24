@@ -1,0 +1,127 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Propozycja 04 — KONSOLA · vistechnologie</title>
+<style>
+:root{--bg:#0B0F13;--panel:#10161C;--line:#1E2A33;--fg:#D7E0E6;--dim:#6E7E8A;--grn:#3EE08F;--amb:#F5B84B;--red:#FF6257}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:14px;line-height:1.5}
+a{color:inherit}
+.bar{display:flex;justify-content:space-between;gap:14px;padding:10px 18px;border-bottom:1px solid var(--line);font-size:12px;color:var(--dim);flex-wrap:wrap}
+.bar b{color:var(--grn)}
+.wrap{max-width:1280px;margin:0 auto;padding:22px 18px;display:grid;grid-template-columns:230px 1fr;gap:18px}
+.rail{border:1px solid var(--line);border-radius:10px;padding:16px;height:max-content;position:sticky;top:16px}
+.rail p{color:var(--dim);font-size:11px;letter-spacing:.12em;margin-bottom:10px}
+.rail a{display:block;padding:8px 10px;border-radius:7px;text-decoration:none;font-size:13px}
+.rail a:hover,.rail a.on{background:#16202A;color:var(--grn)}
+.panel{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:22px;margin-bottom:18px;position:relative}
+.panel .tt{position:absolute;top:-9px;left:14px;background:var(--bg);padding:0 8px;font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.type{font-size:clamp(24px,3.6vw,46px);line-height:1.2;letter-spacing:-.01em;min-height:2.4em}
+.type .c{display:inline-block;width:10px;height:1.1em;background:var(--grn);vertical-align:text-bottom;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.kv{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.kv div{border:1px solid var(--line);border-radius:8px;padding:14px}
+.kv b{display:block;font-size:24px;color:#fff}
+.kv span{font-size:11px;color:var(--dim)}
+.kv .up{color:var(--grn);font-size:11px}
+.proc{width:100%;border-collapse:collapse;font-size:13px}
+.proc td{padding:11px 10px;border-top:1px solid var(--line)}
+.proc tr:hover{background:#141C24}
+.st{padding:2px 9px;border-radius:99px;font-size:11px}
+.st.run{background:rgba(62,224,143,.12);color:var(--grn)}
+.st.dev{background:rgba(245,184,75,.14);color:var(--amb)}
+.wavebox{height:150px;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;background:#0D1319}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.chipst{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--grn)}
+.chipst.warn{color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cmd{background:#0D1319;border:1px solid var(--line);border-radius:8px;padding:14px;font-size:13px}
+.cmd b{color:var(--grn)}
+.btn{display:inline-block;margin-top:14px;background:var(--grn);color:#04130B;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none}
+.btn:hover{filter:brightness(1.12)}
+.log{font-size:12.5px;color:var(--dim);max-height:150px;overflow:hidden}
+.log .ok{color:var(--grn)}.log .wr{color:var(--amb)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.rail{position:static}.grid2{grid-template-columns:1fr}.kv{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div class="bar"><span><b>vis/os</b> v12.4 — partner IT dla biznesu</span><span>uptime: <b>12 lat</b></span><span>systems: <b>OK</b></span><span>region: Banino/GDN</span><span id="clock"></span></div>
+<div class="wrap">
+<aside class="rail">
+<p>NAWIGACJA</p>
+<a class="on" href="#">~/start</a><a href="#proc">~/systemy</a><a href="#ai">~/ai-monitor</a><a href="#uslugi">~/usługi</a><a href="#zarzad">~/zarząd</a><a href="#kontakt">~/kontakt</a>
+<p style="margin-top:18px">STACK</p>
+<div style="font-size:12px;color:var(--dim)">.NET/C# · React<br>Python · Java<br>Azure · AWS · GCP</div>
+</aside>
+<main>
+<div class="panel"><span class="tt">SESJA</span>
+<div class="type" id="type"></div>
+<div class="kv">
+<div><b>12<span style="color:var(--grn)">y</span></b><span>współpracy z kluczowym klientem</span><div class="up">▲ nieprzerwanie</div></div>
+<div><b>10+<span style="color:var(--grn)">y</span></b><span>na rynku</span><div class="up">▲ stabilnie</div></div>
+<div><b>3</b><span>branże: logistyka · OZE · AI</span><div class="up">● core</div></div>
+<div><b>24/7</b><span>mission-critical w produkcji</span><div class="up">● live</div></div>
+</div>
+</div>
+<div class="panel" id="proc"><span class="tt">PROCESY PRODUKCYJNE — REALIZACJE</span>
+<table class="proc">
+<tr><td>PID 001</td><td><b>pcc-intermodal/core</b><br><span style="color:var(--dim)">TOS · sprzedaż · fakturowanie · obieg dokumentów — jedno źródło prawdy całej firmy</span></td><td><span class="st run">RUNNING · 12y</span></td></tr>
+<tr><td>PID 002</td><td><b>apt-chordata/acoustic-ai</b><br><span style="color:var(--dim)">sondy akustyczne + sieci neuronowe edge + MLOps — predykcyjne utrzymanie turbin</span></td><td><span class="st run">RUNNING · farma prod.</span></td></tr>
+<tr><td>PID 003</td><td><b>twoja-firma/next-system</b><br><span style="color:var(--dim)">bezpłatna analiza → wycena → MVP w 8–12 tygodni</span></td><td><span class="st dev">SLOT OPEN</span></td></tr>
+</table>
+</div>
+<div class="panel" id="ai"><span class="tt">AI-MONITOR — DETEKCJA ANOMALII AKUSTYCZNEJ (LIVE SIM)</span>
+<div class="wavebox"><canvas id="cv"></canvas><div class="chipst" id="st">● nasłuch sygnału…</div></div>
+<div class="log" id="log" style="margin-top:12px"></div>
+</div>
+<div class="grid2" id="uslugi">
+<div class="panel" style="margin:0"><span class="tt">USŁUGI</span>
+<table class="proc">
+<tr><td>01</td><td>Systemy dedykowane dla biznesu</td></tr>
+<tr><td>02</td><td>Aplikacje webowe i portale</td></tr>
+<tr><td>03</td><td>Aplikacje mobilne i tabletowe</td></tr>
+<tr><td>04</td><td>Wdrożenia AI</td></tr>
+<tr><td>05</td><td>Monitoring i systemy IoT</td></tr>
+<tr><td>06</td><td>Utrzymanie i rozwój</td></tr>
+</table>
+</div>
+<div class="panel" style="margin:0" id="zarzad"><span class="tt">ZARZĄD — ODPOWIADAJĄ OSOBIŚCIE</span>
+<table class="proc">
+<tr><td>root</td><td><b>Kamil Kamiński</b><br><span style="color:var(--dim)">Prezes · CTO — architektura i kierunek technologiczny</span></td></tr>
+<tr><td>ops</td><td><b>Ireneusz Białkowski</b><br><span style="color:var(--dim)">COO — operacje i rozwój biznesu</span></td></tr>
+<tr><td>fin</td><td><b>Katarzyna Kamińska</b><br><span style="color:var(--dim)">CFO — finanse</span></td></tr>
+</table>
+</div>
+</div>
+<div class="panel" id="kontakt" style="margin-top:18px"><span class="tt">KONTAKT</span>
+<div class="cmd">$ <b>vis connect</b> --projekt<br><span style="color:var(--dim)"># odpowiada osoba techniczna z zarządu, nie handlowiec</span></div>
+<a class="btn" href="mailto:biuro@vistechnologie.pl">biuro@vistechnologie.pl ↗</a>
+<span style="margin-left:16px;color:var(--dim)">tel. 509 375 274 · Vis Technologie Sp. z o.o. · KRS 0000565307</span>
+</div>
+</main>
+</div>
+<script>
+(function(){
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function pad(n){return (n<10?"0":"")+n}
+setInterval(function(){var d=new Date();document.getElementById("clock").textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())+" CET"},500);
+var LINES=["Technologia, która przekłada się na wynik Twojej firmy.","Wdrażamy AI, które czyta dokumenty przewozowe.","Słyszymy zużycie turbin, zanim stanie farma.","Systemy mission-critical. Od 12 lat bez przerwy."];
+var el=document.getElementById("type"),li=0,ch=0;
+function type(){var w=LINES[li];ch++;el.innerHTML=w.slice(0,ch)+'<span class="c"></span>';
+ if(ch>=w.length){setTimeout(function(){ch=0;li=(li+1)%LINES.length;type()},2800);return} setTimeout(type,rm?0:34)}
+if(rm){el.textContent=LINES[0]}else type();
+var cv=document.getElementById("cv"),ctx=cv.getContext("2d"),st=document.getElementById("st"),log=document.getElementById("log");
+function rs(){cv.width=cv.clientWidth*1.5;cv.height=cv.clientHeight*1.5;ctx.setTransform(1.5,0,0,1.5,0,0)}rs();addEventListener("resize",rs);
+var t=0,C=520,A=250,B=330,logs=0;
+function addlog(cls,txt){var d=new Date();var s='<div class="'+cls+'">['+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())+"] "+txt+"</div>";log.innerHTML=s+log.innerHTML;if(++logs>14){log.removeChild(log.lastChild);logs--}}
+addlog("ok","ai-monitor: model acoustic-v7 załadowany (edge)");
+function sm(x,tt){var p=x*.05+tt*.07,y=Math.sin(p)*9+Math.sin(p*2.6+1)*5+Math.sin(p*.5)*6;var f=tt%C,a=f-A;
+ if(a>0&&f<B){var k=Math.exp(-Math.pow(x-(cv.clientWidth-120),2)/3800);y+=(Math.sin(p*9)*26+Math.sin(p*14)*13)*k*Math.min(1,a/18)}return y}
+function fr(){requestAnimationFrame(fr);t++;var W=cv.clientWidth,H=cv.clientHeight,f=t%C;ctx.clearRect(0,0,W,H);
+ ctx.strokeStyle="rgba(215,224,230,.07)";for(var g=24;g<H;g+=26){ctx.beginPath();ctx.moveTo(8,g);ctx.lineTo(W-8,g);ctx.stroke()}
+ var mid=H*.5;ctx.beginPath();for(var x=8;x<W-8;x+=3){var y=mid+sm(x,t);x===8?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+ ctx.strokeStyle="#3EE08F";ctx.lineWidth=1.6;ctx.stroke();
+ if(f>=A&&f<B+70){ctx.strokeStyle="#FF6257";ctx.setLineDash([6,4]);ctx.strokeRect(W-180,mid-52,120,104);ctx.setLineDash([]);}
+ if(f===A+16){st.textContent="▲ ANOMALIA: łożysko główne · pewność 96%";st.className="chipst warn";addlog("wr","anomalia akustyczna: łożysko główne (conf 0.96)")}
+ if(f===B+60){st.textContent="● zlecenie serwisowe utworzone → planowanie";st.className="chipst";addlog("ok","work-order #4211 utworzone · części zamówione")}
+ if(f===6){st.textContent="● nasłuch sygnału…";st.className="chipst"}}
+if(!rm)fr();else{st.textContent="▲ ANOMALIA: łożysko główne · pewność 96%"}
+})();
+</script>
+</body></html>

@@ -1,0 +1,100 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Propozycja 05 — KINETYKA · vistechnologie</title>
+<style>
+:root{--bg:#0E0E0E;--fg:#F4F2EC;--lime:#D8FF3A;--dim:#9A968C}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:18px 26px;z-index:10;mix-blend-mode:difference}
+nav b{font-size:17px;letter-spacing:-.02em}
+nav a{color:var(--fg);text-decoration:none;font-weight:600;font-size:14px}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 4vw;position:relative;overflow:hidden}
+.line{font-size:clamp(52px,11.4vw,190px);font-weight:800;letter-spacing:-.045em;line-height:.92;text-transform:uppercase;white-space:nowrap;will-change:transform}
+.line .o{color:transparent;-webkit-text-stroke:2px var(--fg)}
+.line .l{color:var(--lime)}
+.hero .mono{margin:26px 0 0}
+.spot{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(340px 340px at var(--mx,50%) var(--my,40%),rgba(216,255,58,.13),transparent 70%)}
+.band{background:var(--lime);color:#111;overflow:hidden}
+.band div{display:flex;gap:56px;white-space:nowrap;width:max-content;padding:16px 0;font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:-.01em;animation:mq 18s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:14vh 4vw}
+.big-num{display:flex;align-items:baseline;gap:3vw;flex-wrap:wrap}
+.big-num b{font-size:clamp(120px,24vw,400px);font-weight:800;letter-spacing:-.05em;line-height:.8;color:var(--lime)}
+.big-num div{max-width:36ch;font-size:clamp(16px,1.6vw,22px);line-height:1.5;color:var(--dim)}
+.big-num div strong{color:var(--fg)}
+.hcards{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 0 18px;scrollbar-width:none}
+.hcards::-webkit-scrollbar{display:none}
+.hc{flex:0 0 min(420px,84vw);scroll-snap-align:start;border:1px solid #2A2A26;border-radius:20px;padding:34px;background:#141412;transition:.2s}
+.hc:hover{border-color:var(--lime);transform:translateY(-4px)}
+.hc i{font-style:normal;color:var(--lime);font-weight:800;font-size:15px}
+.hc h3{font-size:26px;letter-spacing:-.02em;margin:12px 0 10px}
+.hc p{font-size:14.5px;line-height:1.55;color:var(--dim)}
+.case{border-top:1px solid #2A2A26;padding:9vh 0;display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.case h3{font-size:clamp(30px,4.6vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.case h3 em{font-style:normal;color:var(--lime)}
+.case p{color:var(--dim);line-height:1.6;margin-top:18px;max-width:48ch}
+.case .fx{font-size:clamp(60px,9vw,140px);font-weight:800;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--lime);white-space:nowrap}
+.cta{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px}
+.cta h2{font-size:clamp(40px,8vw,120px);font-weight:800;letter-spacing:-.045em;text-transform:uppercase;line-height:.95}
+.cta a{background:var(--lime);color:#111;font-weight:800;font-size:18px;padding:20px 44px;border-radius:999px;text-decoration:none}
+.cta a:hover{transform:scale(1.05)}
+footer{border-top:1px solid #2A2A26;padding:26px 4vw;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+@media(max-width:860px){.case{grid-template-columns:1fr}}
+</style></head><body>
+<div class="spot"></div>
+<nav><b>vistechnologie<span style="color:var(--lime)">.</span></b><a href="#kontakt">Porozmawiajmy →</a></nav>
+<div class="hero">
+<div class="line" data-k="0.22">Technologia</div>
+<div class="line o" data-k="-0.3"><span class="o">która robi</span></div>
+<div class="line" data-k="0.16"><span class="l">wynik</span> firmy</div>
+<p class="mono">Systemy dedykowane · AI · IoT — dla przemysłu, logistyki i energetyki · Banino k. Gdańska</p>
+</div>
+<div class="band"><div>
+<span>12 lat jednego systemu w produkcji</span><span>—</span><span>AI, które słyszy usterki turbin</span><span>—</span><span>MVP w 8–12 tygodni</span><span>—</span>
+<span>12 lat jednego systemu w produkcji</span><span>—</span><span>AI, które słyszy usterki turbin</span><span>—</span><span>MVP w 8–12 tygodni</span><span>—</span>
+</div></div>
+<section>
+<div class="big-num"><b data-count="12">0</b>
+<div><strong>lat nieprzerwanej współpracy z kluczowym klientem.</strong><br>Nasz system prowadzi codzienną pracę całej firmy PCC Intermodal — od sprzedaży, przez operacje terminalowe, po księgowość. Ponad 10 lat na rynku. Systemy mission-critical 24/7.</div></div>
+</section>
+<section style="padding-top:0">
+<p class="mono">Usługi — przewiń →</p>
+<div class="hcards">
+<div class="hc"><i>01</i><h3>Systemy dedykowane</h3><p>Budujemy od zera systemy szyte pod procesy firmy. Nasza flagowa usługa i największe doświadczenie.</p></div>
+<div class="hc"><i>02</i><h3>Wdrożenia AI</h3><p>Odczyt dokumentów, wykrywanie anomalii, sieci neuronowe na urządzeniach edge.</p></div>
+<div class="hc"><i>03</i><h3>Aplikacje webowe</h3><p>Portale dla pracowników i klientów — cyfryzacja obsługi i operacji.</p></div>
+<div class="hc"><i>04</i><h3>Mobile &amp; tablet</h3><p>Narzędzia dla ludzi w terenie i na produkcji.</p></div>
+<div class="hc"><i>05</i><h3>Monitoring / IoT</h3><p>Dane z urządzeń przemysłowych w czasie rzeczywistym.</p></div>
+<div class="hc"><i>06</i><h3>Utrzymanie i rozwój</h3><p>Zostajemy po wdrożeniu: serwis, rozwój, kolejne moduły.</p></div>
+</div>
+</section>
+<section style="padding-top:2vh">
+<div class="case">
+<div><p class="mono">Case 01 · Logistyka</p><h3>PCC <em>Intermodal</em></h3><p>Kompletny system end-to-end: TOS, sprzedaż, fakturowanie, obieg dokumentów. Jedno źródło prawdy — mniej błędów, niższe koszty terminala, większa przepustowość.</p></div>
+<div class="fx" data-k="0.06">SYSTEM OD 12 LAT →</div>
+</div>
+<div class="case">
+<div class="fx" data-k="-0.06">← AI SŁYSZY TURBINY</div>
+<div><p class="mono">Case 02 · OZE + AI</p><h3>APT / <em>Chordata</em></h3><p>Akustyka + sieci neuronowe na edge + MLOps. Degradacja podzespołów wykryta, zanim zobaczy ją SCADA — serwis planowany, nie awaryjny. Zwalidowane na pracującej farmie.</p></div>
+</div>
+</section>
+<div class="cta" id="kontakt">
+<p class="mono">Zarząd odpowiada osobiście — firmą kieruje osoba techniczna</p>
+<h2>Zróbmy<br>trudny projekt<span style="color:var(--lime)">.</span></h2>
+<a href="mailto:biuro@vistechnologie.pl">biuro@vistechnologie.pl</a>
+</div>
+<footer><span>© 2026 Vis Technologie Sp. z o.o.</span><span>tel. 509 375 274</span><span>Banino k. Gdańska · KRS 0000565307</span></footer>
+<script>
+(function(){
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.addEventListener("mousemove",function(e){document.documentElement.style.setProperty("--mx",e.clientX+"px");document.documentElement.style.setProperty("--my",e.clientY+"px")});
+var els=[].slice.call(document.querySelectorAll("[data-k]"));
+if(!rm){var tick=false;addEventListener("scroll",function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;var y=pageYOffset;
+ els.forEach(function(el){el.style.transform="translateX("+(y*parseFloat(el.getAttribute("data-k"))*-1).toFixed(1)+"px)"})})},{passive:true})}
+var c=document.querySelector("[data-count]");
+if(c){var done=false;var io=new IntersectionObserver(function(en){if(en[0].isIntersecting&&!done){done=true;var t0=null,tg=12;
+ var st=function(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1200);c.textContent=Math.round(tg*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st)};
+ if(rm)c.textContent=tg;else requestAnimationFrame(st)}},{threshold:.4});io.observe(c)}
+})();
+</script>
+</body></html>
