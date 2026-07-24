@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 720" width="1680" height="720" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+<rect width="1680" height="720" fill="#141412"/>
+<g stroke="#2A2A26" stroke-width="1"><path d="M0 120H1680M0 240H1680M0 360H1680M0 480H1680M0 600H1680M120 0V720M360 0V720M600 0V720M840 0V720M1080 0V720M1320 0V720M1560 0V720"/></g>
+<g fill="none" stroke="#D8FF3A" stroke-width="3" stroke-linecap="round">
+<path d="M430 640 445 300M460 640 445 300"/><circle cx="445" cy="286" r="16"/>
+<g><animateTransform attributeName="transform" type="rotate" from="0 445 286" to="360 445 286" dur="16s" repeatCount="indefinite"/>
+<path d="M445 286 L445 116M445 286 L592 371M445 286 L298 371"/></g>
+</g>
+<g fill="none" stroke="#F4F2EC" stroke-width="2" opacity="0.7">
+<path d="M525 250 a95 95 0 0 1 0 82"><animate attributeName="opacity" values="0.8;0.15;0.8" dur="3s" repeatCount="indefinite"/></path>
+<path d="M565 225 a140 140 0 0 1 0 132"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" begin="0.5s" repeatCount="indefinite"/></path>
+<path d="M605 200 a185 185 0 0 1 0 182"><animate attributeName="opacity" values="0.45;0.08;0.45" dur="3s" begin="1s" repeatCount="indefinite"/></path>
+</g>
+<g fill="none" stroke="#D8FF3A" stroke-width="2.5">
+<path d="M820 470 H1560M820 470 l40 0 22 -46 26 92 24 -60 20 34 30 -110 28 138 24 -72 22 26 200 0" stroke-linejoin="round"/>
+<rect x="1210" y="330" width="180" height="180" stroke="#FF5A4E" stroke-dasharray="8 6"/>
+</g>
+<g font-family="ui-monospace,Consolas,monospace" font-size="20" fill="#A5A198" letter-spacing="3">
+<text x="820" y="300">SYGNAŁ AKUSTYCZNY · EDGE AI</text><text x="1210" y="560" fill="#FF5A4E">ANOMALIA · 96%</text><text x="298" y="680">FARMA PROD.</text>
+</g>
+<circle cx="445" cy="256" r="6" fill="#FF5A4E"><animate attributeName="opacity" values="1;0.15;1" dur="2.4s" repeatCount="indefinite"/></circle>
+</svg>

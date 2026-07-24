@@ -198,5 +198,54 @@
       if (chip) { chip.textContent = states[1]; chip.className = "kino-ai-chip warn"; }
     }
   }
+
+  /* dopasowanie kinetycznych linii do szerokości (PL/EN) */
+  var fitLines = function () {
+    [].slice.call(doc.querySelectorAll(".kn-line")).forEach(function (el) {
+      el.style.fontSize = "";
+      var cw = el.clientWidth, sw = el.scrollWidth;
+      if (sw > cw + 2) {
+        var fs = parseFloat(getComputedStyle(el).fontSize);
+        el.style.fontSize = Math.floor(fs * cw / sw * 0.985) + "px";
+      }
+    });
+  };
+  fitLines();
+  window.addEventListener("resize", fitLines);
+  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(fitLines);
+
+  /* poziomy scroller usług: kółko, przeciąganie, strzałki */
+  [].slice.call(doc.querySelectorAll(".kn-scroll")).forEach(function (sc) {
+    sc.addEventListener("wheel", function (ev) {
+      if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX) && sc.scrollWidth > sc.clientWidth + 4) {
+        var atStart = sc.scrollLeft <= 2 && ev.deltaY < 0;
+        var atEnd = sc.scrollLeft >= sc.scrollWidth - sc.clientWidth - 2 && ev.deltaY > 0;
+        if (!atStart && !atEnd) { ev.preventDefault(); sc.scrollLeft += ev.deltaY; }
+      }
+    }, { passive: false });
+    var down = false, sx = 0, sl = 0;
+    sc.addEventListener("pointerdown", function (ev) { down = true; sx = ev.clientX; sl = sc.scrollLeft; sc.classList.add("grab"); });
+    doc.addEventListener("pointermove", function (ev) { if (down) sc.scrollLeft = sl - (ev.clientX - sx); });
+    doc.addEventListener("pointerup", function () { down = false; sc.classList.remove("grab"); });
+    var wrap = sc.parentNode;
+    var mk = function (dir, label) {
+      var btn = doc.createElement("button");
+      btn.type = "button"; btn.className = "kn-arw kn-arw-" + (dir > 0 ? "r" : "l");
+      btn.setAttribute("aria-label", label);
+      btn.textContent = dir > 0 ? "→" : "←";
+      btn.addEventListener("click", function () { sc.scrollBy({ left: dir * Math.min(440, sc.clientWidth * 0.8), behavior: reduced ? "auto" : "smooth" }); });
+      return btn;
+    };
+    var bar = doc.createElement("div");
+    bar.className = "kn-arws";
+    bar.appendChild(mk(-1, "Poprzednie")); bar.appendChild(mk(1, "Następne"));
+    wrap.insertBefore(bar, sc);
+    var upd = function () {
+      bar.children[0].disabled = sc.scrollLeft <= 2;
+      bar.children[1].disabled = sc.scrollLeft >= sc.scrollWidth - sc.clientWidth - 2;
+    };
+    sc.addEventListener("scroll", upd, { passive: true }); upd();
+  });
+
   body.classList.add("no-gl");
 })();

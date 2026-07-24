@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 720" width="1680" height="720" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+<rect width="1680" height="720" fill="#141412"/>
+<g stroke="#2A2A26" stroke-width="1"><path d="M0 120H1680M0 240H1680M0 360H1680M0 480H1680M0 600H1680M120 0V720M360 0V720M600 0V720M840 0V720M1080 0V720M1320 0V720M1560 0V720"/></g>
+<g fill="none" stroke="#D8FF3A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<path d="M240 560V220M760 560V220M200 220H800M470 220v70M430 288h80v40h-80zM240 560h520"/>
+<path d="M900 560v-96h150v96M915 512h120M1090 560v-150h150v150M1105 462h120M1105 500h120"/>
+<circle cx="290" cy="606" r="22"/><circle cx="430" cy="606" r="22"/><circle cx="640" cy="606" r="22"/><circle cx="950" cy="606" r="22"/><circle cx="1140" cy="606" r="22"/>
+<path d="M160 584h1180"/>
+</g>
+<g fill="none" stroke="#F4F2EC" stroke-width="2.5" opacity="0.85">
+<path d="M1300 560V330h190v230M1320 380h150M1320 430h150M1320 480h150"/>
+</g>
+<path d="M60 120 Q420 60 840 96 T1620 84" fill="none" stroke="#D8FF3A" stroke-width="2.5" stroke-dasharray="10 12">
+<animate attributeName="stroke-dashoffset" values="0;-110" dur="4s" repeatCount="indefinite"/></path>
+<g font-family="ui-monospace,Consolas,monospace" font-size="20" fill="#A5A198" letter-spacing="3">
+<text x="240" y="180">TOS · TERMINAL</text><text x="1300" y="308">FAKTURY · DOKUMENTY</text><text x="900" y="440">SKŁAD KONTENERÓW</text>
+</g>
+<circle cx="470" cy="308" r="7" fill="#D8FF3A"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+</svg>

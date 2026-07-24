@@ -392,13 +392,14 @@ def sec_cases_home(lang):
     rows = []
     for i, w in enumerate(c["cases"]):
         eff = " · ".join(x.split(" — ")[0] for x in w["effects"]["items"][:2])
-        txt = (f'<div class="kn-case-txt"><p class="kn-hint">{e(w["tag"])}</p>'
-               f'<h3>{e(w["title"])}</h3><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
+        txt = (f'<div class="kn-case-txt"><div><p class="kn-hint">{e(w["tag"])}</p>'
+               f'<h3>{e(w["title"])}</h3></div>'
+               f'<div class="kn-case-side"><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
                f'<p class="kn-case-eff">{e(eff)}</p>'
-               f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div>')
-        big = f'<div class="kn-fx" data-k="{0.06 if i % 2 == 0 else -0.06}" aria-hidden="true">{e(fx[i])}</div>'
-        inner = txt + big if i % 2 == 0 else big + txt
-        rows.append(f'<div class="kn-case" data-reveal>{inner}</div>')
+               f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div></div>')
+        strip = (f'<div class="kn-fx-strip"><div class="kn-fx" data-k="{-0.1 if i % 2 == 0 else 0.1}" '
+                 f'aria-hidden="true">{e(fx[i])} · {e(fx[i])} · {e(fx[i])}</div></div>')
+        rows.append(f'<div class="kn-case" data-reveal>{strip}{txt}</div>')
     return f'<section class="kn-cases" data-zone="paper"><div class="kn-cases-inner">{"".join(rows)}</div></section>' + chr(10)
 
 
@@ -467,7 +468,7 @@ def page_cases(lang):
         eff = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"])
         arts.append(f"""<article class="dx-case {tints[i]}" data-reveal>
 <header><div class="dx-feature-eyebrow">{e(w["tag"])}</div><h2 class="dx-case-title">{e(w["title"])}</h2></header>
-<div class="dx-case-art"><img src="/assets/img/scene-case-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1920" height="1080"></div>
+<div class="dx-case-art"><img src="/assets/img/case-kn-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1920" height="1080"></div>
 <div class="dx-case-cols">
 <div class="dx-case-block"><h3>{e(w["challenge"]["h"])}</h3>{ch_ps}</div>
 <div class="dx-case-block"><h3>{e(w["did"]["h"])}</h3>{did_ps}{did_items}</div>
