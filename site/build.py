@@ -186,8 +186,9 @@ def sec_hero(lang):
     art = ('<img src="/assets/img/hero-art.svg" alt="" width="1200" height="900" fetchpriority="high">'
            f'<div class="dx-hero-art-shapes">{tags}</div>')
     return f"""<section class="dx-hero">
+<canvas class="vt-gl" aria-hidden="true" data-vibrance="1"></canvas>
 <div class="dx-hero-inner">
-<div class="dx-hero-left">
+<div class="dx-hero-left" data-reveal>
 <span class="dx-hero-eyebrow">{e(h["eyebrow"])}</span>
 <h1 class="dx-display">{e(h["pre"])}<em>{e(h["em"])}</em>{e(h["post"])}</h1>
 <p>{e(h["sub"])}</p>
@@ -205,10 +206,11 @@ def sec_hero(lang):
 def sec_partners(lang):
     c = C[lang]["partners"]
     names = "".join(f"<span>{e(n)}</span>" for n in c["names"])
+    names_dup = "".join(f'<span aria-hidden="true">{e(n)}</span>' for n in c["names"])
     return f"""<section class="dx-logos">
 <div class="dx-logos-inner">
 <div class="dx-logos-eyebrow">{e(c["title"])}</div>
-<div class="dx-logos-row">{names}</div>
+<div class="dx-logos-row"><div class="dx-logos-track">{names}{names_dup}</div></div>
 <p class="dx-partners-note">{e(c["note"])}</p>
 </div>
 </section>
@@ -218,7 +220,7 @@ def sec_partners(lang):
 def _feature(lang, it, i, eyebrow, btn_label, btn_href):
     tints = ["tint-blue", "tint-yellow", "tint-pink", "", "tint-yellow", "tint-pink", "tint-blue", ""]
     flip = " flip" if i % 2 else ""
-    return f"""<div class="dx-feature {tints[i]}{flip}">
+    return f"""<div class="dx-feature {tints[i]}{flip}" data-reveal>
 <div>
 <div class="dx-feature-eyebrow">{e(eyebrow)}</div>
 <h3 class="dx-h1">{e(it["title"])}</h3>
@@ -239,13 +241,14 @@ def sec_features(lang):
         _feature(lang, it, i, f'{it["num"]} · {c["services"]["eyebrow"]}', label, p["services"])
         for i, it in enumerate(c["services"]["items"][:4])
     )
-    return f'<section class="dx-features"><div class="dx-features-inner">{rows}</div></section>\n'
+    return f'<section class="dx-features" data-zone="paper"><div class="dx-features-inner">{rows}</div></section>\n'
 
 
 def sec_pull(lang):
     c = C[lang]["pull"]
     return f"""<section class="dx-pull">
-<div class="dx-pull-inner">
+<canvas class="vt-gl" aria-hidden="true" data-vibrance="0.45"></canvas>
+<div class="dx-pull-inner" data-reveal>
 <h2>{e(c["text"])}<em>{e(c["em"])}</em></h2>
 <div class="dx-pull-attr">{e(c["attr"])}</div>
 </div>
@@ -256,11 +259,19 @@ def sec_pull(lang):
 def sec_stats(lang):
     c = C[lang]["stats"]
     tints = ["tint-yellow", "tint-blue", "tint-pink", ""]
+
+    def big(txt):
+        m = re.match(r"^(\D*?)(\d+)(\D.*|$)", txt)
+        if not m:
+            return e(txt)
+        pre, num, post = m.groups()
+        return f'{e(pre)}<span data-count="{num}">0</span>{e(post)}'
+
     cards = "".join(
-        f'<div class="dx-ribbon-card {tints[i]}"><div class="dx-ribbon-num dx-ribbon-num-text">{e(s["big"])}</div><div class="dx-ribbon-label">{e(s["label"])}</div></div>'
+        f'<div class="dx-ribbon-card {tints[i]}" data-reveal><div class="dx-ribbon-num dx-ribbon-num-text">{big(s["big"])}</div><div class="dx-ribbon-label">{e(s["label"])}</div></div>'
         for i, s in enumerate(c["items"])
     )
-    return f"""<section class="dx-ribbon">
+    return f"""<section class="dx-ribbon" data-zone="warm">
 <div class="dx-ribbon-inner">
 <div style="margin-bottom:48px;max-width:26ch">
 <span class="dx-eyebrow">{e(c["eyebrow"])}</span>
@@ -276,7 +287,7 @@ def sec_process(lang):
     c = C[lang]["process"]
     tints = ["", "tint-yellow", "tint-blue", "featured", "tint-pink"]
     cards = "".join(
-        f'<div class="dx-proc-card {tints[i]}"><div class="dx-proc-num">{e(s["num"])}</div><div class="dx-proc-name">{e(s["t"])}</div><div class="dx-proc-desc">{e(s["d"])}</div><div class="dx-proc-dur">{e(s["dur"])}</div></div>'
+        f'<div class="dx-proc-card {tints[i]}" data-reveal><div class="dx-proc-num">{e(s["num"])}</div><div class="dx-proc-name">{e(s["t"])}</div><div class="dx-proc-desc">{e(s["d"])}</div><div class="dx-proc-dur">{e(s["dur"])}</div></div>'
         for i, s in enumerate(c["steps"])
     )
     return f"""<section class="dx-plans">
@@ -298,14 +309,14 @@ def sec_about(lang):
     sid = "o-nas" if lang == "pl" else "about"
     paras = "".join(f"<p>{e(p)}</p>" for p in c["paras"])
     founders = "".join(
-        f'<div class="dx-founder"><div class="dx-founder-photo">'
+        f'<div class="dx-founder" data-reveal><div class="dx-founder-photo">'
         f'<img src="/assets/img/team-{i + 1:02d}.svg" alt="{e(f["name"])}" loading="lazy" width="480" height="600"></div>'
         f'<div class="dx-founder-name">{e(f["name"])}</div><div class="dx-founder-role">{e(f["role"])}</div>'
         + (f'<p class="dx-founder-note">{e(f["note"])}</p>' if f["note"] else "")
         + "</div>"
         for i, f in enumerate(c["founders"])
     )
-    return f"""<section class="dx-about" id="{sid}">
+    return f"""<section class="dx-about" id="{sid}" data-zone="cool">
 <div class="dx-about-inner">
 <div class="dx-about-head">
 <span class="dx-eyebrow">{e(c["eyebrow"])}</span>
@@ -331,7 +342,8 @@ def sec_close(lang):
     c = C[lang]["close"]
     p = PATHS[lang]
     return f"""<section class="dx-close">
-<div class="dx-close-inner">
+<div class="dx-close-inner" data-reveal>
+<canvas class="vt-gl" aria-hidden="true" data-vibrance="0.4"></canvas>
 <h2>{e(c["title"])}</h2>
 <p>{e(c["sub"])}</p>
 <a class="dx-btn dx-btn-yellow" href="{p["contact"]}">{e(c["cta"])} →</a>
@@ -370,7 +382,7 @@ def page_services(lang):
     pills = "".join(f'<span class="dx-tech-pill">{e(t)}</span>' for t in c["tech"]["list"])
     return (page_head_block("blue", c["services"]["eyebrow"], c["services"]["title"])
             + f'<section class="dx-features"><div class="dx-features-inner">{rows}</div></section>\n'
-            + f'<section class="dx-tech"><div class="dx-tech-inner"><div class="dx-tech-row">{pills}</div>'
+            + f'<section class="dx-tech"><div class="dx-tech-inner" data-reveal><div class="dx-tech-row">{pills}</div>'
             + f'<p class="dx-tech-motto">{e(c["tech"]["motto"])}</p></div></section>\n'
             + sec_close(lang))
 
@@ -387,7 +399,7 @@ def page_cases(lang):
         did_ps = "".join(f"<p>{e(p)}</p>" for p in w["did"]["ps"])
         ch_ps = "".join(f"<p>{e(p)}</p>" for p in w["challenge"]["ps"])
         eff = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"])
-        arts.append(f"""<article class="dx-case {tints[i]}">
+        arts.append(f"""<article class="dx-case {tints[i]}" data-reveal>
 <header><div class="dx-feature-eyebrow">{e(w["tag"])}</div><h2 class="dx-case-title">{e(w["title"])}</h2></header>
 <div class="dx-case-art"><img src="/assets/img/case-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1680" height="720"></div>
 <div class="dx-case-cols">
@@ -416,7 +428,7 @@ def page_contact(lang):
     return (page_head_block("pink", c["nav"]["contact"], ct["title"], ct["sub"])
             + f"""<section class="dx-contact-wrap">
 <div class="dx-contact-grid">
-<div>
+<div data-reveal>
 <div class="dx-form-error" role="alert">{e(s["formError"])}</div>
 <form method="post" action="{FORM_ACTION}">
 <input type="hidden" name="lang" value="{lang}">
@@ -431,7 +443,7 @@ def page_contact(lang):
 <p class="dx-clause">{e(ct["clausePre"])}<a href="{p["legal"]}">{e(ct["clauseLink"])}</a>{e(ct["clausePost"])}</p>
 </form>
 </div>
-<div>{info}</div>
+<div data-reveal>{info}</div>
 </div>
 </section>
 """)

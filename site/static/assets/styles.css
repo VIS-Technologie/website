@@ -729,3 +729,73 @@ body { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .dx *, .dx *::before, .dx *::after { transition: none !important; animation: none !important; }
 }
+
+/* ============================================================
+   Warstwa „Immersive” — WebGL, scroll-motion, marquee.
+   Wszystko opcjonalne: bez JS/WebGL strona wygląda jak bazowa.
+   ============================================================ */
+
+canvas.vt-gl {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block; z-index: 0; pointer-events: none;
+}
+.dx-hero-inner, .dx-pull-inner { position: relative; z-index: 1; }
+.dx-close-inner { position: relative; overflow: hidden; }
+.dx-close-inner > *:not(canvas) { position: relative; z-index: 1; }
+.dx-pull::before { z-index: 1; pointer-events: none; }
+
+.vt-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--vt-mint), var(--vt-amber));
+  z-index: 90; pointer-events: none;
+}
+
+/* reveal */
+[data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+[data-reveal].in { opacity: 1; transform: none; }
+.dx-hero-left[data-reveal] { transform: translateY(14px); }
+
+/* strefy koloru tła między sekcjami */
+body.dx { transition: background 0.9s ease; }
+body.dx.zone-warm { background: #F6F0E3; }
+body.dx.zone-cool { background: #EBF2EE; }
+body.dx.zone-paper { background: var(--vt-paper); }
+
+/* marquee partnerów */
+.dx-logos-row { overflow: hidden; max-width: 100%; }
+.dx-logos-track {
+  display: flex; gap: 44px; width: max-content; align-items: baseline;
+  animation: vt-marquee 30s linear infinite;
+}
+.dx-logos-track span { white-space: nowrap; }
+.dx-logos-inner:hover .dx-logos-track { animation-play-state: paused; }
+@keyframes vt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* parallax ilustracji sterowany przewijaniem (nowoczesne przeglądarki) */
+@supports (animation-timeline: view()) {
+  .dx-feature-art img, .dx-case-art img {
+    animation: vt-drift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 100%;
+    scale: 1.08;
+  }
+  @keyframes vt-drift { from { transform: translateY(3.5%); } to { transform: translateY(-3.5%); } }
+}
+
+/* płynny parallax hero (transform ustawiany z JS) */
+.dx-hero-art-frame img, .dx-hero-art-shapes > div { will-change: transform; }
+.dx-hero-art-shapes > div { position: absolute; inset: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; }
+  .dx-logos-track { animation: none; }
+  .vt-progress { display: none; }
+  @supports (animation-timeline: view()) {
+    .dx-feature-art img, .dx-case-art img { animation: none; scale: 1; }
+  }
+}
+
+/* czytelność tekstu nad canvasem */
+.gl-on .dx-hero .dx-display, .gl-on .dx-hero-left > p { text-shadow: 0 2px 28px rgba(6, 14, 20, 0.85); }
+.gl-on .dx-pull h2, .gl-on .dx-pull-attr { text-shadow: 0 2px 26px rgba(6, 14, 20, 0.9); }
+.gl-on .dx-close h2, .gl-on .dx-close p { text-shadow: 0 2px 24px rgba(6, 14, 20, 0.85); }

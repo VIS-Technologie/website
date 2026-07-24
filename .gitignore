@@ -1,13 +1,3 @@
-node_modules/
-build/
-.DS_Store
-Thumbs.db
-*.log
-.env
-.vscode/
-.idea/
-__pycache__/
-/BRIEF-_1.DOC
-/VISTEC_1.DOC
-preview-build/
+dist-local*/
 _to_delete/
+__pycache__/
