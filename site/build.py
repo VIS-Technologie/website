@@ -179,14 +179,9 @@ def sec_hero(lang):
     c = C[lang]
     h = c["hero"]
     p = PATHS[lang]
-    tags = "".join(
-        f'<div class="dx-shape-{col}"><span class="dx-hero-tag">{e(t)}</span></div>'
-        for col, t in zip(["blue", "yellow", "pink", "green"], h["tags"])
-    )
-    art = ('<img src="/assets/img/hero-art.svg" alt="" width="1200" height="900" fetchpriority="high">'
-           f'<div class="dx-hero-art-shapes">{tags}</div>')
-    return f"""<section class="dx-hero">
-<canvas class="vt-gl" aria-hidden="true" data-vibrance="1"></canvas>
+    return f"""<section class="dx-hero kino-hero">
+<img class="kino-bg" src="/assets/img/scene-hero.svg" alt="" fetchpriority="high" data-plx>
+<div class="kino-shade"></div>
 <div class="dx-hero-inner">
 <div class="dx-hero-left" data-reveal>
 <span class="dx-hero-eyebrow">{e(h["eyebrow"])}</span>
@@ -197,7 +192,6 @@ def sec_hero(lang):
 <a class="dx-link-quiet" href="{p["cases"]}">{e(h["ctaSecondary"])} →</a>
 </div>
 </div>
-<div class="dx-hero-art"><div class="dx-hero-art-frame">{art}</div></div>
 </div>
 </section>
 """
@@ -218,17 +212,16 @@ def sec_partners(lang):
 
 
 def _feature(lang, it, i, eyebrow, btn_label, btn_href):
-    tints = ["tint-blue", "tint-yellow", "tint-pink", "", "tint-yellow", "tint-pink", "tint-blue", ""]
     flip = " flip" if i % 2 else ""
-    return f"""<div class="dx-feature {tints[i]}{flip}" data-reveal>
-<div>
+    return f"""<div class="kino-chapter{flip}">
+<img class="kino-bg" src="/assets/img/scene-{e(it["num"])}.svg" alt="" loading="lazy" data-plx>
+<div class="kino-chapter-card" data-reveal>
 <div class="dx-feature-eyebrow">{e(eyebrow)}</div>
-<h3 class="dx-h1">{e(it["title"])}</h3>
-<p class="dx-body-lg">{e(it["desc"])}</p>
+<h3 class="dx-h2">{e(it["title"])}</h3>
+<p class="dx-body">{e(it["desc"])}</p>
 <p class="dx-feature-for">{e(it["forWho"])}</p>
-<a class="dx-btn dx-btn-dark" href="{btn_href}">{e(btn_label)} →</a>
+<a class="dx-btn dx-btn-primary" href="{btn_href}">{e(btn_label)} →</a>
 </div>
-<div class="dx-feature-art"><img src="/assets/img/service-{e(it["num"])}.svg" alt="" loading="lazy" width="800" height="600"></div>
 </div>
 """
 
@@ -246,8 +239,9 @@ def sec_features(lang):
 
 def sec_pull(lang):
     c = C[lang]["pull"]
-    return f"""<section class="dx-pull">
-<canvas class="vt-gl" aria-hidden="true" data-vibrance="0.45"></canvas>
+    return f"""<section class="dx-pull kino-pull">
+<img class="kino-bg" src="/assets/img/scene-case-01.svg" alt="" loading="lazy" data-plx>
+<div class="kino-shade-full"></div>
 <div class="dx-pull-inner" data-reveal>
 <h2>{e(c["text"])}<em>{e(c["em"])}</em></h2>
 <div class="dx-pull-attr">{e(c["attr"])}</div>
@@ -379,6 +373,7 @@ def sec_cases_home(lang):
     for i, w in enumerate(c["cases"]):
         effects = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"][:3])
         cards.append(f"""<article class="dx-minicase {tints[i]}" data-reveal>
+<img class="kino-mini-thumb" src="/assets/img/scene-case-{i + 1:02d}.svg" alt="" loading="lazy">
 <div class="dx-feature-eyebrow">{e(w["tag"])}</div>
 <h3>{e(w["title"])}</h3>
 <ul class="dx-case-list">{effects}</ul>
@@ -432,7 +427,7 @@ def page_cases(lang):
         eff = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"])
         arts.append(f"""<article class="dx-case {tints[i]}" data-reveal>
 <header><div class="dx-feature-eyebrow">{e(w["tag"])}</div><h2 class="dx-case-title">{e(w["title"])}</h2></header>
-<div class="dx-case-art"><img src="/assets/img/case-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1680" height="720"></div>
+<div class="dx-case-art"><img src="/assets/img/scene-case-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1920" height="1080"></div>
 <div class="dx-case-cols">
 <div class="dx-case-block"><h3>{e(w["challenge"]["h"])}</h3>{ch_ps}</div>
 <div class="dx-case-block"><h3>{e(w["did"]["h"])}</h3>{did_ps}{did_items}</div>

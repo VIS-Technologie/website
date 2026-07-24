@@ -857,3 +857,115 @@ body.dx.zone-paper { background: var(--vt-paper); }
   .dx-minicase-grid { grid-template-columns: 1fr; }
   .dx-minicase { padding: 32px; }
 }
+
+/* ============================================================
+   KONCEPCJA „KINO” — jasna, ciepła baza + pełnoekranowe kadry
+   domenowe (zmierzch). Kontrast: kadr <-> światło.
+   ============================================================ */
+
+.dx {
+  --vt-ink: #141A2B;
+  --vt-ink-2: #1E2740;
+  --vt-paper: #FBF8F3;
+  --vt-mist: #F2EDE4;
+  --vt-sand: #F7EFE2;
+  --vt-ice: #EDF0EA;
+  --vt-fg: #1F2433;
+  --vt-fg-2: #5D6373;
+  --vt-line: rgba(31, 36, 51, 0.12);
+  --vt-line-strong: rgba(31, 36, 51, 0.3);
+  --vt-mint: #E8934C;        /* akcent na ciemnym: złoty zmierzch */
+  --vt-teal: #B4552F;        /* akcent na jasnym: rdza */
+  --vt-amber: #E8934C;
+  --vt-glow: rgba(232, 147, 76, 0.14);
+}
+canvas.vt-gl { display: none; }
+body.dx.zone-warm { background: #F6EFE3; }
+body.dx.zone-cool { background: #EFF1EB; }
+
+/* wspólne kadry */
+.kino-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+  transform: scale(1.14);
+  will-change: transform;
+}
+.kino-shade {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(8, 12, 22, 0.74) 0%, rgba(8, 12, 22, 0.38) 52%, rgba(8, 12, 22, 0.05) 100%);
+}
+.kino-shade-full { position: absolute; inset: 0; z-index: 1; background: rgba(8, 12, 22, 0.6); }
+
+/* hero-kadr */
+.kino-hero {
+  position: relative; overflow: hidden;
+  min-height: 92svh;
+  display: flex; align-items: center;
+  padding: 96px 32px;
+  background: var(--vt-ink);
+}
+.kino-hero .dx-hero-inner {
+  position: relative; z-index: 2;
+  grid-template-columns: 1fr; max-width: 1320px; width: 100%;
+}
+.kino-hero .dx-hero-left { max-width: 760px; }
+.kino-hero .dx-hero-eyebrow { color: #F2C879; }
+.kino-hero .dx-display em {
+  color: #FFC98A;
+  background: linear-gradient(#E8934C, #E8934C) 0 94% / 100% 6px no-repeat;
+  padding-bottom: 4px;
+}
+.kino-hero .dx-link-quiet { color: #FFD9A0; }
+.kino-hero .dx-btn-primary { background: #E8934C; color: #241203; }
+.kino-hero .dx-btn-primary:hover { background: #F5A75F; box-shadow: 0 10px 32px rgba(232, 147, 76, 0.4); }
+
+/* rozdziały-usługi: pełnoekranowe kadry z kartą na szkle */
+.dx-features { padding: 0; }
+.dx-features-inner { max-width: none; gap: 0; }
+.kino-chapter {
+  position: relative; overflow: hidden;
+  min-height: 78vh;
+  display: flex; align-items: center; justify-content: flex-start;
+  padding: 96px 7vw;
+}
+.kino-chapter::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(8, 12, 22, 0.55), rgba(8, 12, 22, 0.06) 60%);
+}
+.kino-chapter.flip { justify-content: flex-end; }
+.kino-chapter.flip::after {
+  background: linear-gradient(270deg, rgba(8, 12, 22, 0.55), rgba(8, 12, 22, 0.06) 60%);
+}
+.kino-chapter-card {
+  position: relative; z-index: 2;
+  max-width: 600px;
+  background: rgba(251, 248, 243, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 44px 46px;
+  box-shadow: 0 30px 80px rgba(8, 12, 22, 0.35);
+}
+.kino-chapter-card .dx-h2 { margin: 12px 0 0; }
+.kino-chapter-card .dx-body { margin: 14px 0 0; }
+.kino-chapter-card .dx-feature-for { margin: 16px 0 26px; }
+
+/* cytat na kadrze terminala */
+.kino-pull { position: relative; overflow: hidden; background: var(--vt-ink); }
+.kino-pull .dx-pull-inner { position: relative; z-index: 2; }
+
+/* miniatury case studies */
+.kino-mini-thumb {
+  width: calc(100% + 88px); margin: -44px -44px 4px;
+  aspect-ratio: 21 / 9; object-fit: cover;
+  border-radius: 22px 22px 0 0;
+}
+
+@media (max-width: 900px) {
+  .kino-hero { min-height: 78svh; padding: 72px 24px; }
+  .kino-chapter { min-height: auto; padding: 72px 20px; }
+  .kino-chapter-card { padding: 30px 26px; }
+  .kino-mini-thumb { width: calc(100% + 64px); margin: -32px -32px 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kino-bg { transform: none; }
+}
