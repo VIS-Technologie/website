@@ -44,17 +44,26 @@ def stars(n, y0, y1, seed=7, fill="#F5F2EC"):
     return "".join(out)
 
 
-def turbine_sil(cx, ground, hub_h, s=1.0, rot=15, fill=SIL, light=False):
+def turbine_sil(cx, ground, hub_h, s=1.0, rot=15, fill=SIL, light=False, spin=0):
+    """spin > 0: łopaty obracają się (SMIL), pełny obrót w `spin` sekund."""
     cy = ground - hub_h
     t = f'<path d="M{cx - 10 * s} {ground} L{cx - 4 * s} {cy} L{cx + 4 * s} {cy} L{cx + 10 * s} {ground} Z" fill="{fill}"/>'
+    blades = ""
     for ang in (0, 120, 240):
-        t += (f'<g transform="rotate({ang + rot} {cx} {cy})">'
-              f'<path d="M{cx - 6 * s} {cy} q-3 -{34 * s} 0 -{118 * s} q2 -{26 * s} 6 -{26 * s} '
-              f'q4 0 6 {26 * s} q3 {84 * s} 0 {118 * s} Z" fill="{fill}"/></g>')
+        blades += (f'<g transform="rotate({ang + rot} {cx} {cy})">'
+                   f'<path d="M{cx - 6 * s} {cy} q-3 -{34 * s} 0 -{118 * s} q2 -{26 * s} 6 -{26 * s} '
+                   f'q4 0 6 {26 * s} q3 {84 * s} 0 {118 * s} Z" fill="{fill}"/></g>')
+    if spin:
+        t += (f'<g><animateTransform attributeName="transform" type="rotate" '
+              f'from="0 {cx} {cy}" to="360 {cx} {cy}" dur="{spin}s" repeatCount="indefinite"/>{blades}</g>')
+    else:
+        t += blades
     t += f'<circle cx="{cx}" cy="{cy}" r="{11 * s}" fill="{fill}"/>'
     if light:
-        t += (f'<circle cx="{cx}" cy="{cy - 16 * s}" r="{5 * s}" fill="#FF5A4E" opacity="0.9"/>'
-              f'<circle cx="{cx}" cy="{cy - 16 * s}" r="{14 * s}" fill="#FF5A4E" opacity="0.25"/>')
+        t += (f'<circle cx="{cx}" cy="{cy - 16 * s}" r="{5 * s}" fill="#FF5A4E">'
+              f'<animate attributeName="opacity" values="1;0.15;1" dur="2.6s" repeatCount="indefinite"/></circle>'
+              f'<circle cx="{cx}" cy="{cy - 16 * s}" r="{14 * s}" fill="#FF5A4E" opacity="0.25">'
+              f'<animate attributeName="opacity" values="0.3;0.05;0.3" dur="2.6s" repeatCount="indefinite"/></circle>')
     return t
 
 
@@ -79,11 +88,11 @@ def scene_turbine():  # serwis turbin — technik na gondoli o zmierzchu
     b += stars(70, 0, 380)
     b += f'<rect y="900" width="{W}" height="{H - 900}" fill="url(#sea)"/>'
     # dalekie turbiny
-    b += turbine_sil(360, 905, 300, 0.62, rot=40, fill=SIL2)
-    b += turbine_sil(700, 905, 360, 0.8, rot=75, fill=SIL2)
+    b += turbine_sil(360, 905, 300, 0.62, rot=40, fill=SIL2, spin=22)
+    b += turbine_sil(700, 905, 360, 0.8, rot=75, fill=SIL2, spin=18)
     # główna turbina z technikiem na gondoli
     cx, ground, hub = 1360, 1010, 640
-    b += turbine_sil(cx, ground, hub, 1.7, rot=104, light=True)
+    b += turbine_sil(cx, ground, hub, 1.7, rot=104, light=True, spin=14)
     ny = ground - hub
     b += f'<rect x="{cx - 62}" y="{ny - 26}" width="150" height="34" rx="15" fill="{SIL}"/>'
     b += person(cx + 62, ny - 24, 1.05, arm="up")
@@ -121,7 +130,10 @@ def scene_ai():  # AI — dłoń i neuronowa mgławica
     for x, y, r in pts:
         c = "#FFD9A0" if r > 5.2 else "#CDBfFF".replace("f", "F")
         b += f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}" fill="{c}" opacity="0.9"/>'
-    b += f'<ellipse cx="960" cy="500" rx="130" ry="80" fill="url(#aigl2)"/>'
+    b += (f'<ellipse cx="960" cy="500" rx="130" ry="80" fill="url(#aigl2)">'
+      f'<animate attributeName="opacity" values="1;0.55;1" dur="2.8s" repeatCount="indefinite"/></ellipse>'
+      f'<ellipse cx="960" cy="460" rx="560" ry="330" fill="url(#aigl)" opacity="0.6">'
+      f'<animate attributeName="opacity" values="0.6;0.25;0.6" dur="5s" repeatCount="indefinite"/></ellipse>')
     # dłoń (sylwetka, otwarta ku górze)
     b += ('<path d="M700 1080 L760 890 Q790 850 830 852 L846 800 Q852 782 868 786 Q882 790 878 810 L864 862 '
           'L892 856 L916 776 Q922 756 940 762 Q956 768 950 790 L928 864 L956 860 L986 766 Q994 744 1012 752 '
@@ -156,7 +168,8 @@ def scene_tablet():  # mobile/tablet — pracownik z tabletem w magazynie
               f'<ellipse cx="{x}" cy="140" rx="70" ry="16" fill="#BFE0FF" opacity="0.12"/>')
     # pracownik z tabletem (świecący ekran)
     cx, base = 960, 1020
-    b += f'<ellipse cx="{cx}" cy="770" rx="210" ry="150" fill="url(#tgl)"/>'
+    b += (f'<ellipse cx="{cx}" cy="770" rx="210" ry="150" fill="url(#tgl)">'
+          f'<animate attributeName="opacity" values="1;0.7;1" dur="3.2s" repeatCount="indefinite"/></ellipse>')
     b += f'<circle cx="{cx}" cy="{base - 250}" r="34" fill="{SIL}"/>'
     b += (f'<path d="M{cx - 62} {base} L{cx - 52} {base - 120} L{cx - 58} {base - 196} '
           f'Q{cx} {base - 222} {cx + 58} {base - 196} L{cx + 52} {base - 120} L{cx + 62} {base} '
@@ -332,12 +345,13 @@ def scene_case_turbine():  # case APT/Chordata — farma + fala akustyczna
     b += f'<ellipse cx="1560" cy="260" rx="260" ry="240" fill="url(#cmoon)"/>'
     b += stars(110, 0, 640)
     b += f'<rect y="920" width="{W}" height="{H - 920}" fill="{SIL}"/>'
-    b += turbine_sil(300, 925, 320, 0.75, rot=30, fill=SIL2)
-    b += turbine_sil(1680, 925, 280, 0.66, rot=70, fill=SIL2)
-    b += turbine_sil(880, 960, 520, 1.35, rot=100, light=True)
+    b += turbine_sil(300, 925, 320, 0.75, rot=30, fill=SIL2, spin=20)
+    b += turbine_sil(1680, 925, 280, 0.66, rot=70, fill=SIL2, spin=24)
+    b += turbine_sil(880, 960, 520, 1.35, rot=100, light=True, spin=15)
     # fala akustyczna z gondoli
     for rr, op in ((120, 0.65), (190, 0.42), (270, 0.25), (360, 0.14)):
-        b += f'<path d="M{880 + 40} {960 - 520 - rr * 0.55:.0f} a {rr} {rr} 0 0 1 0 {rr * 1.1:.0f}" fill="none" stroke="#57D0A5" stroke-width="5" opacity="{op}"/>'
+        b += (f'<path d="M{880 + 40} {960 - 520 - rr * 0.55:.0f} a {rr} {rr} 0 0 1 0 {rr * 1.1:.0f}" fill="none" stroke="#57D0A5" stroke-width="5" opacity="{op}">'
+                 f'<animate attributeName="opacity" values="{op};{op * 0.25:.2f};{op}" dur="3.4s" begin="{rr / 260:.1f}s" repeatCount="indefinite"/></path>')
     return svg(b, defs)
 
 
@@ -356,8 +370,8 @@ def scene_hero():  # panorama domen: terminal + turbiny + horyzont danych
         for k in range(n):
             b += f'<rect x="{x}" y="{905 - 56 * (k + 1)}" width="112" height="50" rx="4" fill="{SIL2 if k % 2 else SIL}"/>'
     # prawa: turbiny
-    b += turbine_sil(1420, 908, 420, 1.05, rot=95, light=True)
-    b += turbine_sil(1700, 908, 300, 0.72, rot=35, fill=SIL2)
+    b += turbine_sil(1420, 908, 420, 1.05, rot=95, light=True, spin=16)
+    b += turbine_sil(1700, 908, 300, 0.72, rot=35, fill=SIL2, spin=21)
     # horyzont danych — delikatna fala świetlna
     b += ('<path d="M0 760 Q240 700 480 748 T960 736 T1440 752 T1920 726" fill="none" stroke="#57D0A5" stroke-width="3.2" opacity="0.6"/>'
           '<path d="M0 800 Q240 760 480 792 T960 780 T1440 796 T1920 772" fill="none" stroke="#F2C879" stroke-width="2.2" opacity="0.45"/>')

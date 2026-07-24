@@ -179,6 +179,16 @@ def sec_hero(lang):
     c = C[lang]
     h = c["hero"]
     p = PATHS[lang]
+    rot_words = {
+        "pl": ("Wdrażamy AI, które", ["czyta dokumenty przewozowe", "słyszy zużycie turbin, zanim stanie farma",
+                                      "pilnuje operacji terminala 24/7", "uczy się procesów Twojej firmy"]),
+        "en": ("We deploy AI that", ["reads freight documents", "hears turbine wear before downtime",
+                                     "watches terminal operations 24/7", "learns your company's processes"]),
+    }[lang]
+    words_attr = e(json.dumps(rot_words[1], ensure_ascii=False))
+    rotator = (f'<p class="kino-rotator"><span>{e(rot_words[0])}</span> '
+               f'<strong class="kino-rot-word" data-rotate="{words_attr}">{e(rot_words[1][0])}</strong>'
+               f'<span class="kino-caret" aria-hidden="true"></span></p>')
     return f"""<section class="dx-hero kino-hero">
 <img class="kino-bg" src="/assets/img/scene-hero.svg" alt="" fetchpriority="high" data-plx>
 <div class="kino-shade"></div>
@@ -187,6 +197,7 @@ def sec_hero(lang):
 <span class="dx-hero-eyebrow">{e(h["eyebrow"])}</span>
 <h1 class="dx-display">{e(h["pre"])}<em>{e(h["em"])}</em>{e(h["post"])}</h1>
 <p>{e(h["sub"])}</p>
+{rotator}
 <div class="dx-hero-actions">
 <a class="dx-btn dx-btn-primary" href="{p["contact"]}">{e(h["ctaPrimary"])} →</a>
 <a class="dx-link-quiet" href="{p["cases"]}">{e(h["ctaSecondary"])} →</a>
@@ -392,8 +403,38 @@ def sec_cases_home(lang):
 """
 
 
+def sec_ai_demo(lang):
+    """Żywy dowód AI: symulacja detekcji anomalii akustycznej (canvas w site.js)."""
+    t = {
+        "pl": {
+            "eyebrow": "AI w praktyce", "title": "Nasze modele słuchają maszyn.",
+            "sub": "Fragment na żywo: tak algorytm wychwytuje anomalię akustyczną w pracy turbiny — zanim zauważy ją SCADA.",
+            "s0": "nasłuch sygnału…", "s1": "⚠ anomalia: łożysko główne · pewność 96%", "s2": "→ zlecenie serwisowe utworzone",
+        },
+        "en": {
+            "eyebrow": "AI in practice", "title": "Our models listen to machines.",
+            "sub": "Live fragment: this is how the algorithm catches an acoustic anomaly in a turbine — before SCADA notices.",
+            "s0": "listening to the signal…", "s1": "⚠ anomaly: main bearing · confidence 96%", "s2": "→ service order created",
+        },
+    }[lang]
+    return f"""<section class="kino-ai" data-zone="cool">
+<div class="kino-ai-inner">
+<div class="kino-ai-head" data-reveal>
+<span class="dx-eyebrow">{e(t["eyebrow"])}</span>
+<h2 class="dx-h1" style="margin-top:12px">{e(t["title"])}</h2>
+<p class="dx-body">{e(t["sub"])}</p>
+</div>
+<div class="kino-ai-demo" data-reveal data-s0="{e(t["s0"])}" data-s1="{e(t["s1"])}" data-s2="{e(t["s2"])}">
+<canvas class="kino-ai-canvas" aria-hidden="true"></canvas>
+<div class="kino-ai-chip" role="status">{e(t["s0"])}</div>
+</div>
+</div>
+</section>
+"""
+
+
 def page_home(lang):
-    return (sec_hero(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_pull(lang)
+    return (sec_hero(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
             + sec_features(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
 
 

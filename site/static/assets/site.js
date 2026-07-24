@@ -111,3 +111,123 @@
   onScroll();
   body.classList.add("no-gl");
 })();
+
+/* ---------- KINO: AI widoczne na stronie ---------- */
+(function () {
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* rotator w hero: AI "pisze" */
+  var rot = document.querySelector(".kino-rot-word");
+  if (rot) {
+    var words = [];
+    try { words = JSON.parse(rot.getAttribute("data-rotate")) || []; } catch (e) {}
+    if (words.length > 1 && !reduced) {
+      var wi = 0, chi = words[0].length, deleting = true;
+      var step = function () {
+        var w = words[wi];
+        if (deleting) {
+          chi--; rot.textContent = w.slice(0, chi);
+          if (chi <= 0) { deleting = false; wi = (wi + 1) % words.length; }
+          setTimeout(step, 26);
+        } else {
+          w = words[wi]; chi++;
+          rot.textContent = w.slice(0, chi);
+          if (chi >= w.length) { deleting = true; setTimeout(step, 2600); return; }
+          setTimeout(step, 46 + Math.random() * 40);
+        }
+      };
+      setTimeout(step, 2200);
+    }
+  }
+
+  /* demo: detekcja anomalii akustycznej */
+  var demo = document.querySelector(".kino-ai-demo");
+  if (!demo) return;
+  var canvas = demo.querySelector(".kino-ai-canvas");
+  var chip = demo.querySelector(".kino-ai-chip");
+  var ctx = canvas.getContext("2d");
+  var states = [demo.getAttribute("data-s0"), demo.getAttribute("data-s1"), demo.getAttribute("data-s2")];
+  var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+  var resize = function () {
+    W = demo.clientWidth; H = demo.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  };
+  resize();
+  window.addEventListener("resize", resize);
+
+  var t = 0, visible = false;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.2 }).observe(demo);
+  } else visible = true;
+
+  var CYCLE = 560;             /* klatek na pełny cykl */
+  var A_START = 240, A_END = 320;  /* okno anomalii */
+  var sample = function (x, tt) {
+    var ph = (x * 0.045) + tt * 0.06;
+    var y = Math.sin(ph) * 12 + Math.sin(ph * 2.7 + 1.2) * 6 + Math.sin(ph * 0.4) * 8;
+    var frame = (tt % CYCLE);
+    var anomAge = frame - A_START;
+    if (anomAge > 0 && frame < A_END) {
+      var k = Math.exp(-Math.pow((x - (W - 160)), 2) / 5200);
+      y += (Math.sin(ph * 9.5) * 34 + Math.sin(ph * 14) * 18) * k * Math.min(1, anomAge / 20);
+    }
+    return y;
+  };
+
+  var frame = function () {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    t++;
+    var fr = t % CYCLE;
+    ctx.clearRect(0, 0, W, H);
+    /* siatka */
+    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    ctx.lineWidth = 1;
+    for (var gy = 30; gy < H - 20; gy += 34) {
+      ctx.beginPath(); ctx.moveTo(16, gy); ctx.lineTo(W - 16, gy); ctx.stroke();
+    }
+    /* przebieg */
+    var mid = H * 0.44;
+    ctx.beginPath();
+    for (var x = 16; x < W - 16; x += 3) {
+      var y = mid + sample(x, t);
+      if (x === 16) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = "#7FB4E8"; ctx.lineWidth = 2; ctx.stroke();
+    /* skan AI */
+    var scanX = 16 + ((t * 2.4) % (W - 32));
+    ctx.strokeStyle = "rgba(232,147,76,0.85)"; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(scanX, 18); ctx.lineTo(scanX, H - 26); ctx.stroke();
+    /* okno anomalii */
+    if (fr >= A_START && fr < A_END + 90) {
+      var ax = W - 220;
+      ctx.strokeStyle = "#FF6B52"; ctx.lineWidth = 2.5;
+      ctx.setLineDash([7, 5]);
+      ctx.strokeRect(ax, mid - 74, 130, 148);
+      ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(255,107,82,0.09)";
+      ctx.fillRect(ax, mid - 74, 130, 148);
+    }
+    /* status */
+    if (chip) {
+      if (fr === A_START + 20) { chip.textContent = states[1]; chip.className = "kino-ai-chip warn"; }
+      else if (fr === A_END + 60) { chip.textContent = states[2]; chip.className = "kino-ai-chip ok"; }
+      else if (fr === 10) { chip.textContent = states[0]; chip.className = "kino-ai-chip"; }
+    }
+  };
+  if (!reduced) requestAnimationFrame(frame);
+  else {
+    /* statyczna klatka z zaznaczoną anomalią */
+    t = A_START + 40; visible = true;
+    var mid2 = H * 0.44;
+    ctx.beginPath();
+    for (var x2 = 16; x2 < W - 16; x2 += 3) {
+      var y2 = mid2 + sample(x2, t);
+      if (x2 === 16) ctx.moveTo(x2, y2); else ctx.lineTo(x2, y2);
+    }
+    ctx.strokeStyle = "#7FB4E8"; ctx.lineWidth = 2; ctx.stroke();
+    if (chip) { chip.textContent = states[1]; chip.className = "kino-ai-chip warn"; }
+  }
+})();
