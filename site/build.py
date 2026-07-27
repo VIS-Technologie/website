@@ -382,8 +382,8 @@ def sec_cases_home(lang):
     c = C[lang]["workPage"]
     p = PATHS[lang]
     fx = {
-        "pl": ["SYSTEM OD 12 LAT →", "← AI SŁYSZY TURBINY"],
-        "en": ["RUNNING FOR 12 YEARS →", "← AI HEARS TURBINES"],
+        "pl": ["SYSTEM OD 12 LAT", "AI SŁYSZY TURBINY"],
+        "en": ["RUNNING FOR 12 YEARS", "AI HEARS TURBINES"],
     }[lang]
     link_t = "Pełne studium przypadku" if lang == "pl" else "Full case study"
     rows = []
@@ -394,10 +394,10 @@ def sec_cases_home(lang):
                f'<div class="kn-case-side"><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
                f'<p class="kn-case-eff">{e(eff)}</p>'
                f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div></div>')
-        half = f'{e(fx[i])} · {e(fx[i])} · '
+        half = f'<span>{e(fx[i])}</span><span>{e(fx[i])}</span>'
         rev = " rev" if i % 2 else ""
         strip = (f'<div class="kn-fx-strip"><div class="kn-fx{rev}" aria-hidden="true">'
-                 f'<span>{half}</span><span>{half}</span></div></div>')
+                 f'{half}{half}</div></div>')
         rows.append(f'<div class="kn-case" data-reveal>{strip}{txt}</div>')
     return f'<section class="kn-cases" data-zone="paper"><div class="kn-cases-inner">{"".join(rows)}</div></section>' + chr(10)
 

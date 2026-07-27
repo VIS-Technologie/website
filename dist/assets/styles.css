@@ -142,7 +142,7 @@ body { margin: 0; }
 .kn-fx-strip { overflow: hidden; margin: 26px -4vw 30px; padding: 6px 0; }
 .kn-fx { display: flex; width: max-content; will-change: transform; animation: kn-fxmq 34s linear infinite; }
 .kn-fx.rev { animation-direction: reverse; }
-.kn-fx > span { font-size: clamp(48px, 8.8vw, 138px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; color: transparent; -webkit-text-stroke: 1.5px var(--kn-lime); white-space: nowrap; padding-right: 0.6em; }
+.kn-fx > span { font-size: clamp(48px, 8.8vw, 138px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; color: transparent; -webkit-text-stroke: 1.5px var(--kn-lime); white-space: nowrap; padding-right: 2.1em; }
 .kn-fx-strip:hover .kn-fx { animation-play-state: paused; }
 @keyframes kn-fxmq { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .kn-fx { animation: none; } }
