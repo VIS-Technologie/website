@@ -7,6 +7,9 @@ import KineticCases from "./components/KineticCases";
 import AiDemo from "./components/AiDemo";
 import PullQuote from "./components/PullQuote";
 import ServicesScroller from "./components/ServicesScroller";
+import ProcessPlans from "./components/ProcessPlans";
+import About from "./components/About";
+import CtaClose from "./components/CtaClose";
 import { useKineticScroll } from "./hooks/useKineticScroll";
 
 export default function Page() {
@@ -23,6 +26,9 @@ export default function Page() {
         <AiDemo />
         <PullQuote />
         <ServicesScroller />
+        <ProcessPlans />
+        <About />
+        <CtaClose />
       </main>
       <Footer />
     </div>
