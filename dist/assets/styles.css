@@ -140,6 +140,27 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-proof-partners { margin: 48px 0 0; padding-top: 22px; border-top: 1px solid var(--vt-line); display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
 .dx-proof-partners .dx-proof-note { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--vt-fg-2); flex-basis: 100%; }
 
+/* ---------- partnerzy ---------- */
+.kn-partners { padding: 2vh 4vw 8vh; }
+.kn-partners-inner { max-width: 1360px; margin: 0 auto; }
+.kn-part-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.kn-part { position: relative; border: 1px solid #2A2A26; border-radius: 18px; background: #141412;
+  padding: 30px 28px; transition: border-color 0.18s ease, transform 0.18s ease; }
+.kn-part:hover { border-color: var(--kn-lime); transform: translateY(-3px); }
+.kn-part b { display: block; font-size: clamp(22px, 2vw, 30px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
+.kn-part > span { display: block; margin-top: 6px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vt-fg-2); }
+.kn-part p { margin: 12px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--vt-fg-2); }
+.kn-part-badge { position: absolute; top: -11px; left: 24px; font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; background: var(--kn-lime); color: #111; padding: 4px 11px; border-radius: 99px; }
+
+/* founders: monogramy do czasu zdjęć */
+.dx-founder-photo.kn-mono { aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+  background: #141412; position: relative; overflow: hidden; }
+.dx-founder-photo.kn-mono::after { content: ""; position: absolute; left: 24px; right: 24px; bottom: 22px; height: 3px; background: var(--kn-lime); }
+.dx-founder-photo.kn-mono span { font-size: clamp(72px, 7vw, 116px); font-weight: 800; letter-spacing: -0.02em;
+  color: transparent; -webkit-text-stroke: 2.5px var(--kn-lime); transition: color 0.2s ease; }
+.dx-founder:hover .kn-mono span { color: var(--kn-lime); }
+
 /* ---------- kinetyczne case'y ---------- */
 .kn-cases { padding: 4vh 0 6vh; overflow: hidden; }
 .kn-cases-inner { max-width: 1360px; margin: 0 auto; padding: 0 4vw; }
@@ -394,6 +415,7 @@ body.dx.zone-warm, body.dx.zone-cool, body.dx.zone-paper { background: var(--vt-
   .kn-hero { min-height: 78svh; }
   .kn-line { white-space: normal; font-size: clamp(34px, 12.4vw, 92px); }
   .kn-case { padding: 6vh 0; }
+  .kn-part-grid { grid-template-columns: 1fr; }
   .kn-row { grid-template-columns: 44px minmax(0, 1fr) 34px; gap: 16px; padding: 24px 8px; }
   .kn-fx { font-size: clamp(34px, 10.4vw, 80px); }
   .kn-case-txt { grid-template-columns: 1fr; }

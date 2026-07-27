@@ -287,8 +287,6 @@ def sec_stats(lang):
         f'<div class="dx-ribbon-card {tints[i]}" data-reveal><div class="dx-ribbon-num dx-ribbon-num-text">{big(s["big"])}</div><div class="dx-ribbon-label">{e(s["label"])}</div></div>'
         for i, s in enumerate(c["items"])
     )
-    pr = C[lang]["partners"]
-    pnames = " · ".join(pr["names"])
     return f"""<section class="dx-ribbon" data-zone="warm">
 <div class="dx-ribbon-inner">
 <div style="margin-bottom:48px;max-width:26ch">
@@ -296,7 +294,6 @@ def sec_stats(lang):
 <h2 class="dx-h1" style="margin-top:12px">{e(c["title"])}</h2>
 </div>
 <div class="dx-ribbon-grid">{cards}</div>
-<p class="dx-proof-partners"><span class="dx-eyebrow">{e(pr["title"])}</span> <span>{e(pnames)}</span> <span class="dx-proof-note">{e(pr["note"])}</span></p>
 </div>
 </section>
 """
@@ -327,9 +324,13 @@ def sec_about(lang):
     c = C[lang]["about"]
     sid = "o-nas" if lang == "pl" else "about"
     paras = "".join(f"<p>{e(p)}</p>" for p in c["paras"])
+    def _initials(name):
+        parts = [w for w in name.split() if w]
+        return "".join(w[0] for w in parts[:2]).upper()
+
     founders = "".join(
-        f'<div class="dx-founder" data-reveal><div class="dx-founder-photo">'
-        f'<img src="/assets/img/team-{i + 1:02d}.svg" alt="{e(f["name"])}" loading="lazy" width="480" height="600"></div>'
+        f'<div class="dx-founder" data-reveal><div class="dx-founder-photo kn-mono" aria-hidden="true">'
+        f'<span>{e(_initials(f["name"]))}</span></div>'
         f'<div class="dx-founder-name">{e(f["name"])}</div><div class="dx-founder-role">{e(f["role"])}</div>'
         + (f'<p class="dx-founder-note">{e(f["note"])}</p>' if f["note"] else "")
         + "</div>"
@@ -383,6 +384,30 @@ def page_head_block(bg, eyebrow, title, sub=None):
 
 
 # ---------- strony ----------
+
+def sec_partners_kn(lang):
+    pr = C[lang]["partners"]
+    badge = "Aktywny partner" if lang == "pl" else "Active partner"
+    cards = []
+    for n in pr["names"]:
+        big, _, sub = n.partition(" — ")
+        is_fudo = "Fudo" in big
+        cards.append(
+            f'<div class="kn-part" data-reveal>'
+            + (f'<span class="kn-part-badge">{e(badge)}</span>' if is_fudo else "")
+            + f'<b>{e(big)}</b>'
+            + (f'<span>{e(sub)}</span>' if sub else "")
+            + (f'<p>{e(pr["note"].split(chr(8212))[-1].strip().capitalize())}</p>' if is_fudo else "")
+            + '</div>'
+        )
+    return f"""<section class="kn-partners" data-zone="paper">
+<div class="kn-partners-inner">
+<p class="kn-hint">{e(pr["title"])}</p>
+<div class="kn-part-grid">{"".join(cards)}</div>
+</div>
+</section>
+"""
+
 
 def sec_cases_home(lang):
     c = C[lang]["workPage"]
@@ -439,7 +464,7 @@ def sec_ai_demo(lang):
 
 
 def page_home(lang):
-    return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
+    return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_partners_kn(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
             + sec_features(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
 
 
