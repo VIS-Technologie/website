@@ -461,9 +461,24 @@ def sec_ai_demo(lang):
 """
 
 
+def sec_tech_kn(lang):
+    t = C[lang]["tech"]
+    rows = "".join(
+        f'<div class="kn-tech-row" data-reveal><span class="kn-tech-k">{e(g["k"])}</span>'
+        f'<span class="kn-tech-v">{e(g["v"])}</span></div>'
+        for g in t["groups"])
+    return f"""<section class="kn-tech" data-zone="paper">
+<div class="kn-tech-inner">
+<p class="kn-hint">{e(t["title"])}</p>
+<div class="kn-tech-grid">{rows}</div>
+</div>
+</section>
+"""
+
+
 def page_home(lang):
     return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_partners_kn(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
-            + sec_features(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
+            + sec_features(lang) + sec_tech_kn(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
 
 
 def page_services(lang):

@@ -101,6 +101,29 @@
       ]
     },
     "tech": {
+      "title": "Technologie, z których korzystamy",
+      "groups": [
+        {
+          "k": "AI i dane",
+          "v": "modele predykcyjne w produkcji · analiza akustyczna i time-series · MLOps"
+        },
+        {
+          "k": "IoT i edge",
+          "v": "oprogramowanie urządzeń pomiarowych · przetwarzanie na brzegu · telemetria w chmurze"
+        },
+        {
+          "k": "Chmura i platformy",
+          "v": "Azure · Google Cloud · AWS · Kubernetes · CI/CD · Terraform"
+        },
+        {
+          "k": "Bezpieczeństwo",
+          "v": "PAM (Fudo Security) · kontrola dostępu uprzywilejowanego · zero trust"
+        },
+        {
+          "k": "Systemy krytyczne",
+          "v": "integracje ERP i operacje · systemy 24/7 utrzymywane od 12 lat"
+        }
+      ],
       "list": [
         ".NET / C#",
         "React",
@@ -682,6 +705,29 @@
       ]
     },
     "tech": {
+      "title": "Technologies we work with",
+      "groups": [
+        {
+          "k": "AI & data",
+          "v": "predictive models in production · acoustic & time-series analytics · MLOps"
+        },
+        {
+          "k": "IoT & edge",
+          "v": "measurement-device software · edge processing · cloud telemetry"
+        },
+        {
+          "k": "Cloud & platforms",
+          "v": "Azure · Google Cloud · AWS · Kubernetes · CI/CD · Terraform"
+        },
+        {
+          "k": "Security",
+          "v": "PAM (Fudo Security) · privileged access control · zero trust"
+        },
+        {
+          "k": "Critical systems",
+          "v": "ERP & operations integrations · 24/7 systems maintained for 12 years"
+        }
+      ],
       "list": [
         ".NET / C#",
         "React",

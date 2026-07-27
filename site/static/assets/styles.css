@@ -154,6 +154,18 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--kn-lime); border: 1px solid #3A3A30; border-radius: 99px; padding: 4px 11px; }
 .kn-part-sub { margin: 10px 0 0; max-width: 62ch; font-size: 15px; line-height: 1.6; color: var(--vt-fg-2); }
 
+/* dyskretny pasek technologii */
+.kn-tech { padding: 2vh 4vw 7vh; }
+.kn-tech-grid { margin-top: 18px; border-top: 1px solid #1E1E1B; }
+.kn-tech-row { display: grid; grid-template-columns: 220px 1fr; gap: 18px; align-items: baseline;
+  padding: 13px 0; border-bottom: 1px solid #1E1E1B; }
+.kn-tech-k { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--kn-lime); }
+.kn-tech-v { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; line-height: 1.7; color: var(--vt-fg-2); }
+@media (max-width: 700px) {
+  .kn-tech-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
 /* founders: monogramy do czasu zdjęć */
 .dx-founder-photo.kn-mono { aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
   background: #141412; position: relative; overflow: hidden; }
