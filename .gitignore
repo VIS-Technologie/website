@@ -1,3 +1,6 @@
-dist-local*/
+dist-local/
+dist-local-kinetyka/
 _to_delete/
+_incoming/
 __pycache__/
+tools/.env.deploy
