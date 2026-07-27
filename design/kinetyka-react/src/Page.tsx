@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import FactsBand from "./components/FactsBand";
 import StatRibbon from "./components/StatRibbon";
 import KineticCases from "./components/KineticCases";
+import AiDemo from "./components/AiDemo";
 import PullQuote from "./components/PullQuote";
 import { useKineticScroll } from "./hooks/useKineticScroll";
 
@@ -18,7 +19,7 @@ export default function Page() {
         <FactsBand />
         <StatRibbon />
         <KineticCases />
-        {/* AiDemo — Task 8 */}
+        <AiDemo />
         <PullQuote />
       </main>
       <Footer />
