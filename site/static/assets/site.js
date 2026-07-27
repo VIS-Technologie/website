@@ -233,7 +233,7 @@
       var btn = doc.createElement("button");
       btn.type = "button"; btn.className = "kn-arw kn-arw-" + (dir > 0 ? "r" : "l");
       btn.setAttribute("aria-label", label);
-      btn.textContent = dir > 0 ? "→" : "←";
+      btn.textContent = dir > 0 ? "\u2192" : "\u2190";
       btn.addEventListener("click", function () { sc.scrollBy({ left: dir * Math.min(440, sc.clientWidth * 0.8), behavior: reduced ? "auto" : "smooth" }); });
       return btn;
     };
@@ -284,7 +284,7 @@
         k.textContent = parseInt(k.getAttribute("data-kpi"), 10) + Math.floor(step / 2) % 23;
       }
       var msg = L2.tosLogs[step % L2.tosLogs.length].replace("{n}", 100 + (step * 7) % 899);
-      log.innerHTML = "<b>›</b> " + msg;
+      log.innerHTML = "<b>\u203A</b> " + msg;
     }, 1600);
   }
   var farm = doc.querySelector('[data-sim="farm"]');
@@ -330,12 +330,12 @@
       if (fr === FA + 14 && turb4) {
         turb4.className = "sim-chip warn"; turb4.textContent = warnTxt;
         var d = doc.createElement("div"); d.className = "sim-al warn";
-        d.textContent = "⚠ T-04 · " + warnTxt + " · conf 0.96";
+        d.textContent = "\u26A0 T-04 \u00B7 " + warnTxt + " · conf 0.96";
         alerts.prepend(d);
       }
       if (fr === FB + 80 && turb4) {
         var d2 = doc.createElement("div"); d2.className = "sim-al lime";
-        d2.textContent = doc.documentElement.lang === "en" ? "→ work order #4211 created" : "→ zlecenie serwisowe #4211 utworzone";
+        d2.textContent = doc.documentElement.lang === "en" ? "\u2192 work order #4211 created" : "\u2192 zlecenie serwisowe #4211 utworzone";
         alerts.prepend(d2);
         while (alerts.children.length > 3) alerts.removeChild(alerts.lastChild);
       }
