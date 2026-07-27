@@ -1,4 +1,4 @@
-# Wdrożenie vistechnologie.pl na hosting Kylos przez FTP (WinSCP).
+﻿# Wdrożenie vistechnologie.pl na hosting Kylos przez FTP (WinSCP).
 # Użycie:  powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 [-Mirror] [-DryRun]
 #   -Mirror : usuwa z serwera pliki, których nie ma w dist/ (pełna synchronizacja).
 #             Użyj świadomie — skasuje pozostałości starej strony.
@@ -28,10 +28,10 @@ foreach ($k in 'FTP_HOST','FTP_USER','FTP_PASS','FTP_REMOTE_DIR') {
 $protocol = if ($cfg['FTP_PROTOCOL']) { $cfg['FTP_PROTOCOL'] } else { 'ftpes' }
 
 # --- 2. Zbuduj stronę ---
-Write-Host "==> Build: python site/build.py" -ForegroundColor Cyan
+Write-Host "==> Build: py site/build.py" -ForegroundColor Cyan
 Push-Location $repo
 try {
-    python site/build.py
+    py site/build.py
     if ($LASTEXITCODE -ne 0) { Write-Error "Build nie przeszedł — wdrożenie przerwane." }
 } finally { Pop-Location }
 
@@ -54,10 +54,14 @@ $sync = 'synchronize remote -transfer=automatic'
 if ($Mirror) { $sync += ' -delete' }
 if ($DryRun) { $sync += ' -preview' }
 
+# SFTP: pojedyncze polaczenie (port 22), omija problem kanalu danych pasywnego FTP.
+# FTP/FTPES: tryb pasywny. -hostkey="*" akceptuje klucz hosta (mozna przypiac konkretny).
+$openExtra = if ($protocol -eq 'sftp') { '-hostkey="*"' } else { '-passive=on' }
+
 $lines = @(
     'option batch abort',
     'option confirm off',
-    "open $protocol`://$($cfg['FTP_USER'])@$($cfg['FTP_HOST'])/ -passive=on -password=`"%1%`"",
+    "open $protocol`://$($cfg['FTP_USER'])@$($cfg['FTP_HOST'])/ $openExtra -password=`"%1%`"",
     "$sync `"$dist`" `"$remote`"",
     'close',
     'exit'

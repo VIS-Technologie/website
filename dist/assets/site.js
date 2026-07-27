@@ -31,6 +31,14 @@
       nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false");
     });
   }
+  /* zapamietaj wybor jezyka: cookie vt_lang po kliknieciu przelacznika PL/EN */
+  var langLinks = doc.querySelectorAll(".dx-lang a[hreflang]");
+  for (var li = 0; li < langLinks.length; li++) {
+    langLinks[li].addEventListener("click", function () {
+      try { doc.cookie = "vt_lang=" + this.getAttribute("hreflang") + ";path=/;max-age=31536000;samesite=lax"; } catch (e) {}
+    });
+  }
+
   /* błąd formularza */
   var err = doc.querySelector(".dx-form-error");
   if (err && /[?&](blad|error)=1/.test(location.search)) err.classList.add("show");
