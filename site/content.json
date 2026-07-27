@@ -24,13 +24,27 @@
     },
     "partners": {
       "title": "Partnerstwa i współpraca",
-      "names": [
-        "APT — Acoustic Probe Technologies",
-        "Chordata",
-        "Fudo Security"
-      ],
-      "note": "Aktywny partner Fudo Security — rozwiązania bezpiecznego dostępu.",
-      "sub": "Stała, aktywna współpraca — wspólne projekty i wdrożenia realizowane na bieżąco."
+      "sub": "Trzy aktywne współprace — każda o innym charakterze, wszystkie realizowane na bieżąco.",
+      "items": [
+        {
+          "name": "APT",
+          "full": "Acoustic Probe Technologies",
+          "role": "Partner technologiczny",
+          "desc": "Wspólnie rozwijamy akustyczną diagnostykę turbin wiatrowych — APT odpowiada za sondę pomiarową, my za całość oprogramowania: od urządzenia, przez chmurę, po platformę."
+        },
+        {
+          "name": "Chordata",
+          "full": "",
+          "role": "Klient i partner",
+          "desc": "Współpraca, która zaczęła się od projektu, a dziś jest stałym wspólnym działaniem — razem dostarczamy AI i analitykę w predykcyjnym utrzymaniu turbin."
+        },
+        {
+          "name": "Fudo Security",
+          "full": "",
+          "role": "Partner wdrożeniowy",
+          "desc": "Jesteśmy aktywnym partnerem Fudo Security — wdrażamy ich rozwiązania bezpiecznego dostępu (PAM) u naszych klientów."
+        }
+      ]
     },
     "services": {
       "eyebrow": "Usługi",
@@ -591,13 +605,27 @@
     },
     "partners": {
       "title": "Partnerships & collaboration",
-      "names": [
-        "APT — Acoustic Probe Technologies",
-        "Chordata",
-        "Fudo Security"
-      ],
-      "note": "An active Fudo Security partner — secure access solutions.",
-      "sub": "Ongoing, active partnerships — joint projects and deployments, delivered together."
+      "sub": "Three active collaborations — each of a different nature, all ongoing.",
+      "items": [
+        {
+          "name": "APT",
+          "full": "Acoustic Probe Technologies",
+          "role": "Technology partner",
+          "desc": "Together we build acoustic diagnostics for wind turbines — APT delivers the measurement probe, we deliver all the software: device, cloud and platform."
+        },
+        {
+          "name": "Chordata",
+          "full": "",
+          "role": "Client & partner",
+          "desc": "A collaboration that began as a project and is now an ongoing joint effort — together we deliver AI and analytics for predictive turbine maintenance."
+        },
+        {
+          "name": "Fudo Security",
+          "full": "",
+          "role": "Implementation partner",
+          "desc": "An active Fudo Security partner — we deploy their secure-access (PAM) solutions for our clients."
+        }
+      ]
     },
     "services": {
       "eyebrow": "Services",

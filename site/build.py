@@ -388,14 +388,13 @@ def page_head_block(bg, eyebrow, title, sub=None):
 def sec_partners_kn(lang):
     pr = C[lang]["partners"]
     cards = []
-    for n in pr["names"]:
-        big, _, sub = n.partition(" — ")
-        is_fudo = "Fudo" in big
+    for it in pr["items"]:
         cards.append(
             f'<div class="kn-part" data-reveal>'
-            + f'<b>{e(big)}</b>'
-            + (f'<span>{e(sub)}</span>' if sub else "")
-            + (f'<p>{e(pr["note"].split(chr(8212))[-1].strip().capitalize())}</p>' if is_fudo else "")
+            + f'<b>{e(it["name"])}</b>'
+            + (f'<span>{e(it["full"])}</span>' if it.get("full") else "")
+            + f'<span class="kn-part-role">{e(it["role"])}</span>'
+            + f'<p>{e(it["desc"])}</p>'
             + '</div>'
         )
     intro = f'<p class="kn-part-sub">{e(pr["sub"])}</p>' if pr.get("sub") else ""
