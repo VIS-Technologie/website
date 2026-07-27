@@ -8,26 +8,10 @@ export function useReveal() {
   const ioRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (reduced() || !("IntersectionObserver" in window)) return;
-    ioRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((en) => {
-          if (!en.isIntersecting) return;
-          const el = en.target as HTMLElement;
-          const sibs = el.parentNode
-            ? Array.from(el.parentNode.children).filter(
-                (s) => (s as HTMLElement).hasAttribute?.("data-reveal"),
-              )
-            : [el];
-          el.style.transitionDelay =
-            (Math.min(Math.max(0, sibs.indexOf(el)) % 8, 5) * 70) + "ms";
-          el.classList.add("in");
-          ioRef.current?.unobserve(el);
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
-    );
-    return () => ioRef.current?.disconnect();
+    return () => {
+      ioRef.current?.disconnect();
+      ioRef.current = null;
+    };
   }, []);
 
   return useCallback((el: HTMLElement | null) => {
@@ -36,6 +20,26 @@ export function useReveal() {
       el.classList.add("in");
       return;
     }
-    ioRef.current?.observe(el);
+    if (!ioRef.current) {
+      ioRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const t = en.target as HTMLElement;
+            const sibs = t.parentNode
+              ? Array.from(t.parentNode.children).filter(
+                  (s) => (s as HTMLElement).hasAttribute("data-reveal"),
+                )
+              : [t];
+            t.style.transitionDelay =
+              (Math.min(Math.max(0, sibs.indexOf(t)) % 8, 5) * 70) + "ms";
+            t.classList.add("in");
+            ioRef.current?.unobserve(t);
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      );
+    }
+    ioRef.current.observe(el);
   }, []);
 }
