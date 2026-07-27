@@ -6,6 +6,7 @@ import StatRibbon from "./components/StatRibbon";
 import KineticCases from "./components/KineticCases";
 import AiDemo from "./components/AiDemo";
 import PullQuote from "./components/PullQuote";
+import ServicesScroller from "./components/ServicesScroller";
 import { useKineticScroll } from "./hooks/useKineticScroll";
 
 export default function Page() {
@@ -21,6 +22,7 @@ export default function Page() {
         <KineticCases />
         <AiDemo />
         <PullQuote />
+        <ServicesScroller />
       </main>
       <Footer />
     </div>
