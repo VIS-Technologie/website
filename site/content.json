@@ -29,7 +29,8 @@
         "Chordata",
         "Fudo Security"
       ],
-      "note": "Aktywny partner Fudo Security — rozwiązania bezpiecznego dostępu."
+      "note": "Aktywny partner Fudo Security — rozwiązania bezpiecznego dostępu.",
+      "sub": "Stała, aktywna współpraca — wspólne projekty i wdrożenia realizowane na bieżąco."
     },
     "services": {
       "eyebrow": "Usługi",
@@ -338,7 +339,7 @@
       "legalH": "Prawne",
       "privacyLink": "Polityka prywatności",
       "cookiesLink": "Polityka cookies",
-      "reg": "Vis Technologie Sp. z o.o. \u00b7 KRS 0000565307",
+      "reg": "Vis Technologie Sp. z o.o. · KRS 0000565307",
       "rights": "© 2026 Vis Technologie Sp. z o.o.",
       "made": "Banino koło Gdańska, Polska"
     },
@@ -534,13 +535,34 @@
       "notFoundText": "Adres jest błędny albo strona została przeniesiona.",
       "formError": "Nie udało się wysłać wiadomości. Sprawdź pola: imię i nazwisko, e-mail, treść oraz zgodę — i spróbuj ponownie.",
       "meta": {
-        "home": { "title": "Vis Technologie — technologia, która przekłada się na wynik Twojej firmy", "desc": "Partner IT dla biznesu: systemy dedykowane, aplikacje webowe i mobilne, wdrożenia AI, monitoring i IoT. Najmocniejsi w logistyce i OZE. Banino koło Gdańska." },
-        "services": { "title": "Usługi — Vis Technologie", "desc": "Systemy dedykowane dla biznesu, aplikacje webowe i portale, aplikacje mobilne i tabletowe, utrzymanie i rozwój, wdrożenia AI, monitoring i IoT, infrastruktura IT, strony internetowe." },
-        "cases": { "title": "Realizacje — Vis Technologie", "desc": "Case studies: kompletny system zarządzania operacjami transportu intermodalnego (PCC Intermodal) oraz AI i akustyka w predykcyjnym utrzymaniu turbin wiatrowych (APT / Chordata)." },
-        "contact": { "title": "Kontakt — Vis Technologie", "desc": "Porozmawiajmy o projekcie. Tel. 509 375 274, biuro@vistechnologie.pl. Vis Technologie Sp. z o.o., Banino koło Gdańska." },
-        "thanks": { "title": "Dziękujemy — Vis Technologie", "desc": "Wiadomość została wysłana." },
-        "legal": { "title": "Polityka prywatności i cookies — Vis Technologie", "desc": "Zasady przetwarzania danych osobowych oraz wykorzystania plików cookies w serwisie vistechnologie.pl." },
-        "notfound": { "title": "Nie znaleziono strony — Vis Technologie", "desc": "Strona nie istnieje." }
+        "home": {
+          "title": "Vis Technologie — technologia, która przekłada się na wynik Twojej firmy",
+          "desc": "Partner IT dla biznesu: systemy dedykowane, aplikacje webowe i mobilne, wdrożenia AI, monitoring i IoT. Najmocniejsi w logistyce i OZE. Banino koło Gdańska."
+        },
+        "services": {
+          "title": "Usługi — Vis Technologie",
+          "desc": "Systemy dedykowane dla biznesu, aplikacje webowe i portale, aplikacje mobilne i tabletowe, utrzymanie i rozwój, wdrożenia AI, monitoring i IoT, infrastruktura IT, strony internetowe."
+        },
+        "cases": {
+          "title": "Realizacje — Vis Technologie",
+          "desc": "Case studies: kompletny system zarządzania operacjami transportu intermodalnego (PCC Intermodal) oraz AI i akustyka w predykcyjnym utrzymaniu turbin wiatrowych (APT / Chordata)."
+        },
+        "contact": {
+          "title": "Kontakt — Vis Technologie",
+          "desc": "Porozmawiajmy o projekcie. Tel. 509 375 274, biuro@vistechnologie.pl. Vis Technologie Sp. z o.o., Banino koło Gdańska."
+        },
+        "thanks": {
+          "title": "Dziękujemy — Vis Technologie",
+          "desc": "Wiadomość została wysłana."
+        },
+        "legal": {
+          "title": "Polityka prywatności i cookies — Vis Technologie",
+          "desc": "Zasady przetwarzania danych osobowych oraz wykorzystania plików cookies w serwisie vistechnologie.pl."
+        },
+        "notfound": {
+          "title": "Nie znaleziono strony — Vis Technologie",
+          "desc": "Strona nie istnieje."
+        }
       }
     }
   },
@@ -574,7 +596,8 @@
         "Chordata",
         "Fudo Security"
       ],
-      "note": "An active Fudo Security partner — secure access solutions."
+      "note": "An active Fudo Security partner — secure access solutions.",
+      "sub": "Ongoing, active partnerships — joint projects and deployments, delivered together."
     },
     "services": {
       "eyebrow": "Services",
@@ -883,7 +906,7 @@
       "legalH": "Legal",
       "privacyLink": "Privacy policy",
       "cookiesLink": "Cookie policy",
-      "reg": "Vis Technologie Sp. z o.o. \u00b7 KRS 0000565307",
+      "reg": "Vis Technologie Sp. z o.o. · KRS 0000565307",
       "rights": "© 2026 Vis Technologie Sp. z o.o.",
       "made": "Banino near Gdańsk, Poland"
     },
@@ -1079,13 +1102,34 @@
       "notFoundText": "The address is wrong or the page has been moved.",
       "formError": "Your message could not be sent. Please check the fields: full name, e-mail, message and the consent checkbox — and try again.",
       "meta": {
-        "home": { "title": "Vis Technologie — technology that translates into your bottom line", "desc": "An IT partner for business: custom systems, web & mobile applications, AI implementations, monitoring & IoT. Strongest in logistics and renewables. Banino near Gdańsk, Poland." },
-        "services": { "title": "Services — Vis Technologie", "desc": "Custom business systems, web applications & portals, mobile & tablet apps, maintenance & growth, AI implementations, monitoring & IoT, IT infrastructure, websites." },
-        "cases": { "title": "Case studies — Vis Technologie", "desc": "Case studies: a complete intermodal transport operations system (PCC Intermodal) and AI & acoustics in predictive wind-turbine maintenance (APT / Chordata)." },
-        "contact": { "title": "Contact — Vis Technologie", "desc": "Let's talk about your project. Phone +48 509 375 274, biuro@vistechnologie.pl. Vis Technologie Sp. z o.o., Banino near Gdańsk, Poland." },
-        "thanks": { "title": "Thank you — Vis Technologie", "desc": "Your message has been sent." },
-        "legal": { "title": "Privacy & cookie policy — Vis Technologie", "desc": "How we process personal data and use cookies on vistechnologie.pl." },
-        "notfound": { "title": "Page not found — Vis Technologie", "desc": "This page does not exist." }
+        "home": {
+          "title": "Vis Technologie — technology that translates into your bottom line",
+          "desc": "An IT partner for business: custom systems, web & mobile applications, AI implementations, monitoring & IoT. Strongest in logistics and renewables. Banino near Gdańsk, Poland."
+        },
+        "services": {
+          "title": "Services — Vis Technologie",
+          "desc": "Custom business systems, web applications & portals, mobile & tablet apps, maintenance & growth, AI implementations, monitoring & IoT, IT infrastructure, websites."
+        },
+        "cases": {
+          "title": "Case studies — Vis Technologie",
+          "desc": "Case studies: a complete intermodal transport operations system (PCC Intermodal) and AI & acoustics in predictive wind-turbine maintenance (APT / Chordata)."
+        },
+        "contact": {
+          "title": "Contact — Vis Technologie",
+          "desc": "Let's talk about your project. Phone +48 509 375 274, biuro@vistechnologie.pl. Vis Technologie Sp. z o.o., Banino near Gdańsk, Poland."
+        },
+        "thanks": {
+          "title": "Thank you — Vis Technologie",
+          "desc": "Your message has been sent."
+        },
+        "legal": {
+          "title": "Privacy & cookie policy — Vis Technologie",
+          "desc": "How we process personal data and use cookies on vistechnologie.pl."
+        },
+        "notfound": {
+          "title": "Page not found — Vis Technologie",
+          "desc": "This page does not exist."
+        }
       }
     }
   }
