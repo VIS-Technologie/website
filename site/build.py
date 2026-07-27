@@ -463,13 +463,15 @@ def _sim_tos(lang):
     L = {
         "pl": {"title": "VIS·TOS — operacje terminala", "live": "LIVE", "trains": "Pociągi",
                "yard": "Plac składowy", "kpi": ["kontenery / doba", "wagony w obsłudze", "faktury dziś"],
-               "rows": [("TR-4102", "Gdańsk → Brzeg D.", "rozładunek"), ("TR-4103", "Gdynia → Kutno", "w drodze"),
-                        ("TR-4099", "Brzeg D. → Gdańsk", "załadunek"), ("TR-4104", "Kutno → Gdynia", "planowanie")],
+               "rows": [("TR-4102", "Gdańsk → Rotterdam", "rozładunek"), ("TR-4103", "Gdynia → Hamburg", "w drodze"),
+                        ("TR-4099", "Duisburg → Warszawa", "załadunek"), ("TR-4104", "Antwerpia → Kutno", "planowanie"),
+                        ("US-2201", "Chicago → Kansas City", "w drodze")],
                "log": "system: walidacja rozkładu masy OK · wagon 12 zatwierdzony"},
         "en": {"title": "VIS·TOS — terminal operations", "live": "LIVE", "trains": "Trains",
                "yard": "Container yard", "kpi": ["containers / day", "wagons in service", "invoices today"],
-               "rows": [("TR-4102", "Gdańsk → Brzeg D.", "unloading"), ("TR-4103", "Gdynia → Kutno", "en route"),
-                        ("TR-4099", "Brzeg D. → Gdańsk", "loading"), ("TR-4104", "Kutno → Gdynia", "planning")],
+               "rows": [("TR-4102", "Gdańsk → Rotterdam", "unloading"), ("TR-4103", "Hamburg → Vienna", "en route"),
+                        ("TR-4099", "Duisburg → Warsaw", "loading"), ("TR-4104", "Antwerp → Prague", "planning"),
+                        ("US-2201", "Chicago → Kansas City", "en route")],
                "log": "system: mass distribution validated OK · wagon 12 approved"},
     }[lang]
     rows = "".join(
