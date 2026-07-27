@@ -1,11 +1,15 @@
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+
 export default function Page() {
   return (
     <div className="dx">
-      <main id="tresc" style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}>
-        <h1 className="dx-display">
-          Kinetyka <em>online</em>
-        </h1>
+      <a className="skip-link" href="#tresc">Przejdź do treści</a>
+      <Nav />
+      <main id="tresc">
+        {/* sekcje dokładane w kolejnych taskach */}
       </main>
+      <Footer />
     </div>
   );
 }
