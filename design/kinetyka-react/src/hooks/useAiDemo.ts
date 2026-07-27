@@ -4,7 +4,7 @@ const reduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export function useAiDemo(states: [string, string, string]) {
-  const demoRef = useRef<HTMLDivElement>(null);
+  const demoRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chipRef = useRef<HTMLDivElement>(null);
 

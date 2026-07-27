@@ -14,7 +14,14 @@ export default function AiDemo() {
           <h2 className="dx-h1" style={{ marginTop: 12 }}>{a.h1}</h2>
           <p className="dx-body">{a.body}</p>
         </div>
-        <div className="kino-ai-demo" data-reveal ref={demoRef}>
+        <div
+          className="kino-ai-demo"
+          data-reveal
+          ref={(el) => {
+            demoRef.current = el;
+            reveal(el);
+          }}
+        >
           <canvas className="kino-ai-canvas" aria-hidden="true" ref={canvasRef} />
           <div className="kino-ai-chip" role="status" ref={chipRef}>{a.s0}</div>
         </div>
