@@ -459,6 +459,69 @@ def page_services(lang):
             + sec_close(lang))
 
 
+def _sim_tos(lang):
+    L = {
+        "pl": {"title": "VIS·TOS — operacje terminala", "live": "LIVE", "trains": "Pociągi",
+               "yard": "Plac składowy", "kpi": ["kontenery / doba", "wagony w obsłudze", "faktury dziś"],
+               "rows": [("TR-4102", "Gdańsk → Brzeg D.", "rozładunek"), ("TR-4103", "Gdynia → Kutno", "w drodze"),
+                        ("TR-4099", "Brzeg D. → Gdańsk", "załadunek"), ("TR-4104", "Kutno → Gdynia", "planowanie")],
+               "log": "system: walidacja rozkładu masy OK · wagon 12 zatwierdzony"},
+        "en": {"title": "VIS·TOS — terminal operations", "live": "LIVE", "trains": "Trains",
+               "yard": "Container yard", "kpi": ["containers / day", "wagons in service", "invoices today"],
+               "rows": [("TR-4102", "Gdańsk → Brzeg D.", "unloading"), ("TR-4103", "Gdynia → Kutno", "en route"),
+                        ("TR-4099", "Brzeg D. → Gdańsk", "loading"), ("TR-4104", "Kutno → Gdynia", "planning")],
+               "log": "system: mass distribution validated OK · wagon 12 approved"},
+    }[lang]
+    rows = "".join(
+        f'<div class="sim-row"><b>{e(r[0])}</b><span>{e(r[1])}</span>'
+        f'<i class="sim-chip s{n % 4}">{e(r[2])}</i></div>'
+        for n, r in enumerate(L["rows"])
+    )
+    yard = "".join(f'<span class="y{(n * 7) % 5}"></span>' for n in range(60))
+    kpi = "".join(
+        f'<div class="sim-kpi"><b data-kpi="{v}">{v}</b><span>{e(k)}</span></div>'
+        for k, v in zip(L["kpi"], (318, 47, 96))
+    )
+    return f"""<div class="sim" data-sim="tos" aria-hidden="true">
+<div class="sim-bar"><span class="sd r"></span><span class="sd y"></span><span class="sd g"></span>
+<span class="sim-title">{e(L["title"])}</span><span class="sim-live">● {e(L["live"])}</span></div>
+<div class="sim-cols">
+<div class="sim-panel"><h4>{e(L["trains"])}</h4>{rows}</div>
+<div class="sim-panel"><h4>{e(L["yard"])}</h4><div class="sim-yard">{yard}</div></div>
+<div class="sim-panel sim-kpis">{kpi}</div>
+</div>
+<div class="sim-log">{e(L["log"])}</div>
+</div>
+"""
+
+
+def _sim_farm(lang):
+    L = {
+        "pl": {"title": "VIS·FARM — monitoring akustyczny", "live": "LIVE", "turb": "Turbiny",
+               "sig": "Sygnał akustyczny — T-04", "alerts": "Zdarzenia",
+               "a1": "nasłuch — wszystkie zespoły w normie", "ok": "norma", "warn": "anomalia"},
+        "en": {"title": "VIS·FARM — acoustic monitoring", "live": "LIVE", "turb": "Turbines",
+               "sig": "Acoustic signal — T-04", "alerts": "Events",
+               "a1": "listening — all assemblies nominal", "ok": "nominal", "warn": "anomaly"},
+    }[lang]
+    turbs = "".join(
+        f'<div class="sim-row sim-turb" data-t="{n}"><b>T-0{n + 1}</b><span>{12 + (n * 3) % 5}.{n * 2 % 9} rpm</span>'
+        f'<i class="sim-chip s1">{e(L["ok"])}</i></div>'
+        for n in range(5)
+    )
+    return f"""<div class="sim" data-sim="farm" aria-hidden="true"
+ data-warn="{e(L["warn"])}" data-ok="{e(L["ok"])}">
+<div class="sim-bar"><span class="sd r"></span><span class="sd y"></span><span class="sd g"></span>
+<span class="sim-title">{e(L["title"])}</span><span class="sim-live">● {e(L["live"])}</span></div>
+<div class="sim-cols">
+<div class="sim-panel"><h4>{e(L["turb"])}</h4>{turbs}</div>
+<div class="sim-panel sim-wave"><h4>{e(L["sig"])}</h4><canvas class="sim-canvas"></canvas></div>
+<div class="sim-panel"><h4>{e(L["alerts"])}</h4><div class="sim-alerts"><div class="sim-al ok">{e(L["a1"])}</div></div></div>
+</div>
+</div>
+"""
+
+
 def page_cases(lang):
     c = C[lang]["workPage"]
     tints = ["tint-blue", "tint-yellow"]
@@ -473,7 +536,7 @@ def page_cases(lang):
         eff = "".join(f"<li>{e(x)}</li>" for x in w["effects"]["items"])
         arts.append(f"""<article class="dx-case {tints[i]}" data-reveal>
 <header><div class="dx-feature-eyebrow">{e(w["tag"])}</div><h2 class="dx-case-title">{e(w["title"])}</h2></header>
-<div class="dx-case-art"><img src="/assets/img/case-kn-{i + 1:02d}.svg" alt="{e(w["title"])}" loading="lazy" width="1920" height="1080"></div>
+<div class="dx-case-art dx-case-sim">{_sim_tos(lang) if i == 0 else _sim_farm(lang)}</div>
 <div class="dx-case-cols">
 <div class="dx-case-block"><h3>{e(w["challenge"]["h"])}</h3>{ch_ps}</div>
 <div class="dx-case-block"><h3>{e(w["did"]["h"])}</h3>{did_ps}{did_items}</div>

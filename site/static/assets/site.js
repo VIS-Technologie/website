@@ -253,5 +253,99 @@
     el.addEventListener("click", function () { el.classList.toggle("paused"); });
   });
 
+  /* symulatory systemów w case studies */
+  var L2 = {
+    tosStatus: doc.documentElement.lang === "en"
+      ? ["planning", "en route", "unloading", "loading", "done"]
+      : ["planowanie", "w drodze", "rozładunek", "załadunek", "gotowe"],
+    tosLogs: doc.documentElement.lang === "en"
+      ? ["system: dangerous goods check OK · wagon {n}", "invoice #{n} issued automatically", "gate: truck {n} checked in", "crane 2: container moved to slot {n}"]
+      : ["system: kontrola ładunków niebezpiecznych OK · wagon {n}", "faktura #{n} wystawiona automatycznie", "brama: awizacja ciężarówki {n}", "suwnica 2: kontener na pole {n}"]
+  };
+  var tos = doc.querySelector('[data-sim="tos"]');
+  if (tos && !reduced) {
+    var rows = [].slice.call(tos.querySelectorAll(".sim-row .sim-chip"));
+    var yard = [].slice.call(tos.querySelectorAll(".sim-yard span"));
+    var kpis = [].slice.call(tos.querySelectorAll("[data-kpi]"));
+    var log = tos.querySelector(".sim-log");
+    var vis2 = false, step = 0;
+    new IntersectionObserver(function (en) { vis2 = en[0].isIntersecting; }, { threshold: 0.25 }).observe(tos);
+    setInterval(function () {
+      if (!vis2) return;
+      step++;
+      var chip = rows[step % rows.length];
+      var si = (parseInt(chip.className.replace(/\D/g, ""), 10) + 1) % L2.tosStatus.length;
+      chip.className = "sim-chip s" + (si % 4);
+      chip.textContent = L2.tosStatus[si];
+      var cell = yard[Math.floor((step * 17) % yard.length)];
+      cell.className = "y" + ((step % 4) + 1);
+      if (step % 2 === 0) {
+        var k = kpis[step % kpis.length];
+        k.textContent = parseInt(k.getAttribute("data-kpi"), 10) + Math.floor(step / 2) % 23;
+      }
+      var msg = L2.tosLogs[step % L2.tosLogs.length].replace("{n}", 100 + (step * 7) % 899);
+      log.innerHTML = "<b>›</b> " + msg;
+    }, 1600);
+  }
+  var farm = doc.querySelector('[data-sim="farm"]');
+  if (farm) {
+    var fc = farm.querySelector(".sim-canvas");
+    var fctx = fc.getContext("2d");
+    var warnTxt = farm.getAttribute("data-warn"), okTxt = farm.getAttribute("data-ok");
+    var fresize = function () {
+      fc.width = fc.clientWidth * 1.5; fc.height = fc.clientHeight * 1.5;
+      fctx.setTransform(1.5, 0, 0, 1.5, 0, 0);
+    };
+    fresize(); window.addEventListener("resize", fresize);
+    var fvis = false, ft = 0, FC = 420, FA = 180, FB = 260;
+    new IntersectionObserver(function (en) { fvis = en[0].isIntersecting; if (fvis) fresize(); }, { threshold: 0.25 }).observe(farm);
+    var turb4 = farm.querySelector('[data-t="3"] .sim-chip');
+    var alerts = farm.querySelector(".sim-alerts");
+    var fsample = function (x, tt) {
+      var ph = x * 0.06 + tt * 0.07;
+      var y = Math.sin(ph) * 8 + Math.sin(ph * 2.4 + 1) * 4;
+      var fr = tt % FC, a = fr - FA;
+      if (a > 0 && fr < FB) {
+        var k = Math.exp(-Math.pow(x - fc.clientWidth * 0.68, 2) / 2600);
+        y += (Math.sin(ph * 9) * 22 + Math.sin(ph * 15) * 11) * k * Math.min(1, a / 16);
+      }
+      return y;
+    };
+    var fdraw = function () {
+      var W2 = fc.clientWidth, H2 = fc.clientHeight, fr = ft % FC;
+      fctx.clearRect(0, 0, W2, H2);
+      fctx.strokeStyle = "rgba(244,242,236,0.06)";
+      for (var gy = 20; gy < H2; gy += 24) { fctx.beginPath(); fctx.moveTo(0, gy); fctx.lineTo(W2, gy); fctx.stroke(); }
+      var mid = H2 * 0.5;
+      fctx.beginPath();
+      for (var x = 0; x < W2; x += 3) {
+        var y = mid + fsample(x, ft);
+        x === 0 ? fctx.moveTo(x, y) : fctx.lineTo(x, y);
+      }
+      fctx.strokeStyle = "#D8FF3A"; fctx.lineWidth = 1.8; fctx.stroke();
+      if (fr >= FA && fr < FB + 60) {
+        fctx.strokeStyle = "#FF5A4E"; fctx.setLineDash([6, 4]);
+        fctx.strokeRect(W2 * 0.68 - 55, mid - 44, 110, 88); fctx.setLineDash([]);
+      }
+      if (fr === FA + 14 && turb4) {
+        turb4.className = "sim-chip warn"; turb4.textContent = warnTxt;
+        var d = doc.createElement("div"); d.className = "sim-al warn";
+        d.textContent = "⚠ T-04 · " + warnTxt + " · conf 0.96";
+        alerts.prepend(d);
+      }
+      if (fr === FB + 80 && turb4) {
+        var d2 = doc.createElement("div"); d2.className = "sim-al lime";
+        d2.textContent = doc.documentElement.lang === "en" ? "→ work order #4211 created" : "→ zlecenie serwisowe #4211 utworzone";
+        alerts.prepend(d2);
+        while (alerts.children.length > 3) alerts.removeChild(alerts.lastChild);
+      }
+      if (fr === 4 && turb4) { turb4.className = "sim-chip s1"; turb4.textContent = okTxt; }
+    };
+    if (!reduced) {
+      var floop = function () { requestAnimationFrame(floop); if (!fvis) return; ft++; fdraw(); };
+      requestAnimationFrame(floop);
+    } else { ft = FA + 30; fresize(); fdraw(); }
+  }
+
   body.classList.add("no-gl");
 })();

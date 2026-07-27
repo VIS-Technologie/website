@@ -256,6 +256,52 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-case-list li strong { color: var(--vt-fg); }
 .dx-case-closing { margin: 36px 0 0; padding-top: 22px; border-top: 1px solid var(--vt-line); font-size: 15.5px; font-weight: 700; max-width: 70ch; }
 
+/* ---------- symulatory systemów w case studies ---------- */
+.dx-case-sim { aspect-ratio: auto; background: none; border: 0; overflow: visible; }
+.sim { background: #101010; border: 1px solid #2A2A26; border-radius: 16px; overflow: hidden;
+  font-family: var(--mono); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5); }
+.sim-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #232320; background: #151513; }
+.sd { width: 10px; height: 10px; border-radius: 50%; }
+.sd.r { background: #FF5A4E; } .sd.y { background: #E8C15A; } .sd.g { background: #57D0A5; }
+.sim-title { margin-left: 8px; font-size: 12px; letter-spacing: 0.08em; color: var(--vt-fg-2); text-transform: uppercase; }
+.sim-live { margin-left: auto; font-size: 11px; color: var(--kn-lime); animation: sim-blink 2.2s steps(1) infinite; }
+@keyframes sim-blink { 50% { opacity: 0.3; } }
+.sim-cols { display: grid; grid-template-columns: 1.15fr 1fr 0.75fr; gap: 1px; background: #232320; }
+.sim-panel { background: #101010; padding: 16px; min-width: 0; }
+.sim-panel h4 { margin: 0 0 12px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--vt-fg-2); }
+.sim-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; background: #161614; margin-bottom: 7px; font-size: 12px; }
+.sim-row b { color: var(--vt-fg); font-weight: 700; }
+.sim-row > span { color: var(--vt-fg-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.sim-chip { font-style: normal; font-size: 10.5px; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.sim-chip.s0 { background: rgba(216, 255, 58, 0.16); color: var(--kn-lime); }
+.sim-chip.s1 { background: rgba(87, 208, 165, 0.15); color: #57D0A5; }
+.sim-chip.s2 { background: rgba(232, 193, 90, 0.15); color: #E8C15A; }
+.sim-chip.s3 { background: rgba(244, 242, 236, 0.1); color: var(--vt-fg-2); }
+.sim-chip.warn { background: rgba(255, 90, 78, 0.18); color: #FF5A4E; }
+.sim-yard { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
+.sim-yard span { aspect-ratio: 1.6; border-radius: 3px; background: #1D1D1A; transition: background 0.4s; }
+.sim-yard .y1 { background: rgba(216, 255, 58, 0.5); }
+.sim-yard .y2 { background: rgba(87, 208, 165, 0.4); }
+.sim-yard .y3 { background: rgba(232, 193, 90, 0.4); }
+.sim-yard .y4 { background: #24241F; }
+.sim-kpis { display: flex; flex-direction: column; justify-content: space-around; gap: 10px; }
+.sim-kpi b { display: block; font-size: clamp(24px, 2.2vw, 36px); font-weight: 800; color: var(--kn-lime); font-family: var(--sans); letter-spacing: -0.03em; }
+.sim-kpi span { font-size: 11px; color: var(--vt-fg-2); letter-spacing: 0.06em; }
+.sim-log { border-top: 1px solid #232320; padding: 10px 16px; font-size: 11px; color: var(--vt-fg-2); background: #131311; min-height: 37px; }
+.sim-log b { color: var(--kn-lime); font-weight: 600; }
+.sim-wave { display: flex; flex-direction: column; }
+.sim-canvas { width: 100%; flex: 1; min-height: 150px; display: block; }
+.sim-alerts { display: flex; flex-direction: column; gap: 8px; }
+.sim-al { font-size: 11.5px; line-height: 1.45; padding: 9px 11px; border-radius: 8px; background: #161614; color: var(--vt-fg-2); border-left: 2px solid #2A2A26; }
+.sim-al.ok { border-left-color: #57D0A5; }
+.sim-al.warn { border-left-color: #FF5A4E; color: var(--vt-fg); }
+.sim-al.lime { border-left-color: var(--kn-lime); }
+@media (max-width: 900px) {
+  .sim-cols { grid-template-columns: 1fr; }
+  .sim-kpis { flex-direction: row; }
+  .sim-yard { grid-template-columns: repeat(12, 1fr); }
+}
+
 /* ---------- technologie ---------- */
 .dx-tech { padding: 0 4vw 10vh; }
 .dx-tech-inner { max-width: 1360px; margin: 0 auto; border: 1px solid #2A2A26; background: #141412; border-radius: 18px; padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
