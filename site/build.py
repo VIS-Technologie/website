@@ -72,6 +72,10 @@ def head(lang, key, path, other_path):
 <meta property="og:type" content="website">
 <meta property="og:url" content="{DOMAIN}{path}">
 <meta property="og:locale" content="{LOCALE[lang]}">
+<meta property="og:image" content="{DOMAIN}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -186,9 +190,11 @@ def sec_hero(lang):
                                      "watches terminal operations 24/7", "learns your company's processes"]),
     }[lang]
     words_attr = e(json.dumps(rot_words[1], ensure_ascii=False))
-    rotator = (f'<p class="kn-rotator"><span>{e(rot_words[0])}</span> '
+    sr_all = e(rot_words[0] + " " + "; ".join(rot_words[1]) + ".")
+    rotator = (f'<p class="kn-rotator"><span class="sr-only">{sr_all}</span>'
+               f'<span aria-hidden="true"><span>{e(rot_words[0])}</span> '
                f'<strong class="kino-rot-word" data-rotate="{words_attr}">{e(rot_words[1][0])}</strong>'
-               f'<span class="kino-caret" aria-hidden="true"></span></p>')
+               f'<span class="kino-caret"></span></span></p>')
     pre_words = h["pre"].strip().split()
     cut = max(1, len(pre_words) // 2)
     l1 = " ".join(pre_words[:cut])

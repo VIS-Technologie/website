@@ -3,6 +3,7 @@
 (function () {
   "use strict";
   var doc = document, body = doc.body;
+  doc.documentElement.classList.add("js");
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -245,6 +246,11 @@
       bar.children[1].disabled = sc.scrollLeft >= sc.scrollWidth - sc.clientWidth - 2;
     };
     sc.addEventListener("scroll", upd, { passive: true }); upd();
+  });
+
+  /* pauza ruchomych pasków tapnięciem/kliknięciem (WCAG 2.2.2) */
+  [].slice.call(doc.querySelectorAll(".kn-band, .kn-fx-strip")).forEach(function (el) {
+    el.addEventListener("click", function () { el.classList.toggle("paused"); });
   });
 
   body.classList.add("no-gl");
