@@ -39,6 +39,9 @@
 }
 
 html, body { overflow-x: clip; }
+/* Mamy fonty do wagi 700 — syntetyczny bold psuje -webkit-text-stroke
+   (przypadkowe ukośne kreski w literach konturowych). */
+html { font-synthesis: none; }
 body { margin: 0; }
 .dx *, .dx *::before, .dx *::after { box-sizing: border-box; }
 .dx img { max-width: 100%; display: block; }
@@ -111,7 +114,9 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .kn-h1 { margin: 0; }
 .kn-line { display: block; font-size: clamp(36px, 7.3vw, 124px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.96; text-transform: uppercase; white-space: nowrap; will-change: transform; }
 .kn-line em { font-style: normal; color: var(--kn-lime); }
-.kn-outline { color: transparent; -webkit-text-stroke: 2px var(--vt-fg); }
+/* Kontur bez artefaktów: obrys malowany POD wypełnieniem w kolorze tła
+   (paint-order), bo glify Inter mają nakładające się kontury. */
+.kn-outline { color: var(--vt-paper); -webkit-text-stroke: 4px var(--vt-fg); paint-order: stroke fill; }
 .kn-sub { margin: 4vh 0 0; max-width: 52ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.6; color: var(--vt-fg-2); }
 .kn-rotator { margin: 14px 0 0; font-family: var(--mono); font-size: clamp(13px, 1.1vw, 15px); letter-spacing: 0.04em; color: var(--vt-fg-2); }
 .kn-rotator .kino-rot-word { color: var(--kn-lime); font-weight: 600; }
@@ -171,7 +176,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
   background: #141412; position: relative; overflow: hidden; }
 .dx-founder-photo.kn-mono::after { content: ""; position: absolute; left: 24px; right: 24px; bottom: 22px; height: 3px; background: var(--kn-lime); }
 .dx-founder-photo.kn-mono span { font-size: clamp(72px, 7vw, 116px); font-weight: 800; letter-spacing: -0.02em;
-  color: transparent; -webkit-text-stroke: 2.5px var(--kn-lime); transition: color 0.2s ease; }
+  color: #141412; -webkit-text-stroke: 5px var(--kn-lime); paint-order: stroke fill; transition: color 0.2s ease; }
 .dx-founder:hover .kn-mono span { color: var(--kn-lime); }
 
 /* ---------- kinetyczne case'y ---------- */
@@ -182,7 +187,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .kn-fx-strip { overflow: hidden; margin: 26px -4vw 30px; padding: 6px 0; }
 .kn-fx { display: flex; width: max-content; will-change: transform; animation: kn-fxmq 34s linear infinite; }
 .kn-fx.rev { animation-direction: reverse; }
-.kn-fx > span { font-size: clamp(48px, 8.8vw, 138px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; color: transparent; -webkit-text-stroke: 1.5px var(--kn-lime); white-space: nowrap; padding-right: 2.1em; }
+.kn-fx > span { font-size: clamp(48px, 8.8vw, 138px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; color: var(--vt-paper); -webkit-text-stroke: 3px var(--kn-lime); paint-order: stroke fill; white-space: nowrap; padding-right: 2.1em; }
 .kn-fx-strip:hover .kn-fx { animation-play-state: paused; }
 @keyframes kn-fxmq { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .kn-fx { animation: none; } }
@@ -390,7 +395,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 /* ---------- stopka ---------- */
 .dx-footer { border-top: 1px solid var(--vt-line); padding: 0 4vw; }
 .dx-footer-inner { max-width: 1360px; margin: 0 auto; padding: 56px 0 30px; }
-.dx-footer-mark { font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(40px, 10vw, 150px); margin-bottom: 44px; white-space: nowrap; color: transparent; -webkit-text-stroke: 2px var(--vt-fg); text-transform: uppercase; }
+.dx-footer-mark { font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(40px, 10vw, 150px); margin-bottom: 44px; white-space: nowrap; color: var(--vt-paper); -webkit-text-stroke: 4px var(--vt-fg); paint-order: stroke fill; text-transform: uppercase; }
 .dx-footer-mark::after { content: "."; color: var(--kn-lime); -webkit-text-stroke: 0; }
 .dx-footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 44px; }
 .dx-footer h5 { margin: 0 0 14px; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--kn-lime); }
