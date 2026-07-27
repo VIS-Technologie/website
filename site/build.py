@@ -235,12 +235,10 @@ def sec_partners(lang):
 
 
 def _feature(lang, it, i, eyebrow, btn_label, btn_href):
-    return f"""<a class="kn-card" href="{btn_href}" data-reveal>
+    return f"""<a class="kn-row" href="{btn_href}" data-reveal>
 <i>{e(it["num"])}</i>
-<h3>{e(it["title"])}</h3>
-<p>{e(it["desc"])}</p>
-<span class="kn-card-for">{e(it["forWho"])}</span>
-<span class="kn-card-arw">{e(btn_label)} →</span>
+<div class="kn-row-main"><h3>{e(it["title"])}</h3><p>{e(it["desc"])}</p><span class="kn-row-for">{e(it["forWho"])}</span></div>
+<span class="kn-row-arw" aria-hidden="true">→</span>
 </a>
 """
 
@@ -248,14 +246,13 @@ def _feature(lang, it, i, eyebrow, btn_label, btn_href):
 def sec_features(lang):
     c = C[lang]
     p = PATHS[lang]
-    label = "Zobacz wszystkie usługi" if lang == "pl" else "See all services"
+    hint = "Usługi" if lang == "pl" else "Services"
     rows = "".join(
-        _feature(lang, it, i, "", label, p["services"])
-        for i, it in enumerate(c["services"]["items"][:6])
+        _feature(lang, it, i, "", "", p["services"])
+        for i, it in enumerate(c["services"]["items"])
     )
-    hint = "Usługi — przewiń →" if lang == "pl" else "Services — scroll →"
     return (f'<section class="kn-services" data-zone="paper"><div class="kn-services-inner">'
-            f'<p class="kn-hint">{e(hint)}</p><div class="kn-scroll">{rows}</div></div></section>' + chr(10))
+            f'<p class="kn-hint">{e(hint)}</p><div class="kn-rows">{rows}</div></div></section>' + chr(10))
 
 
 def sec_pull(lang):
@@ -397,8 +394,10 @@ def sec_cases_home(lang):
                f'<div class="kn-case-side"><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
                f'<p class="kn-case-eff">{e(eff)}</p>'
                f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div></div>')
-        strip = (f'<div class="kn-fx-strip"><div class="kn-fx" data-k="{-0.1 if i % 2 == 0 else 0.1}" '
-                 f'aria-hidden="true">{e(fx[i])} · {e(fx[i])} · {e(fx[i])}</div></div>')
+        half = f'{e(fx[i])} · {e(fx[i])} · '
+        rev = " rev" if i % 2 else ""
+        strip = (f'<div class="kn-fx-strip"><div class="kn-fx{rev}" aria-hidden="true">'
+                 f'<span>{half}</span><span>{half}</span></div></div>')
         rows.append(f'<div class="kn-case" data-reveal>{strip}{txt}</div>')
     return f'<section class="kn-cases" data-zone="paper"><div class="kn-cases-inner">{"".join(rows)}</div></section>' + chr(10)
 
