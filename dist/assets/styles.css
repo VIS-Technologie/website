@@ -467,62 +467,104 @@ body.dx.zone-warm, body.dx.zone-cool, body.dx.zone-paper { background: var(--vt-
 }
 
 /* ============================================================
-   JASNA WERSJA KINETYKI
-   - automatyczna wg systemu (prefers-color-scheme), gdy brak wyboru
-   - wybor uzytkownika: html[data-theme="light"|"dark"] (przelacznik w nav,
-     zapamietany w localStorage vt_theme, ustawiany przed renderem w <head>)
-   Limonka: wypelnienia zostaja, tekst akcentowy -> oliwka.
+   JASNA WERSJA KINETYKI — "galeria": neutralna biel + czern,
+   limonka CZYSTA, ale tylko jako wypelnienie/marker przy czerni
+   (nigdy jako kolor tekstu — na bieli traci moc i czytelnosc).
+   - auto wg systemu (prefers-color-scheme), gdy brak wyboru
+   - wybor uzytkownika: html[data-theme="light"|"dark"]
    Symulatory i AI-demo pozostaja ciemne (okna aplikacji).
    ============================================================ */
 @media (prefers-color-scheme: light) {
   html:not([data-theme="dark"]) .dx {
-    --vt-ink: #FFFFFF; --vt-ink-2: #FAF8F1;
-    --vt-paper: #F2F0E9; --vt-mist: #EDEBE2; --vt-sand: #EFEDE4; --vt-ice: #F0EEE6;
-    --vt-fg: #161613; --vt-fg-2: #5D5A50;
-    --vt-line: rgba(20, 20, 18, 0.16); --vt-line-strong: rgba(20, 20, 18, 0.36);
-    --vt-glow: rgba(180, 215, 0, 0.16);
-    --kn-lime: #CDE72E;
-    --kn-card: #FFFFFF; --kn-card-line: #DFDBCE;
-    --kn-hairline: #DDD9CB; --kn-pill-line: #D8D4C6;
-    --kn-acc-ink: #5C7000; --kn-acc-stroke: #A9C400;
+    --vt-ink: #FFFFFF; --vt-ink-2: #FBFBFA;
+    --vt-paper: #F6F6F4; --vt-mist: #F1F1EE; --vt-sand: #F3F3F0; --vt-ice: #F2F2F0;
+    --vt-fg: #131312; --vt-fg-2: #56544E;
+    --vt-line: rgba(19, 19, 18, 0.14); --vt-line-strong: rgba(19, 19, 18, 0.32);
+    --vt-glow: rgba(216, 255, 58, 0.20);
+    --kn-lime: #D8FF3A;
+    --kn-card: #FFFFFF; --kn-card-line: #E2E2DD;
+    --kn-hairline: #E0E0DB; --kn-pill-line: #DBDBD5;
+    --kn-acc-ink: #131312; --kn-acc-stroke: #131312;
   }
   html:not([data-theme="dark"]) .kn-spot {
-    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(196, 230, 20, 0.14), transparent 70%);
+    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(216, 255, 58, 0.22), transparent 70%);
   }
   html:not([data-theme="dark"]) .dx-nav {
-    background: rgba(242, 240, 233, 0.85);
+    background: rgba(246, 246, 244, 0.86);
+  }
+  html:not([data-theme="dark"]) .kn-line em, html:not([data-theme="dark"]) .dx-display em {
+    color: #131312; background: var(--kn-lime); padding: 0 0.07em;
+  }
+  html:not([data-theme="dark"]) .kn-part .kn-part-role {
+    color: #131312; background: var(--kn-lime); border-color: transparent;
+  }
+  html:not([data-theme="dark"]) .dx-logo::after {
+    color: #B9D51E;
+  }
+  html:not([data-theme="dark"]) .dx-nav-links a.on {
+    box-shadow: 0 3px 0 var(--kn-lime);
+  }
+  html:not([data-theme="dark"]) .dx-founder-photo.kn-mono span {
+    -webkit-text-stroke-color: #131312;
+  }
+  html:not([data-theme="dark"]) .dx-founder:hover .kn-mono span {
+    color: #131312;
+  }
+  html:not([data-theme="dark"]) .kn-fx > span {
+    -webkit-text-stroke-color: #131312;
   }
   html:not([data-theme="dark"]) .sim, html:not([data-theme="dark"]) .kino-ai-demo {
     --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
-    --kn-card: #141412; --kn-card-line: #262622;
+    --kn-card: #141412; --kn-card-line: #262622; --kn-acc-ink: #D8FF3A; --kn-acc-stroke: #D8FF3A;
   }
 }
 html[data-theme="light"] .dx {
-    --vt-ink: #FFFFFF; --vt-ink-2: #FAF8F1;
-    --vt-paper: #F2F0E9; --vt-mist: #EDEBE2; --vt-sand: #EFEDE4; --vt-ice: #F0EEE6;
-    --vt-fg: #161613; --vt-fg-2: #5D5A50;
-    --vt-line: rgba(20, 20, 18, 0.16); --vt-line-strong: rgba(20, 20, 18, 0.36);
-    --vt-glow: rgba(180, 215, 0, 0.16);
-    --kn-lime: #CDE72E;
-    --kn-card: #FFFFFF; --kn-card-line: #DFDBCE;
-    --kn-hairline: #DDD9CB; --kn-pill-line: #D8D4C6;
-    --kn-acc-ink: #5C7000; --kn-acc-stroke: #A9C400;
-  }
+    --vt-ink: #FFFFFF; --vt-ink-2: #FBFBFA;
+    --vt-paper: #F6F6F4; --vt-mist: #F1F1EE; --vt-sand: #F3F3F0; --vt-ice: #F2F2F0;
+    --vt-fg: #131312; --vt-fg-2: #56544E;
+    --vt-line: rgba(19, 19, 18, 0.14); --vt-line-strong: rgba(19, 19, 18, 0.32);
+    --vt-glow: rgba(216, 255, 58, 0.20);
+    --kn-lime: #D8FF3A;
+    --kn-card: #FFFFFF; --kn-card-line: #E2E2DD;
+    --kn-hairline: #E0E0DB; --kn-pill-line: #DBDBD5;
+    --kn-acc-ink: #131312; --kn-acc-stroke: #131312;
+}
 html[data-theme="light"] .kn-spot {
-    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(196, 230, 20, 0.14), transparent 70%);
-  }
+    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(216, 255, 58, 0.22), transparent 70%);
+}
 html[data-theme="light"] .dx-nav {
-    background: rgba(242, 240, 233, 0.85);
-  }
+    background: rgba(246, 246, 244, 0.86);
+}
+html[data-theme="light"] .kn-line em, html[data-theme="light"] .dx-display em {
+    color: #131312; background: var(--kn-lime); padding: 0 0.07em;
+}
+html[data-theme="light"] .kn-part .kn-part-role {
+    color: #131312; background: var(--kn-lime); border-color: transparent;
+}
+html[data-theme="light"] .dx-logo::after {
+    color: #B9D51E;
+}
+html[data-theme="light"] .dx-nav-links a.on {
+    box-shadow: 0 3px 0 var(--kn-lime);
+}
+html[data-theme="light"] .dx-founder-photo.kn-mono span {
+    -webkit-text-stroke-color: #131312;
+}
+html[data-theme="light"] .dx-founder:hover .kn-mono span {
+    color: #131312;
+}
+html[data-theme="light"] .kn-fx > span {
+    -webkit-text-stroke-color: #131312;
+}
 html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
     --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
-    --kn-card: #141412; --kn-card-line: #262622;
-  }
+    --kn-card: #141412; --kn-card-line: #262622; --kn-acc-ink: #D8FF3A; --kn-acc-stroke: #D8FF3A;
+}
 @media (prefers-color-scheme: light) and (max-width: 900px) {
-  html:not([data-theme="dark"]) .dx-nav-links { background: #F2F0E9; }
+  html:not([data-theme="dark"]) .dx-nav-links { background: #F6F6F4; }
 }
 @media (max-width: 900px) {
-  html[data-theme="light"] .dx-nav-links { background: #F2F0E9; }
+  html[data-theme="light"] .dx-nav-links { background: #F6F6F4; }
 }
 
 /* przelacznik motywu w nav */
