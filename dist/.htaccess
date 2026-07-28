@@ -3,12 +3,25 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # HTTP -> HTTPS
+  # HTTP -> HTTPS (z wyjatkiem wyzwania Let's Encrypt, by walidacja certyfikatu dzialala po http)
   RewriteCond %{HTTPS} !=on
+  RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   # www -> bez www
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Auto-jezyk (tylko strona glowna "/"): EN dla nie-polskich przegladarek.
+  # Wybor uzytkownika zapamietany w cookie vt_lang (ustawianym w site.js po kliknieciu PL/EN).
+  # 1) zapamietany wybor EN
+  RewriteCond %{REQUEST_URI} ^/$
+  RewriteCond %{HTTP_COOKIE} vt_lang=en [NC]
+  RewriteRule ^ /en/ [L,R=302]
+  # 2) brak wyboru + przegladarka nie po polsku
+  RewriteCond %{REQUEST_URI} ^/$
+  RewriteCond %{HTTP_COOKIE} !vt_lang= [NC]
+  RewriteCond %{HTTP:Accept-Language} !^pl [NC]
+  RewriteRule ^ /en/ [L,R=302]
 </IfModule>
 
 <IfModule mod_headers.c>
