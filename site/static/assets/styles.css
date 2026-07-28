@@ -467,12 +467,15 @@ body.dx.zone-warm, body.dx.zone-cool, body.dx.zone-paper { background: var(--vt-
 }
 
 /* ============================================================
-   JASNA WERSJA KINETYKI — automatyczna (prefers-color-scheme)
-   Limonka: wypełnienia zostają, tekst akcentowy -> oliwka.
-   Symulatory i AI-demo pozostają ciemne (okna aplikacji).
+   JASNA WERSJA KINETYKI
+   - automatyczna wg systemu (prefers-color-scheme), gdy brak wyboru
+   - wybor uzytkownika: html[data-theme="light"|"dark"] (przelacznik w nav,
+     zapamietany w localStorage vt_theme, ustawiany przed renderem w <head>)
+   Limonka: wypelnienia zostaja, tekst akcentowy -> oliwka.
+   Symulatory i AI-demo pozostaja ciemne (okna aplikacji).
    ============================================================ */
 @media (prefers-color-scheme: light) {
-  .dx {
+  html:not([data-theme="dark"]) .dx {
     --vt-ink: #FFFFFF; --vt-ink-2: #FAF8F1;
     --vt-paper: #F2F0E9; --vt-mist: #EDEBE2; --vt-sand: #EFEDE4; --vt-ice: #F0EEE6;
     --vt-fg: #161613; --vt-fg-2: #5D5A50;
@@ -483,14 +486,47 @@ body.dx.zone-warm, body.dx.zone-cool, body.dx.zone-paper { background: var(--vt-
     --kn-hairline: #DDD9CB; --kn-pill-line: #D8D4C6;
     --kn-acc-ink: #5C7000; --kn-acc-stroke: #A9C400;
   }
-  .kn-spot { background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(196, 230, 20, 0.14), transparent 70%); }
-  .dx-nav { background: rgba(242, 240, 233, 0.85); }
-  /* symulatory + AI-demo: przypięta ciemna paleta (okna aplikacji) */
-  .sim, .kino-ai-demo {
+  html:not([data-theme="dark"]) .kn-spot {
+    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(196, 230, 20, 0.14), transparent 70%);
+  }
+  html:not([data-theme="dark"]) .dx-nav {
+    background: rgba(242, 240, 233, 0.85);
+  }
+  html:not([data-theme="dark"]) .sim, html:not([data-theme="dark"]) .kino-ai-demo {
     --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
     --kn-card: #141412; --kn-card-line: #262622;
   }
 }
+html[data-theme="light"] .dx {
+    --vt-ink: #FFFFFF; --vt-ink-2: #FAF8F1;
+    --vt-paper: #F2F0E9; --vt-mist: #EDEBE2; --vt-sand: #EFEDE4; --vt-ice: #F0EEE6;
+    --vt-fg: #161613; --vt-fg-2: #5D5A50;
+    --vt-line: rgba(20, 20, 18, 0.16); --vt-line-strong: rgba(20, 20, 18, 0.36);
+    --vt-glow: rgba(180, 215, 0, 0.16);
+    --kn-lime: #CDE72E;
+    --kn-card: #FFFFFF; --kn-card-line: #DFDBCE;
+    --kn-hairline: #DDD9CB; --kn-pill-line: #D8D4C6;
+    --kn-acc-ink: #5C7000; --kn-acc-stroke: #A9C400;
+  }
+html[data-theme="light"] .kn-spot {
+    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 35%), rgba(196, 230, 20, 0.14), transparent 70%);
+  }
+html[data-theme="light"] .dx-nav {
+    background: rgba(242, 240, 233, 0.85);
+  }
+html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
+    --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
+    --kn-card: #141412; --kn-card-line: #262622;
+  }
 @media (prefers-color-scheme: light) and (max-width: 900px) {
-  .dx-nav-links { background: #F2F0E9; }
+  html:not([data-theme="dark"]) .dx-nav-links { background: #F2F0E9; }
 }
+@media (max-width: 900px) {
+  html[data-theme="light"] .dx-nav-links { background: #F2F0E9; }
+}
+
+/* przelacznik motywu w nav */
+.kn-theme-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px;
+  border-radius: 999px; background: none; border: 1px solid var(--vt-line-strong); color: var(--vt-fg); cursor: pointer; padding: 0; }
+.kn-theme-btn:hover { border-color: var(--kn-acc-stroke); color: var(--kn-acc-ink); }
+.kn-theme-btn svg { width: 17px; height: 17px; display: block; }

@@ -355,5 +355,39 @@
     } else { ft = FA + 30; fresize(); fdraw(); }
   }
 
+  /* przelacznik motywu: domyslnie system, wybor uzytkownika w localStorage vt_theme */
+  var side = doc.querySelector(".dx-nav-side");
+  if (side) {
+    var mqlLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+    var SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2.1 2.1M16.9 16.9L19 19M19 5l-2.1 2.1M7.1 16.9L5 19"/></svg>';
+    var MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>';
+    var tbtn = doc.createElement("button");
+    tbtn.type = "button"; tbtn.className = "kn-theme-btn";
+    var effTheme = function () {
+      var a = doc.documentElement.getAttribute("data-theme");
+      if (a === "light" || a === "dark") return a;
+      return mqlLight && mqlLight.matches ? "light" : "dark";
+    };
+    var paintTheme = function () {
+      var eff = effTheme();
+      tbtn.innerHTML = eff === "light" ? MOON : SUN;
+      var lab = doc.documentElement.lang === "en"
+        ? (eff === "light" ? "Switch to dark mode" : "Switch to light mode")
+        : (eff === "light" ? "Prze\u0142\u0105cz na tryb ciemny" : "Prze\u0142\u0105cz na tryb jasny");
+      tbtn.setAttribute("aria-label", lab); tbtn.title = lab;
+      var metas = doc.querySelectorAll('meta[name="theme-color"]');
+      for (var mi = 0; mi < metas.length; mi++) metas[mi].setAttribute("content", eff === "light" ? "#F2F0E9" : "#0E0E0E");
+    };
+    tbtn.addEventListener("click", function () {
+      var next = effTheme() === "light" ? "dark" : "light";
+      doc.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("vt_theme", next); } catch (e) {}
+      paintTheme();
+    });
+    if (mqlLight && mqlLight.addEventListener) mqlLight.addEventListener("change", paintTheme);
+    side.insertBefore(tbtn, side.firstChild);
+    paintTheme();
+  }
+
   body.classList.add("no-gl");
 })();
