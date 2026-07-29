@@ -600,7 +600,8 @@
           "title": "Nie znaleziono strony — Vis Technologie",
           "desc": "Strona nie istnieje."
         }
-      }
+      },
+      "fab": "Porozmawiajmy"
     }
   },
   "en": {
@@ -1204,7 +1205,8 @@
           "title": "Page not found — Vis Technologie",
           "desc": "This page does not exist."
         }
-      }
+      },
+      "fab": "Let's talk"
     }
   }
 }

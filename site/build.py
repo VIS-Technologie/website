@@ -144,7 +144,7 @@ def footer(lang):
 <div class="dx-footer-inner">
 <div class="dx-footer-mark">vistechnologie</div>
 <div class="dx-footer-grid">
-<div><h5>{e(f["studioH"])}</h5><p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.65);max-width:30ch;margin:0">{studio}</p><p class="dx-footer-reg">{e(f["reg"])}</p></div>
+<div><h5>{e(f["studioH"])}</h5><p class="dx-footer-studio">{studio}</p><p class="dx-footer-reg">{e(f["reg"])}</p></div>
 <div><h5>{e(n["services"])}</h5><ul>
 {services_links}
 </ul></div>
@@ -176,6 +176,7 @@ def layout(lang, key, body):
             + f'<body class="dx">\n<a class="skip-link" href="#{main_id}">{e(s["skip"])}</a>\n'
             + nav(lang, key, pl_path, en_path)
             + f'<main id="{main_id}">\n{body}</main>\n'
+            + (f'<a class="kn-fab" href="{p["contact"]}">{e(s["fab"])} \u2192</a>' if key not in ("contact", "thanks", "notfound") else "")
             + cookie_note(lang)
             + footer(lang)
             + '<script src="/assets/site.js"></script>\n</body>\n</html>\n')
@@ -614,6 +615,7 @@ def page_contact(lang):
 <p class="dx-hp" aria-hidden="true"><label>WWW <input type="text" name="www" tabindex="-1" autocomplete="off"></label></p>
 <div class="dx-field"><label for="f-name">{e(fl["name"])}</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>
 <div class="dx-field"><label for="f-email">{e(fl["email"])}</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+<div class="dx-field"><label for="f-company">{e(fl["company"])}</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
 <div class="dx-field"><label for="f-message">{e(fl["message"])}</label><textarea id="f-message" name="message" rows="6" required></textarea></div>
 <label class="dx-rodo"><input type="checkbox" name="rodo" required> <span>{e(ct["rodoCheckbox"])}</span></label>
 <button type="submit" class="dx-btn dx-btn-primary">{e(fl["send"])} →</button>
