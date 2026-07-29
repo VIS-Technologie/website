@@ -147,7 +147,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-ribbon .dx-h1 { max-width: 14ch; }
 .dx-ribbon-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; border-top: 1px solid var(--vt-line); margin-top: 40px; padding-top: 40px; }
 .dx-ribbon-card { border: 0; padding: 0; background: none; }
-.dx-ribbon-num { font-weight: 800; letter-spacing: -0.04em; line-height: 1.0; font-size: clamp(32px, 3.3vw, 56px); color: var(--kn-lime); overflow-wrap: normal; hyphens: manual; text-wrap: balance; }
+.dx-ribbon-num { font-weight: 800; letter-spacing: -0.04em; line-height: 1.0; font-size: clamp(32px, 3.3vw, 56px); color: var(--kn-acc-ink); overflow-wrap: normal; hyphens: manual; text-wrap: balance; }
 .dx-ribbon-label { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--vt-fg-2); max-width: 26ch; }
 .dx-proof-partners { margin: 48px 0 0; padding-top: 22px; border-top: 1px solid var(--vt-line); display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
 .dx-proof-partners .dx-proof-note { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--vt-fg-2); flex-basis: 100%; }
@@ -158,7 +158,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .kn-part-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
 .kn-part { position: relative; border: 1px solid var(--kn-card-line); border-radius: 18px; background: var(--kn-card);
   padding: 30px 28px; transition: border-color 0.18s ease, transform 0.18s ease; }
-.kn-part:hover { border-color: var(--kn-lime); transform: translateY(-3px); }
+.kn-part:hover { border-color: var(--kn-acc-stroke); transform: translateY(-3px); }
 .kn-part b { display: block; font-size: clamp(22px, 2vw, 30px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
 .kn-part > span { display: block; margin-top: 6px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vt-fg-2); }
 .kn-part p { margin: 12px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--vt-fg-2); }
@@ -218,7 +218,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-pull { padding: 14vh 4vw; text-align: center; border-top: 1px solid var(--vt-line); border-bottom: 1px solid var(--vt-line); }
 .dx-pull-inner { max-width: 1050px; margin: 0 auto; }
 .dx-pull h2 { font-weight: 800; font-size: clamp(26px, 3.8vw, 54px); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 28px; text-wrap: balance; }
-.dx-pull h2 em { font-style: normal; color: var(--kn-lime); }
+.dx-pull h2 em { font-style: normal; color: var(--kn-acc-ink); }
 .dx-pull-attr { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; color: var(--vt-fg-2); }
 
 /* ---------- usługi: wiersze czytane scrollem strony ---------- */
@@ -228,7 +228,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .kn-row { display: grid; grid-template-columns: 70px minmax(0, 1fr) 60px; gap: 28px; align-items: center;
   padding: 30px 14px; border-top: 1px solid var(--vt-line); text-decoration: none; color: inherit; transition: background 0.15s ease, color 0.15s ease; }
 .kn-row:last-child { border-bottom: 1px solid var(--vt-line); }
-.kn-row i { font-style: normal; font-family: var(--mono); font-weight: 800; font-size: 15px; color: var(--kn-lime); }
+.kn-row i { font-style: normal; font-family: var(--mono); font-weight: 800; font-size: 15px; color: var(--kn-acc-ink); }
 .kn-row h3 { font-size: clamp(21px, 2.3vw, 34px); font-weight: 800; letter-spacing: -0.025em; margin: 0 0 6px; text-transform: uppercase; }
 .kn-row p { font-size: 14.5px; line-height: 1.55; color: var(--vt-fg-2); margin: 0; max-width: 74ch; }
 .kn-row-for { display: block; margin-top: 8px; font-size: 12.5px; color: var(--vt-fg-2); border-left: 2px solid var(--vt-line-strong); padding-left: 10px; }
@@ -246,7 +246,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-plans-head .dx-body { margin: 16px 0 0; }
 .dx-proc-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
 .dx-proc-card { background: var(--kn-card); border: 1px solid var(--kn-card-line); border-radius: 16px; padding: 22px 18px; display: flex; flex-direction: column; gap: 10px; }
-.dx-proc-num { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--kn-lime); }
+.dx-proc-num { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--kn-acc-ink); }
 .dx-proc-name { font-weight: 800; font-size: 16px; line-height: 1.2; }
 .dx-proc-desc { font-size: 13px; line-height: 1.5; color: var(--vt-fg-2); flex: 1; }
 .dx-proc-dur { font-family: var(--mono); font-size: 11px; color: var(--vt-fg-2); border-top: 1px dashed var(--vt-line-strong); padding-top: 10px; }
@@ -283,7 +283,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-close { padding: 16vh 4vw; text-align: center; border-top: 1px solid var(--vt-line); }
 .dx-close-inner { max-width: 1100px; margin: 0 auto; background: none; padding: 0; }
 .dx-close h2 { font-weight: 800; font-size: clamp(40px, 7.4vw, 110px); letter-spacing: -0.045em; line-height: 0.95; margin: 0; text-transform: uppercase; }
-.dx-close h2 em { font-style: normal; color: var(--kn-lime); }
+.dx-close h2 em { font-style: normal; color: var(--kn-acc-ink); }
 .dx-close p { margin: 24px auto 34px; max-width: 52ch; font-size: 16.5px; line-height: 1.6; color: var(--vt-fg-2); }
 
 /* ---------- realizacje (pełna strona) ---------- */
@@ -294,11 +294,11 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-case-art { margin: 32px 0 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--kn-card-line); aspect-ratio: 21 / 9; }
 .dx-case-art img { width: 100%; height: 100%; object-fit: cover; }
 .dx-case-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
-.dx-case-block h3 { margin: 0 0 14px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--kn-lime); }
+.dx-case-block h3 { margin: 0 0 14px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--kn-acc-ink); }
 .dx-case-block p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.6; color: var(--vt-fg-2); }
 .dx-case-list { margin: 0; padding: 0; list-style: none; }
 .dx-case-list li { position: relative; padding: 0 0 10px 20px; font-size: 14.5px; line-height: 1.55; color: var(--vt-fg-2); }
-.dx-case-list li::before { content: "\2192"; position: absolute; left: 0; top: 0; color: var(--kn-lime); font-weight: 800; font-size: 12px; }
+.dx-case-list li::before { content: "\2192"; position: absolute; left: 0; top: 0; color: var(--kn-acc-ink); font-weight: 800; font-size: 12px; }
 .dx-case-list li strong { color: var(--vt-fg); }
 .dx-case-closing { margin: 36px 0 0; padding-top: 22px; border-top: 1px solid var(--vt-line); font-size: 15.5px; font-weight: 700; max-width: 70ch; }
 
@@ -353,7 +353,7 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-tech-inner { max-width: 1360px; margin: 0 auto; border: 1px solid var(--kn-card-line); background: var(--kn-card); border-radius: 18px; padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .dx-tech-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .dx-tech-pill { font-family: var(--mono); font-size: 12px; border: 1px solid var(--vt-line-strong); border-radius: 999px; padding: 8px 15px; }
-.dx-tech-motto { margin: 0; font-size: 14px; color: var(--kn-lime); font-weight: 700; max-width: 34ch; }
+.dx-tech-motto { margin: 0; font-size: 14px; color: var(--kn-acc-ink); font-weight: 700; max-width: 34ch; }
 
 /* ---------- nagłówki podstron ---------- */
 .dx-page-head, .dx-page-head.bg-yellow, .dx-page-head.bg-pink { background: none; padding: 12vh 4vw 8vh; border-bottom: 1px solid var(--vt-line); }
@@ -371,12 +371,12 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-field { margin-bottom: 20px; }
 .dx-field label { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--vt-fg-2); margin-bottom: 8px; }
 .dx-field input, .dx-field textarea { width: 100%; min-width: 0; padding: 14px 16px; border: 1px solid var(--vt-line-strong); border-radius: 12px; font-size: 16px; font-family: var(--sans); background: var(--kn-card); color: var(--vt-fg); }
-.dx-field input:focus, .dx-field textarea:focus { outline: none; border-color: var(--kn-lime); box-shadow: 0 0 0 3px rgba(216, 255, 58, 0.16); }
+.dx-field input:focus, .dx-field textarea:focus { outline: none; border-color: var(--kn-acc-stroke); box-shadow: 0 0 0 3px rgba(216, 255, 58, 0.16); }
 .dx-field textarea { resize: vertical; }
 .dx-rodo { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 22px; font-size: 13px; line-height: 1.5; color: var(--vt-fg-2); cursor: pointer; max-width: 60ch; }
-.dx-rodo input { margin-top: 3px; accent-color: var(--kn-lime); }
+.dx-rodo input { margin-top: 3px; accent-color: var(--kn-acc-stroke); }
 .dx-clause { font-size: 12px; color: var(--vt-fg-2); line-height: 1.55; margin: 22px 0 0; max-width: 60ch; }
-.dx-clause a { color: var(--kn-lime); font-weight: 600; }
+.dx-clause a { color: var(--kn-acc-ink); font-weight: 600; }
 .dx-contact-grid > div:last-child { background: var(--kn-card); border: 1px solid var(--kn-card-line); border-radius: 18px; padding: 10px 26px; }
 .dx-info-row { display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid var(--vt-line); }
 .dx-info-row:first-child { border-top: 0; }
@@ -405,11 +405,11 @@ html:not(.js) .kn-line { font-size: clamp(28px, 5.4vw, 92px); }
 .dx-footer-mark { font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(40px, 10vw, 150px); margin-bottom: 44px; white-space: nowrap; color: var(--vt-paper); -webkit-text-stroke: 4px var(--vt-fg); paint-order: stroke fill; text-transform: uppercase; }
 .dx-footer-mark::after { content: "."; color: var(--kn-lime); -webkit-text-stroke: 0; }
 .dx-footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 44px; }
-.dx-footer h5 { margin: 0 0 14px; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--kn-lime); }
+.dx-footer h5 { margin: 0 0 14px; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--kn-acc-ink); }
 .dx-footer ul { margin: 0; padding: 0; list-style: none; }
 .dx-footer li { margin-bottom: 9px; }
 .dx-footer a { color: var(--vt-fg-2); text-decoration: none; font-size: 14px; }
-.dx-footer a:hover { color: var(--kn-lime); }
+.dx-footer a:hover { color: var(--kn-acc-ink); }
 .dx-footer-reg { margin: 14px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--vt-fg-2); }
 .dx-footer-tail { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--vt-line); padding: 20px 0 0; font-size: 12px; color: var(--vt-fg-2); font-family: var(--mono); }
 
@@ -498,7 +498,13 @@ body.dx.zone-warm, body.dx.zone-cool, body.dx.zone-paper { background: var(--vt-
   html:not([data-theme="dark"]) .kn-part .kn-part-role {
     color: #131312; background: var(--kn-lime); border-color: transparent;
   }
-  html:not([data-theme="dark"]) .dx-logo::after {
+    html:not([data-theme="dark"]) .dx-pull h2 em, html:not([data-theme="dark"]) .dx-close h2 em {
+    color: #131312; background: var(--kn-lime); padding: 0 0.07em;
+  }
+  html:not([data-theme="dark"]) .dx-footer-mark::after {
+    color: #B9D51E;
+  }
+html:not([data-theme="dark"]) .dx-logo::after {
     color: #B9D51E;
   }
   html:not([data-theme="dark"]) .dx-nav-links a.on {
@@ -540,6 +546,12 @@ html[data-theme="light"] .kn-line em, html[data-theme="light"] .dx-display em {
 }
 html[data-theme="light"] .kn-part .kn-part-role {
     color: #131312; background: var(--kn-lime); border-color: transparent;
+}
+html[data-theme="light"] .dx-pull h2 em, html[data-theme="light"] .dx-close h2 em {
+    color: #131312; background: var(--kn-lime); padding: 0 0.07em;
+}
+html[data-theme="light"] .dx-footer-mark::after {
+    color: #B9D51E;
 }
 html[data-theme="light"] .dx-logo::after {
     color: #B9D51E;
