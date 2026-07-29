@@ -1,5 +1,4 @@
-dist-local/
-dist-local-kinetyka/
+dist-local*/
 _to_delete/
 _incoming/
 __pycache__/
