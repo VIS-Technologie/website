@@ -366,6 +366,78 @@
       "sentTitle": "Dziękujemy.",
       "sentSub": "Odpowiemy najszybciej, jak to możliwe."
     },
+    "meeting": {
+      "eyebrow": "Spotkanie",
+      "title": "Umów spotkanie",
+      "sub": "Godzina online albo u Was. Pokazujemy działający system na danych z wdrożenia i odpowiadamy na pytania techniczne — bez zobowiązań.",
+      "labels": {
+        "name": "Imię i nazwisko",
+        "email": "E-mail",
+        "company": "Firma (opcjonalnie)",
+        "topic": "Temat rozmowy",
+        "mode": "Forma spotkania",
+        "slots": "Preferowany termin",
+        "message": "Wiadomość (opcjonalnie)",
+        "send": "Wyślij prośbę o spotkanie",
+        "choose": "— wybierz —"
+      },
+      "slotsPlaceholder": "np. wtorki i czwartki po 14:00",
+      "topicOptions": [
+        {"v": "crane", "t": "Monitoring suwnic"},
+        {"v": "localcontent", "t": "Local content"},
+        {"v": "integrations", "t": "Integracje IT-OT"},
+        {"v": "other", "t": "Inny temat"}
+      ],
+      "modeOptions": [
+        {"v": "online", "t": "Online"},
+        {"v": "phone", "t": "Telefon"},
+        {"v": "at-us", "t": "U nas (Banino k. Gdańska)"},
+        {"v": "at-you", "t": "U Was"}
+      ],
+      "promise": "Potwierdzimy termin w ciągu 1 dnia roboczego.",
+      "formError": "Nie udało się wysłać. Sprawdź pola: imię i nazwisko, e-mail, temat, forma spotkania, preferowany termin oraz zgodę — i spróbuj ponownie.",
+      "crossPre": "Wolisz od razu przetestować system u siebie? ",
+      "crossLink": "Zgłoś wdrożenie pilotażowe"
+    },
+    "pilot": {
+      "eyebrow": "Pilotaż",
+      "title": "Zgłoś wdrożenie pilotażowe",
+      "sub": "Pilot na jednej suwnicy: montaż sondy bez postoju, kilka tygodni nasłuchu i raport z tego, co usłyszeliśmy. Wypełnij zgłoszenie — wrócimy z propozycją zakresu i terminu.",
+      "labels": {
+        "name": "Imię i nazwisko",
+        "email": "E-mail",
+        "company": "Firma",
+        "cranes": "Liczba suwnic w zakładzie",
+        "ctype": "Typ suwnic",
+        "location": "Lokalizacja zakładu",
+        "horizon": "Kiedy chcecie wystartować",
+        "message": "Wiadomość (opcjonalnie)",
+        "send": "Wyślij zgłoszenie",
+        "choose": "— wybierz —"
+      },
+      "locationPlaceholder": "miasto lub region",
+      "cranesOptions": [
+        {"v": "1-2", "t": "1–2"},
+        {"v": "3-5", "t": "3–5"},
+        {"v": "6-10", "t": "6–10"},
+        {"v": "10plus", "t": "ponad 10"}
+      ],
+      "ctypeOptions": [
+        {"v": "pomostowe", "t": "Pomostowe"},
+        {"v": "bramowe", "t": "Bramowe"},
+        {"v": "polbramowe", "t": "Półbramowe"},
+        {"v": "inne", "t": "Różne / inne"}
+      ],
+      "horizonOptions": [
+        {"v": "asap", "t": "Jak najszybciej"},
+        {"v": "quarter", "t": "W tym kwartale"},
+        {"v": "year", "t": "W tym roku"},
+        {"v": "research", "t": "Na razie się rozeznajemy"}
+      ],
+      "formError": "Nie udało się wysłać. Sprawdź pola: imię i nazwisko, e-mail, firma, liczba i typ suwnic, lokalizacja, termin startu oraz zgodę — i spróbuj ponownie.",
+      "crossPre": "Wolisz najpierw porozmawiać? ",
+      "crossLink": "Umów spotkanie"
+    },
     "cookieNote": {
       "text": "Ta strona używa wyłącznie plików cookies niezbędnych do jej działania. Nie stosujemy analityki ani śledzenia.",
       "link": "Więcej w Polityce cookies →",
@@ -609,6 +681,14 @@
         "localcontent": {
           "title": "Local content — polska firma, polski kapitał — Vis Technologie",
           "desc": "Spełniamy wszystkie sześć kryteriów krajowości podmiotu z Kodeksu Dobrych Praktyk Local Content. Wydatek u nas wchodzi do wskaźnika local content Waszej spółki."
+        },
+        "meeting": {
+          "title": "Umów spotkanie — Vis Technologie",
+          "desc": "Godzina online albo u Was: pokaz działającego systemu monitoringu i rozmowa techniczna. Podaj preferowane terminy — potwierdzimy w 1 dzień roboczy."
+        },
+        "pilot": {
+          "title": "Wdrożenie pilotażowe monitoringu suwnic — Vis Technologie",
+          "desc": "Zgłoś pilotaż na jednej suwnicy: montaż sondy bez postoju, kilka tygodni nasłuchu, raport. Formularz zgłoszeniowy."
         }
       },
       "fab": "Porozmawiajmy"
@@ -1237,6 +1317,78 @@
       "sentTitle": "Thank you.",
       "sentSub": "We'll get back to you as soon as we can."
     },
+    "meeting": {
+      "eyebrow": "Meeting",
+      "title": "Book a meeting",
+      "sub": "An hour online or at your site. We show the working system on data from a real deployment and answer the technical questions — no commitment.",
+      "labels": {
+        "name": "Full name",
+        "email": "E-mail",
+        "company": "Company (optional)",
+        "topic": "Topic",
+        "mode": "Meeting format",
+        "slots": "Preferred time",
+        "message": "Message (optional)",
+        "send": "Send meeting request",
+        "choose": "— select —"
+      },
+      "slotsPlaceholder": "e.g. Tuesdays and Thursdays after 2 pm",
+      "topicOptions": [
+        {"v": "crane", "t": "Crane monitoring"},
+        {"v": "localcontent", "t": "Local content"},
+        {"v": "integrations", "t": "IT-OT integrations"},
+        {"v": "other", "t": "Something else"}
+      ],
+      "modeOptions": [
+        {"v": "online", "t": "Online"},
+        {"v": "phone", "t": "Phone call"},
+        {"v": "at-us", "t": "At our office (Banino near Gdańsk)"},
+        {"v": "at-you", "t": "At your site"}
+      ],
+      "promise": "We'll confirm the date within 1 business day.",
+      "formError": "Your request could not be sent. Please check: full name, e-mail, topic, meeting format, preferred time and the consent checkbox — and try again.",
+      "crossPre": "Prefer to test the system on your own crane? ",
+      "crossLink": "Request a pilot deployment"
+    },
+    "pilot": {
+      "eyebrow": "Pilot",
+      "title": "Request a pilot deployment",
+      "sub": "A pilot on one crane: probe fitted without stopping the machine, a few weeks of listening, and a report on what we heard. Fill in the form — we'll come back with a scope and date proposal.",
+      "labels": {
+        "name": "Full name",
+        "email": "E-mail",
+        "company": "Company",
+        "cranes": "Number of cranes on site",
+        "ctype": "Crane type",
+        "location": "Site location",
+        "horizon": "When do you want to start",
+        "message": "Message (optional)",
+        "send": "Send request",
+        "choose": "— select —"
+      },
+      "locationPlaceholder": "city or region",
+      "cranesOptions": [
+        {"v": "1-2", "t": "1–2"},
+        {"v": "3-5", "t": "3–5"},
+        {"v": "6-10", "t": "6–10"},
+        {"v": "10plus", "t": "more than 10"}
+      ],
+      "ctypeOptions": [
+        {"v": "pomostowe", "t": "Overhead (bridge)"},
+        {"v": "bramowe", "t": "Gantry"},
+        {"v": "polbramowe", "t": "Semi-gantry"},
+        {"v": "inne", "t": "Mixed / other"}
+      ],
+      "horizonOptions": [
+        {"v": "asap", "t": "As soon as possible"},
+        {"v": "quarter", "t": "This quarter"},
+        {"v": "year", "t": "This year"},
+        {"v": "research", "t": "Just researching for now"}
+      ],
+      "formError": "Your request could not be sent. Please check: full name, e-mail, company, number and type of cranes, location, start date and the consent checkbox — and try again.",
+      "crossPre": "Prefer to talk first? ",
+      "crossLink": "Book a meeting"
+    },
     "cookieNote": {
       "text": "This site uses only cookies essential for it to work. No analytics, no tracking.",
       "link": "More in the Cookie policy →",
@@ -1480,6 +1632,14 @@
         "localcontent": {
           "title": "Local content — Polish company, Polish capital — Vis Technologie",
           "desc": "We meet all six domestic entity criteria of the Polish Local Content Code of Good Practice. Money spent with us counts towards your own local content indicator."
+        },
+        "meeting": {
+          "title": "Book a meeting — Vis Technologie",
+          "desc": "An hour online or at your site: a live demo of the monitoring system and a technical conversation. Tell us when suits you — we'll confirm within 1 business day."
+        },
+        "pilot": {
+          "title": "Crane monitoring pilot deployment — Vis Technologie",
+          "desc": "Request a pilot on one crane: probe fitted without stopping the machine, a few weeks of listening, a report. Request form."
         }
       },
       "fab": "Let's talk"
