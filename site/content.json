@@ -747,7 +747,6 @@
           "btn": "Umów spotkanie"
         }
       ],
-      "note": "Vis Technologie Sp. z o.o., KRS 0000565307, Banino koło Gdańska.",
       "noteLink": "Jesteśmy local content — co to znaczy dla Was"
     },
     "localcontent": {
@@ -868,8 +867,7 @@
       "closeTitleEm": "na papierze?",
       "closeLead": "Do postępowania albo do sprawozdania przekażemy oświadczenie o spełnieniu kryteriów krajowości wraz z dokumentami, na których się opiera. Bez zbędnej korespondencji — napiszcie, czego dokładnie wymaga Wasz formularz.",
       "closeBtn": "Napiszcie do nas",
-      "closeLink": "Zobacz nasz produkt dla terminali",
-      "note": "Local content to „wartość towarów lub usług wyprodukowanych lub świadczonych przez podmiot krajowy”. Definicja, kryteria i ich wagi za Kodeksem Dobrych Praktyk Local Content, Ministerstwo Aktywów Państwowych, kwiecień 2026. Vis Technologie Sp. z o.o., KRS 0000565307, siedziba Banino koło Gdańska."
+      "closeLink": "Zobacz nasz produkt dla terminali"
     }
   },
   "en": {
@@ -1620,7 +1618,6 @@
           "btn": "Book a meeting"
         }
       ],
-      "note": "Vis Technologie Sp. z o.o., registered in Poland, KRS 0000565307, Banino near Gdańsk.",
       "noteLink": "We are local content — what that means for you"
     },
     "localcontent": {
@@ -1741,8 +1738,7 @@
       "closeTitleEm": "on paper?",
       "closeLead": "For a tender or for your reporting we will provide a statement of compliance with the domestic entity criteria together with the documents it rests on. No unnecessary correspondence — tell us exactly what your form requires.",
       "closeBtn": "Write to us",
-      "closeLink": "See our product for terminals",
-      "note": "Local content is “the value of goods or services produced or provided by a domestic entity”. Definition, criteria and weights after the Local Content Code of Good Practice, Polish Ministry of State Assets, April 2026. Vis Technologie Sp. z o.o., KRS 0000565307, registered in Banino near Gdańsk."
+      "closeLink": "See our product for terminals"
     }
   }
 }

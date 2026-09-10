@@ -796,7 +796,6 @@ def page_crane(lang):
 {_tytul("sw-h2", c["startTitle"], c["startTitleEm"])}
 <div class="sw-cards-2">{drogi}</div>
 <p class="sw-more"><a class="dx-link-quiet" href="{p["localcontent"]}">{e(c["noteLink"])} \u2192</a></p>
-<p class="sw-note">{e(c["note"])}</p>
 </section>
 """
     return hero + ryzyka + dostarczamy + case + uniw + start
@@ -864,7 +863,6 @@ def page_localcontent(lang):
 <a class="dx-btn dx-btn-primary" href="{p["contact"]}">{e(c["closeBtn"])} \u2192</a>
 <a class="dx-link-quiet" href="{p["crane"]}">{e(c["closeLink"])} \u2192</a>
 </div>
-<p class="lc-note">{e(c["note"])}</p>
 </section>
 """
     return hero + kryteria + sek + co + close

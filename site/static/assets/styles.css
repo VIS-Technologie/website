@@ -605,6 +605,9 @@ html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
 
 .sw, .lc { max-width: 1240px; margin: 0 auto; padding-inline: 28px; }
 .sw-sec, .lc-sec { padding-block: 88px; border-top: 1px solid var(--vt-line); }
+/* Naglowek konczy sie zdjeciem, ktore ma wlasna ramke — separator pierwszej sekcji
+   przyklejalby sie do jego dolnej krawedzi i czytalby sie jak druga kreska pod zdjeciem. */
+.sw-hero + .sw-sec { border-top: 0; }
 .sw-hero { padding-block: 64px 0; }
 .lc-hero { padding-block: 64px 88px; }
 .sw-close, .lc-close { padding-block: 88px 104px; border-top: 1px solid var(--vt-line); }
@@ -620,9 +623,6 @@ html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
 .sw-kicker { margin: 0 0 18px; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em;
   text-transform: uppercase; font-weight: 600; color: var(--vt-fg-2); }
 .sw-cta, .lc-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; align-items: center; }
-.sw-note, .lc-note { margin: 48px 0 0; padding-top: 20px; border-top: 1px solid var(--vt-line);
-  font-size: 12.5px; line-height: 1.65; color: var(--vt-fg-2); max-width: 100ch; }
-.sw-note a, .lc-note a { color: inherit; }
 .sw-more { margin: 26px 0 0; }
 
 .sw-figure { margin: 44px 0 0; min-width: 0; }
