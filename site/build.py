@@ -709,6 +709,18 @@ def _karta(it):
     return f'<div class="sw-card"><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p></div>'
 
 
+# ZDJECIE crane-hero.jpg — pochodzenie i warunek podpisu
+#
+# Autor: Karmelki90. Licencja: CC0 (zrzeczenie sie praw, domena publiczna).
+# Zrodlo: Wikimedia Commons. Ujecie: Baltic Hub T3, Gdansk.
+#
+# CC0 NIE WYMAGA atrybucji i dlatego podpisu pod zdjeciem tu nie ma.
+#
+# JESLI KIEDYKOLWIEK PODMIENISZ TO ZDJECIE: wiekszosc zdjec suwnic na Wikimedia
+# Commons jest na CC BY-SA, ktora atrybucji WYMAGA — i to widocznej przy zdjeciu,
+# nie w stopce dokumentu. Wtedy podpis musi wrocic (<figcaption>). Rejestr licencji
+# zdjec uzywanych w materialach: APT, docs/foto-suwnice-zrodla.md.
+# Najlepszym wyjsciem jest wlasne zdjecie z obiektu — wtedy pytanie znika.
 def page_crane(lang):
     c = C[lang]["crane"]
     p = PATHS[lang]
@@ -725,7 +737,6 @@ def page_crane(lang):
 </div>
 <figure class="sw-figure">
 <img src="/assets/img/crane-hero.jpg" width="1800" height="747" alt="{e(c["photoAlt"])}" loading="eager">
-<figcaption>{e(c["photoCredit"])}</figcaption>
 </figure>
 </section>
 """
@@ -784,8 +795,8 @@ def page_crane(lang):
 <p class="dx-eyebrow">{e(c["startEyebrow"])}</p>
 {_tytul("sw-h2", c["startTitle"], c["startTitleEm"])}
 <div class="sw-cards-2">{drogi}</div>
-<p class="sw-note">{e(c["photoCredit"])} {e(c["note"])}
-<a href="{p["localcontent"]}">{e(c["noteLink"])} \u2192</a></p>
+<p class="sw-more"><a class="dx-link-quiet" href="{p["localcontent"]}">{e(c["noteLink"])} \u2192</a></p>
+<p class="sw-note">{e(c["note"])}</p>
 </section>
 """
     return hero + ryzyka + dostarczamy + case + uniw + start

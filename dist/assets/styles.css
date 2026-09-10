@@ -623,6 +623,7 @@ html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
 .sw-note, .lc-note { margin: 48px 0 0; padding-top: 20px; border-top: 1px solid var(--vt-line);
   font-size: 12.5px; line-height: 1.65; color: var(--vt-fg-2); max-width: 100ch; }
 .sw-note a, .lc-note a { color: inherit; }
+.sw-more { margin: 26px 0 0; }
 
 .sw-figure { margin: 44px 0 0; min-width: 0; }
 .sw-figure img { width: 100%; border-radius: 18px; border: 1px solid var(--kn-card-line); }
