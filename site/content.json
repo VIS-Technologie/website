@@ -4,7 +4,9 @@
       "services": "Usługi",
       "work": "Realizacje",
       "about": "O nas",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "crane": "Monitoring suwnic",
+      "localcontent": "Local content"
     },
     "cta": "Porozmawiajmy",
     "hero": {
@@ -599,9 +601,276 @@
         "notfound": {
           "title": "Nie znaleziono strony — Vis Technologie",
           "desc": "Strona nie istnieje."
+        },
+        "crane": {
+          "title": "Monitoring akustyczny suwnic terminalowych — Vis Technologie",
+          "desc": "Sonda z AI słucha maszynowni suwnicy przez całą dobę i wychwytuje zmianę dźwięku, zanim maszyna stanie. Sprawdzone na wdrożeniu u operatora farmy wiatrowej."
+        },
+        "localcontent": {
+          "title": "Local content — polska firma, polski kapitał — Vis Technologie",
+          "desc": "Spełniamy wszystkie sześć kryteriów krajowości podmiotu z Kodeksu Dobrych Praktyk Local Content. Wydatek u nas wchodzi do wskaźnika local content Waszej spółki."
         }
       },
       "fab": "Porozmawiajmy"
+    },
+    "crane": {
+      "eyebrow": "Monitoring akustyczny · suwnice terminalowe",
+      "title": "Suwnica mówi, że się psuje. Nikt jej nie słucha.",
+      "titleEm": "Nikt jej nie słucha.",
+      "lead": "Sonda w maszynowni słucha bez przerwy, uczy się, jak brzmi ta konkretna maszyna w każdej fazie cyklu, i sama ocenia każdą sekundę dźwięku. Kiedy coś odbiega od normy, utrzymanie ruchu wie o tym w kilka sekund — a nie na najbliższym przeglądzie.",
+      "ctaPrimary": "Zacznijmy od jednej suwnicy",
+      "ctaSecondary": "Zobacz wdrożenie u operatora",
+      "photoAlt": "Suwnice STS przy statku kontenerowym w porcie",
+      "photoCredit": "fot. Karmelki90, CC0 / Wikimedia Commons — Baltic Hub T3, Gdańsk",
+      "riskEyebrow": "Co zdejmujemy z ryzyka",
+      "riskTitle": "Awaria suwnicy nigdy nie kosztuje tyle, co część.",
+      "riskTitleEm": "nigdy nie kosztuje tyle, co część.",
+      "riskLead": "Kosztu części nikt nie liczy w kategoriach ryzyka. Liczy się to, kiedy wypada wymiana i czego jeszcze zdąży przy okazji zniszczyć. Ciągły nasłuch przesuwa naprawę z awarii do zaplanowanego okna — i to jest cała różnica.",
+      "risks": [
+        {
+          "h": "Nieplanowany postój",
+          "p": "Awaria nie umawia się na termin. Wykryta wcześnie schodzi do okna postojowego, które i tak macie w harmonogramie — bez przestawiania statku i bez demurrage."
+        },
+        {
+          "h": "Awaria wtórna",
+          "p": "Zajeżdżone łożysko niszczy wał i przekładnię. Ta sama usterka wyłapana wcześniej to wymiana jednego elementu, a nie remont całego zespołu."
+        },
+        {
+          "h": "Przegląd, który nic nie wykrył",
+          "p": "Przegląd pokazuje stan maszyny w dniu przeglądu. Usterka rozwija się w pozostałe 89 dni kwartału — i wtedy nikt jej nie słucha."
+        },
+        {
+          "h": "Rozmowa z serwisem bez danych",
+          "p": "Przy sporze z serwisem albo producentem liczy się zapis: nagranie, data i trend wskaźnika. To argument, którego nie da się podważyć wrażeniem operatora."
+        }
+      ],
+      "deliverEyebrow": "Co dostarczamy",
+      "deliverTitle": "Jedno urządzenie, zaawansowana AI na pokładzie.",
+      "deliverTitleEm": "zaawansowana AI na pokładzie.",
+      "deliverLead": "Dźwięk wszystkich zespołów dociera do jednej sondy stojącej w maszynowni. Nie okablowujemy każdego łożyska — przypisanie odchylenia do mechanizmu robi model, na podstawie sygnatury widmowej zespołu i fazy cyklu, w której odchylenie wystąpiło.",
+      "specTitle": "Sonda akustyczna z AI",
+      "specSub": "Pasywne urządzenie na magnesach, bez ingerencji w konstrukcję i sterowanie suwnicy.",
+      "spec": [
+        "Bardzo szerokie pasmo sygnałów akustycznych — dźwięki słyszalne i ultradźwięki",
+        "Sieci neuronowe liczone na dedykowanym akceleratorze AI w sondzie",
+        "Nasłuch ciągły, 24 godziny na dobę, 7 dni w tygodniu",
+        "Nagrania zapisywane od pierwszego dnia pracy — do odsłuchu w każdej chwili",
+        "Łączność przewodowa albo komórkowa — bez wymagań wobec sieci terminalu",
+        "Montaż bez wiercenia, bez postoju maszyny, bez zmian w dokumentacji dozorowej"
+      ],
+      "capabilities": [
+        {
+          "h": "Zaawansowana sztuczna inteligencja — na urządzeniu, nie w chmurze",
+          "p": "W sondzie pracuje dedykowany akcelerator AI. Sieć neuronowa rozpoznaje typy dźwięków maszyny, a druga warstwa uczy się normy tej konkretnej suwnicy i każdej fazy jej cyklu. Potwierdzone i odrzucone alerty wracają do modelu, który jest okresowo dotrenowywany — system działa tym lepiej, im dłużej u Was pracuje."
+        },
+        {
+          "h": "Nasłuch ciągły zamiast próbki",
+          "p": "Pomiar drganiowy to zdjęcie stanu maszyny w jednej chwili, raz na kwartał. Sonda słucha bez przerwy i widzi zmianę w dniu, w którym się pojawia — łącznie ze zdarzeniami, które trwają sekundę i nie powtórzą się przy inspektorze."
+        },
+        {
+          "h": "Predykcja w czasie rzeczywistym",
+          "p": "Model ocenia dźwięk na bieżąco, na obiekcie. Od surowego dźwięku do gotowego alertu z przypisaniem mija kilka sekund — nie doba oczekiwania na przetworzenie w chmurze i nie tydzień na raport z laboratorium."
+        },
+        {
+          "h": "Jedna liczba, która mówi, jak bardzo to odbiega od normy",
+          "p": "Dla każdej sekundy dźwięku model wylicza, jak daleko ten dźwięk jest od normy wyuczonej dla tej maszyny i tej fazy cyklu. Ta sama liczba zbierana przez tygodnie pokazuje, czy coś narasta, czy był to pojedynczy incydent. Do każdego zdarzenia zostaje nagranie do odsłuchu, a maszyny można porównywać między sobą."
+        }
+      ],
+      "caseEyebrow": "Wdrożenie referencyjne",
+      "caseTitle": "Tauron Ekoenergia: dwie awarie wyłapane samym dźwiękiem.",
+      "caseTitleEm": "dwie awarie wyłapane samym dźwiękiem.",
+      "caseLead": "Zanim weszliśmy do maszynowni suwnicy, ten sam system pracował w gondoli turbiny wiatrowej — w zamkniętym pomieszczeniu technicznym z przekładnią, łożyskami, hamulcem i wentylatorami. Raport z wdrożenia został zatwierdzony przez operatora farmy.",
+      "caseColA": "Wdrożenie",
+      "caseColB": "Wyniki",
+      "caseFacts": [
+        {
+          "h": "5 turbin Senvion MM92",
+          "p": "na farmie liczącej 15 turbin, 30,75 MW"
+        },
+        {
+          "h": "Flota po 15 latach eksploatacji",
+          "p": "profil, w którym wczesne ostrzeganie daje najwięcej"
+        },
+        {
+          "h": "Nasłuch ciągły, 24 godziny na dobę",
+          "p": "inferencja AI na urządzeniu, na obiekcie — nie w chmurze"
+        },
+        {
+          "h": "Walidacja z zespołami operatora",
+          "p": "prowadzona wspólnie ze służbami operacyjnymi i serwisem"
+        }
+      ],
+      "caseResults": [
+        {
+          "h": "Rozwijające się uszkodzenie łożyska",
+          "p": "Wykryte akustycznie i potwierdzone przez serwis operatora. Naprawa w zaplanowanym oknie zamiast awaryjnego postoju."
+        },
+        {
+          "h": "Wada wentylatora chłodzenia",
+          "p": "Wyłapana samym dźwiękiem — poza zasięgiem czujników temperatury i drgań, którymi turbina była już obłożona."
+        }
+      ],
+      "caseChecks": [
+        "Od surowego dźwięku do gotowego alertu — automatycznie, w kilka sekund",
+        "Skuteczność monitoringu akustycznego potwierdzona w decyzjach utrzymania ruchu",
+        "Wykryte to, czego nie widzą czujniki temperatury, drgań ani oględziny"
+      ],
+      "univEyebrow": "Uniwersalność",
+      "univTitle": "Ta sama platforma, kolejna maszyna.",
+      "univTitleEm": "kolejna maszyna.",
+      "univLead": "Sonda nie jest przywiązana do typu urządzenia. Wszędzie tam, gdzie w zamkniętym pomieszczeniu pracuje zespół obrotowy — przekładnia, łożyska, hamulec, wentylatory — obowiązuje ta sama fizyka i ten sam tor przetwarzania dźwięku. Różnica jest jedna: turbina kręci się jednostajnie, a suwnica pracuje cyklami, więc model uczy się faz cyklu — inaczej każdy podnoszony kontener wyglądałby jak anomalia.",
+      "univ": [
+        {
+          "h": "Sprawdzone na turbinach",
+          "p": "Gondola turbiny wiatrowej: przekładnia, łożyska główne, hamulec, układ chłodzenia. Wdrożenie u operatora farmy, raport zatwierdzony."
+        },
+        {
+          "h": "Wdrażane na suwnicach",
+          "p": "Maszynownia suwnicy STS, RMG i RTG: wciągarka, przekładnie jazdy, hamulce, wentylatory, szafy zasilania. Ta sama sonda i ten sam model bazowy — a montaż nie jest modernizacją urządzenia, więc gwarancja producenta pozostaje nienaruszona."
+        },
+        {
+          "h": "Kolejna maszyna nie zaczyna od zera",
+          "p": "Model bazowy jest wspólny dla całej floty — nowa maszyna dokłada tylko własną warstwę normy. Rozszerzenie na kolejne urządzenie to tygodnie, nie nowy projekt."
+        }
+      ],
+      "startEyebrow": "Zacznijmy",
+      "startTitle": "Dwie drogi, obie krótkie.",
+      "startTitleEm": "obie krótkie.",
+      "start": [
+        {
+          "h": "Pilot na jednej suwnicy",
+          "p": "Wybieracie jedną maszynę. Montujemy sondę bez postoju i bez zmian w dokumentacji urządzenia, słuchamy przez kilka tygodni i oddajemy raport z tego, co usłyszeliśmy. Dopiero potem rozmawiamy o reszcie floty.",
+          "btn": "Umów pilot"
+        },
+        {
+          "h": "Spotkanie z pokazem systemu",
+          "p": "Godzina u Was albo zdalnie. Pokazujemy działający system na danych z wdrożenia: jak wygląda alert, jak pracuje się z historią i nagraniami, co widzi utrzymanie ruchu. Odpowiadamy na pytania techniczne, bez zobowiązań.",
+          "btn": "Umów spotkanie"
+        }
+      ],
+      "note": "Vis Technologie Sp. z o.o., KRS 0000565307, Banino koło Gdańska.",
+      "noteLink": "Jesteśmy local content — co to znaczy dla Was"
+    },
+    "localcontent": {
+      "eyebrow": "Dla polskich przedsiębiorstw",
+      "title": "Wydatek u nas liczy się po Waszej stronie.",
+      "titleEm": "liczy się po Waszej stronie.",
+      "lead": "Polska spółka, polski kapitał, zespół i realizacja w Polsce. Spełniamy wszystkie sześć kryteriów krajowości podmiotu z Kodeksu Dobrych Praktyk Local Content — a to znaczy, że pieniądze wydane u nas wchodzą do Waszego wskaźnika local content, a nie wychodzą z polskiej gospodarki.",
+      "flagLabel": "Barwy Rzeczypospolitej Polskiej",
+      "critEyebrow": "Kryteria",
+      "critTitle": "Local content to nie deklaracja. To sześć kryteriów.",
+      "critTitleEm": "To sześć kryteriów.",
+      "critLead": "Ministerstwo Aktywów Państwowych opisało, co znaczy „podmiot krajowy”, i przypisało temu wagi. Nie ma tu miejsca na interpretację — albo się kryterium spełnia, albo nie. Wszystko poniżej można sprawdzić w KRS.",
+      "critCard": "Kryteria krajowości podmiotu — wagi MAP",
+      "crit": [
+        [
+          "Beneficjent rzeczywisty z siedzibą w Polsce",
+          "25%"
+        ],
+        [
+          "Główny przedmiot działalności w Polsce",
+          "25%"
+        ],
+        [
+          "Rezydencja podatkowa w Polsce",
+          "15%"
+        ],
+        [
+          "Ponad połowa pracowników rozlicza się w Polsce",
+          "15%"
+        ],
+        [
+          "Siedziba w Polsce, działalność ponad 3 lata",
+          "10%"
+        ],
+        [
+          "Ponad połowa rocznych obrotów w Polsce",
+          "10%"
+        ]
+      ],
+      "critSum": "100%",
+      "critSumText": "Vis Technologie spełnia wszystkie sześć kryteriów.",
+      "points": [
+        {
+          "h": "Dla zarządu to pozycja w sprawozdaniu",
+          "p": "Spółki z udziałem Skarbu Państwa mają Kodeks Dobrych Praktyk Local Content, KPI dla zarządów, pełnomocników i cykliczną sprawozdawczość w umowach. GUS mierzy pochodzenie krajowe jako pierwszy urząd statystyczny w Unii. Wybór krajowego dostawcy nie jest gestem — wypełnia Wasz własny wskaźnik."
+        },
+        {
+          "h": "To nie jest protekcjonizm",
+          "p": "Local content działa przez kryteria niecenowe w postępowaniach, a nie przez zakaz kupowania za granicą. Pozostaje zgodny z prawem zamówień publicznych Unii Europejskiej i z programem „Buy European”."
+        },
+        {
+          "h": "Krótki łańcuch dostaw",
+          "p": "Projektujemy, integrujemy i utrzymujemy w Polsce. Wsparcie prowadzimy po polsku, a serwis liczy się w godzinach jazdy, nie w tygodniach oczekiwania na przesyłkę zza granicy."
+        }
+      ],
+      "sekEyebrow": "Dekada wielkich inwestycji",
+      "sekTitle": "Siedem sektorów, w których to się teraz rozstrzyga.",
+      "sekTitleEm": "w których to się teraz rozstrzyga.",
+      "sekLead": "Tyle sektorów wskazało ministerstwo jako kierunek wielkich inwestycji na najbliższą dekadę. W jednym z nich pracujemy na co dzień.",
+      "sektory": [
+        [
+          "Porty morskie",
+          "tu pracujemy — monitoring suwnic terminalowych",
+          true
+        ],
+        [
+          "Kolej",
+          "infrastruktura i tabor",
+          false
+        ],
+        [
+          "Drogi",
+          "infrastruktura drogowa",
+          false
+        ],
+        [
+          "Porty lotnicze",
+          "infrastruktura lotniskowa",
+          false
+        ],
+        [
+          "Obronność",
+          "przemysł zbrojeniowy",
+          false
+        ],
+        [
+          "Energetyka",
+          "wytwarzanie i sieci",
+          false
+        ],
+        [
+          "Cyfryzacja",
+          "systemy i infrastruktura IT",
+          false
+        ]
+      ],
+      "coEyebrow": "Co dostajecie od krajowego dostawcy",
+      "coTitle": "Local content otwiera drzwi. Za drzwiami musi być produkt.",
+      "coTitleEm": "Za drzwiami musi być produkt.",
+      "coLead": "Nie budujemy przewagi na samym pochodzeniu. Krajowość przechyla szalę przy porównywalnych ofertach — nie zastępuje produktu. Dlatego mówimy, co konkretnie robimy.",
+      "co": [
+        {
+          "h": "Systemy szyte na miarę",
+          "p": "Od ponad dziesięciu lat budujemy systemy, na których codziennie pracują firmy przemysłowe, logistyczne i energetyczne. Jeden z nich jest w produkcji u operatora terminali intermodalnych dwunasty rok."
+        },
+        {
+          "h": "AI na urządzeniach edge",
+          "p": "Sieci neuronowe liczone na obiekcie, nie w chmurze — tam, gdzie dane nie mogą wyjechać poza teren zakładu albo gdzie łącze jest wąskie i zawodne."
+        },
+        {
+          "h": "Monitoring akustyczny maszyn",
+          "p": "Sonda z AI słucha maszynowni i wychwytuje zmianę dźwięku, zanim maszyna stanie. Sprawdzone na turbinach wiatrowych, wdrażane na suwnicach terminalowych.",
+          "link": "Zobacz, jak to działa"
+        }
+      ],
+      "closeEyebrow": "Porozmawiajmy",
+      "closeTitle": "Potrzebujecie tego na papierze?",
+      "closeTitleEm": "na papierze?",
+      "closeLead": "Do postępowania albo do sprawozdania przekażemy oświadczenie o spełnieniu kryteriów krajowości wraz z dokumentami, na których się opiera. Bez zbędnej korespondencji — napiszcie, czego dokładnie wymaga Wasz formularz.",
+      "closeBtn": "Napiszcie do nas",
+      "closeLink": "Zobacz nasz produkt dla terminali",
+      "note": "Local content to „wartość towarów lub usług wyprodukowanych lub świadczonych przez podmiot krajowy”. Definicja, kryteria i ich wagi za Kodeksem Dobrych Praktyk Local Content, Ministerstwo Aktywów Państwowych, kwiecień 2026. Vis Technologie Sp. z o.o., KRS 0000565307, siedziba Banino koło Gdańska."
     }
   },
   "en": {
@@ -609,7 +878,9 @@
       "services": "Services",
       "work": "Case studies",
       "about": "About us",
-      "contact": "Contact"
+      "contact": "Contact",
+      "crane": "Crane monitoring",
+      "localcontent": "Local content"
     },
     "cta": "Let's talk",
     "hero": {
@@ -1204,9 +1475,276 @@
         "notfound": {
           "title": "Page not found — Vis Technologie",
           "desc": "This page does not exist."
+        },
+        "crane": {
+          "title": "Acoustic monitoring for terminal cranes — Vis Technologie",
+          "desc": "An AI probe listens to the crane machinery house around the clock and catches a change in sound before the machine stops. Proven on a wind farm deployment."
+        },
+        "localcontent": {
+          "title": "Local content — Polish company, Polish capital — Vis Technologie",
+          "desc": "We meet all six domestic entity criteria of the Polish Local Content Code of Good Practice. Money spent with us counts towards your own local content indicator."
         }
       },
       "fab": "Let's talk"
+    },
+    "crane": {
+      "eyebrow": "Acoustic monitoring · terminal cranes",
+      "title": "The crane tells you it is failing. Nobody is listening.",
+      "titleEm": "Nobody is listening.",
+      "lead": "A probe in the machinery house listens without a break, learns how this particular machine sounds in every phase of its cycle, and scores every second of audio. When something departs from the norm, maintenance knows within seconds — not at the next inspection.",
+      "ctaPrimary": "Start with a single crane",
+      "ctaSecondary": "See the field deployment",
+      "photoAlt": "STS cranes alongside a container ship in port",
+      "photoCredit": "photo: Karmelki90, CC0 / Wikimedia Commons — Baltic Hub T3, Gdańsk",
+      "riskEyebrow": "The risk we take off the table",
+      "riskTitle": "A crane failure never costs what the part costs.",
+      "riskTitleEm": "never costs what the part costs.",
+      "riskLead": "Nobody measures risk by the price of a component. What matters is when the replacement falls due and what else it takes down on the way. Continuous listening moves the repair out of a breakdown and into a planned window — and that is the whole difference.",
+      "risks": [
+        {
+          "h": "Unplanned downtime",
+          "p": "A failure does not book an appointment. Caught early, it drops into a maintenance window you already have in the schedule — no vessel reshuffling and no demurrage."
+        },
+        {
+          "h": "Consequential damage",
+          "p": "A worn bearing destroys the shaft and the gearbox. The same fault caught earlier is one component replaced, not a full drive-train overhaul."
+        },
+        {
+          "h": "The inspection that found nothing",
+          "p": "An inspection shows the machine on the day of the inspection. The fault develops over the other 89 days of the quarter — and nobody is listening then."
+        },
+        {
+          "h": "Arguing with service without evidence",
+          "p": "In a dispute with a service provider or the OEM, what counts is the record: the recording, the date, and the trend. That is an argument no operator's impression can overturn."
+        }
+      ],
+      "deliverEyebrow": "What we deliver",
+      "deliverTitle": "One device, powerful AI on board.",
+      "deliverTitleEm": "powerful AI on board.",
+      "deliverLead": "Sound from every drive assembly reaches a single probe standing in the machinery house. We do not wire up each bearing — the model attributes a deviation to a mechanism, based on that assembly's spectral signature and the cycle phase the deviation occurred in.",
+      "specTitle": "AI acoustic probe",
+      "specSub": "A passive, magnet-mounted device that touches neither the structure nor the crane's controls.",
+      "spec": [
+        "A very wide band of acoustic signals — audible sound and ultrasound",
+        "Neural networks running on a dedicated AI accelerator inside the probe",
+        "Continuous listening, 24 hours a day, 7 days a week",
+        "Recordings stored from day one — available to play back at any time",
+        "Wired or cellular connectivity — no demands on the terminal's network",
+        "Installed without drilling, without stopping the machine, without changes to statutory documentation"
+      ],
+      "capabilities": [
+        {
+          "h": "Powerful AI — on the device, not in the cloud",
+          "p": "A dedicated AI accelerator runs inside the probe. One neural network recognises the types of sound a machine makes; a second layer learns the norm for this specific crane and each phase of its cycle. Confirmed and rejected alerts feed back into the model, which is retrained periodically — the system gets better the longer it runs on your site."
+        },
+        {
+          "h": "Continuous listening instead of a sample",
+          "p": "A vibration measurement is a snapshot of the machine at one moment, once a quarter. The probe listens without a break and sees a change on the day it appears — including events that last a second and will not repeat while the inspector is there."
+        },
+        {
+          "h": "Prediction in real time",
+          "p": "The model scores sound as it happens, on site. From raw audio to a finished, attributed alert takes seconds — not a day waiting for cloud processing and not a week for a laboratory report."
+        },
+        {
+          "h": "One number that says how far this is from normal",
+          "p": "For every second of audio the model computes how far that sound sits from the norm learned for this machine and this cycle phase. The same number, collected over weeks, shows whether something is building or whether it was a one-off. Every event keeps its recording, and machines can be compared against each other."
+        }
+      ],
+      "caseEyebrow": "Field deployment",
+      "caseTitle": "Tauron Ekoenergia: two faults caught by sound alone.",
+      "caseTitleEm": "two faults caught by sound alone.",
+      "caseLead": "Before we entered a crane machinery house, the same system was running inside a wind turbine nacelle — an enclosed technical space with a gearbox, bearings, a brake and cooling fans. The deployment report was approved by the farm operator.",
+      "caseColA": "Deployment",
+      "caseColB": "Results",
+      "caseFacts": [
+        {
+          "h": "5 Senvion MM92 turbines",
+          "p": "on a farm of 15 turbines, 30.75 MW"
+        },
+        {
+          "h": "A fleet 15 years into service",
+          "p": "the profile where early warning delivers the most"
+        },
+        {
+          "h": "Continuous listening, 24 hours a day",
+          "p": "AI inference on the device, on site — not in the cloud"
+        },
+        {
+          "h": "Validated with the operator's teams",
+          "p": "carried out jointly with operations and service"
+        }
+      ],
+      "caseResults": [
+        {
+          "h": "A developing bearing fault",
+          "p": "Detected acoustically and confirmed by the operator's service team. Repaired in a planned window instead of an emergency shutdown."
+        },
+        {
+          "h": "A cooling-fan defect",
+          "p": "Picked up by sound alone — beyond the reach of the temperature and vibration sensors the turbine already carried."
+        }
+      ],
+      "caseChecks": [
+        "From raw audio to a finished alert — automatically, within seconds",
+        "Acoustic monitoring proven in real maintenance decisions",
+        "Found what temperature sensors, vibration sensors and visual inspection do not show"
+      ],
+      "univEyebrow": "One platform, many machines",
+      "univTitle": "The same platform, the next machine.",
+      "univTitleEm": "the next machine.",
+      "univLead": "The probe is not tied to a type of equipment. Wherever a rotating assembly works inside an enclosed space — a gearbox, bearings, a brake, fans — the physics and the audio pipeline are the same. There is one difference: a turbine turns at a steady rate while a crane works in cycles, so the model learns the cycle phases — otherwise every container lifted would look like an anomaly.",
+      "univ": [
+        {
+          "h": "Proven on turbines",
+          "p": "A wind turbine nacelle: gearbox, main bearings, brake, cooling system. Deployed with a farm operator, report approved."
+        },
+        {
+          "h": "Rolling out on cranes",
+          "p": "The machinery house of an STS, RMG or RTG crane: hoist, travel gearboxes, brakes, fans, power cabinets. The same probe and the same base model — and because the installation is not a modification of the equipment, the manufacturer's warranty stays intact."
+        },
+        {
+          "h": "The next machine does not start from zero",
+          "p": "The base model is shared across the fleet — a new machine only adds its own layer of normal. Extending to another unit takes weeks, not a new project."
+        }
+      ],
+      "startEyebrow": "Getting started",
+      "startTitle": "Two ways in, both short.",
+      "startTitleEm": "both short.",
+      "start": [
+        {
+          "h": "A pilot on one crane",
+          "p": "You pick one machine. We fit the probe without stopping it and without changes to the equipment's documentation, listen for a few weeks, and hand over a report on what we heard. Only then do we talk about the rest of the fleet.",
+          "btn": "Book a pilot"
+        },
+        {
+          "h": "A meeting with a live demo",
+          "p": "An hour at your site or remotely. We show the working system on data from the deployment: what an alert looks like, how you work with history and recordings, what maintenance sees. We answer the technical questions, with no commitment.",
+          "btn": "Book a meeting"
+        }
+      ],
+      "note": "Vis Technologie Sp. z o.o., registered in Poland, KRS 0000565307, Banino near Gdańsk.",
+      "noteLink": "We are local content — what that means for you"
+    },
+    "localcontent": {
+      "eyebrow": "For companies buying in Poland",
+      "title": "Money spent with us counts on your side.",
+      "titleEm": "counts on your side.",
+      "lead": "A Polish company with Polish capital, a Polish team and delivery in Poland. We meet all six domestic entity criteria of the Local Content Code of Good Practice — which means money spent with us counts towards your own local content indicator instead of leaving the Polish economy.",
+      "flagLabel": "The colours of the Republic of Poland",
+      "critEyebrow": "The criteria",
+      "critTitle": "Local content is not a claim. It is six criteria.",
+      "critTitleEm": "It is six criteria.",
+      "critLead": "The Polish Ministry of State Assets defined what a “domestic entity” is and assigned weights to it. There is no room for interpretation — a criterion is either met or it is not. Everything below can be verified in the national court register.",
+      "critCard": "Domestic entity criteria — ministry weights",
+      "crit": [
+        [
+          "Ultimate beneficial owner based in Poland",
+          "25%"
+        ],
+        [
+          "Core business activity carried out in Poland",
+          "25%"
+        ],
+        [
+          "Tax residency in Poland",
+          "15%"
+        ],
+        [
+          "Over half of staff taxed and insured in Poland",
+          "15%"
+        ],
+        [
+          "Registered in Poland, trading for over 3 years",
+          "10%"
+        ],
+        [
+          "Over half of annual turnover generated in Poland",
+          "10%"
+        ]
+      ],
+      "critSum": "100%",
+      "critSumText": "Vis Technologie meets all six criteria.",
+      "points": [
+        {
+          "h": "For the board it is a line in the report",
+          "p": "State-owned companies operate under a Local Content Code of Good Practice, with board-level KPIs, designated officers and periodic reporting written into contracts. The national statistics office measures domestic origin — the first such office in the EU. Choosing a domestic supplier is not a gesture; it fills your own indicator."
+        },
+        {
+          "h": "This is not protectionism",
+          "p": "Local content works through non-price award criteria, not through a ban on buying abroad. It remains compliant with EU public procurement law and with the “Buy European” programme."
+        },
+        {
+          "h": "A short supply chain",
+          "p": "We design, integrate and maintain in Poland. Support runs in Polish and English, and service is measured in hours of driving — not weeks of waiting for a shipment from abroad."
+        }
+      ],
+      "sekEyebrow": "A decade of major investment",
+      "sekTitle": "Seven sectors where this is being decided now.",
+      "sekTitleEm": "where this is being decided now.",
+      "sekLead": "That is how many sectors the ministry named as the direction of major investment for the coming decade. We work in one of them every day.",
+      "sektory": [
+        [
+          "Seaports",
+          "where we work — terminal crane monitoring",
+          true
+        ],
+        [
+          "Rail",
+          "infrastructure and rolling stock",
+          false
+        ],
+        [
+          "Roads",
+          "road infrastructure",
+          false
+        ],
+        [
+          "Airports",
+          "airport infrastructure",
+          false
+        ],
+        [
+          "Defence",
+          "the defence industry",
+          false
+        ],
+        [
+          "Energy",
+          "generation and grids",
+          false
+        ],
+        [
+          "Digitalisation",
+          "IT systems and infrastructure",
+          false
+        ]
+      ],
+      "coEyebrow": "What you get from a domestic supplier",
+      "coTitle": "Local content opens the door. There has to be a product behind it.",
+      "coTitleEm": "There has to be a product behind it.",
+      "coLead": "We do not build an advantage on origin alone. Being domestic tips the scale between comparable offers — it does not replace the product. So here is what we actually do.",
+      "co": [
+        {
+          "h": "Systems built to measure",
+          "p": "For over ten years we have built the systems that industrial, logistics and energy companies run on every day. One of them has been in production at an intermodal terminal operator for twelve years."
+        },
+        {
+          "h": "AI on edge devices",
+          "p": "Neural networks computed on site rather than in the cloud — where data cannot leave the plant, or where the connection is narrow and unreliable."
+        },
+        {
+          "h": "Acoustic machine monitoring",
+          "p": "An AI probe listens to the machinery house and catches a change in sound before the machine stops. Proven on wind turbines, rolling out on terminal cranes.",
+          "link": "See how it works"
+        }
+      ],
+      "closeEyebrow": "Let's talk",
+      "closeTitle": "Do you need this on paper?",
+      "closeTitleEm": "on paper?",
+      "closeLead": "For a tender or for your reporting we will provide a statement of compliance with the domestic entity criteria together with the documents it rests on. No unnecessary correspondence — tell us exactly what your form requires.",
+      "closeBtn": "Write to us",
+      "closeLink": "See our product for terminals",
+      "note": "Local content is “the value of goods or services produced or provided by a domestic entity”. Definition, criteria and weights after the Local Content Code of Good Practice, Polish Ministry of State Assets, April 2026. Vis Technologie Sp. z o.o., KRS 0000565307, registered in Banino near Gdańsk."
     }
   }
 }

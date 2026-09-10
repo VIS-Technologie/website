@@ -34,6 +34,8 @@ PAGES = [
     ("contact", "/kontakt/", "/en/contact/"),
     ("thanks", "/kontakt/dziekujemy/", "/en/contact/thank-you/"),
     ("legal", "/polityka-prywatnosci/", "/en/privacy-policy/"),
+    ("crane", "/monitoring-suwnic/", "/en/crane-monitoring/"),
+    ("localcontent", "/local-content/", "/en/local-content/"),
 ]
 NOINDEX = {"thanks", "notfound"}
 PATHS = {
@@ -107,6 +109,8 @@ def nav(lang, active, pl_path, en_path):
 <button class="dx-nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="{e(s["menuLabel"])}"><span></span><span></span><span></span></button>
 <div class="dx-nav-links" id="menu">
 {link("services", n["services"])}
+{link("crane", n["crane"])}
+{link("localcontent", n["localcontent"])}
 {link("cases", n["work"])}
 <a href="{about_href}">{e(n["about"])}</a>
 {link("contact", n["contact"])}
@@ -692,8 +696,173 @@ def page_404():
             + '<script src="/assets/site.js"></script>\n</body>\n</html>\n')
 
 
+# ---------- podstrony produktowe (prefiksy .sw- i .lc- w styles.css) ----------
+
+def _tytul(cls, txt, em):
+    """Tytul z wyroznionym ogonem. `em` musi byc koncowka `txt` — inaczej nie podswietlamy nic."""
+    if em and txt.endswith(em):
+        return f'<h2 class="{cls}">{e(txt[:-len(em)])}<em>{e(em)}</em></h2>'
+    return f'<h2 class="{cls}">{e(txt)}</h2>'
+
+
+def _karta(it):
+    return f'<div class="sw-card"><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p></div>'
+
+
+def page_crane(lang):
+    c = C[lang]["crane"]
+    p = PATHS[lang]
+    h1 = (f'<h1>{e(c["title"][:-len(c["titleEm"])])}<em>{e(c["titleEm"])}</em></h1>'
+          if c["title"].endswith(c["titleEm"]) else f'<h1>{e(c["title"])}</h1>')
+
+    hero = f"""<section class="sw sw-hero">
+<p class="dx-eyebrow">{e(c["eyebrow"])}</p>
+{h1}
+<p class="sw-lead">{e(c["lead"])}</p>
+<div class="sw-cta">
+<a class="dx-btn dx-btn-primary" href="#start">{e(c["ctaPrimary"])} \u2192</a>
+<a class="dx-link-quiet" href="#case">{e(c["ctaSecondary"])} \u2193</a>
+</div>
+<figure class="sw-figure">
+<img src="/assets/img/crane-hero.jpg" width="1800" height="747" alt="{e(c["photoAlt"])}" loading="eager">
+<figcaption>{e(c["photoCredit"])}</figcaption>
+</figure>
+</section>
+"""
+
+    ryzyka = f"""<section class="sw sw-sec" id="ryzyko">
+<p class="dx-eyebrow">{e(c["riskEyebrow"])}</p>
+{_tytul("sw-h2", c["riskTitle"], c["riskTitleEm"])}
+<p class="sw-lead">{e(c["riskLead"])}</p>
+<div class="sw-cards-2">{"".join(_karta(it) for it in c["risks"])}</div>
+</section>
+"""
+
+    spec = "".join(f'<li><i></i><span>{e(x)}</span></li>' for x in c["spec"])
+    mozliwosci = "".join(
+        f'<div><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p></div>' for it in c["capabilities"])
+    dostarczamy = f"""<section class="sw sw-sec" id="deliver">
+<p class="dx-eyebrow">{e(c["deliverEyebrow"])}</p>
+{_tytul("sw-h2", c["deliverTitle"], c["deliverTitleEm"])}
+<p class="sw-lead">{e(c["deliverLead"])}</p>
+<div class="sw-produkt">
+<div class="sw-spec"><h3>{e(c["specTitle"])}</h3><p>{e(c["specSub"])}</p><ul>{spec}</ul></div>
+<div class="sw-mozliwosci">{mozliwosci}</div>
+</div>
+</section>
+"""
+
+    fakty = "".join(f'<li><b>{e(it["h"])}</b><span>{e(it["p"])}</span></li>' for it in c["caseFacts"])
+    wyniki = "".join(_karta(it) for it in c["caseResults"])
+    ptaszki = "".join(f'<li>{e(x)}</li>' for x in c["caseChecks"])
+    case = f"""<section class="sw sw-sec" id="case">
+<p class="dx-eyebrow">{e(c["caseEyebrow"])}</p>
+{_tytul("sw-h2", c["caseTitle"], c["caseTitleEm"])}
+<p class="sw-lead">{e(c["caseLead"])}</p>
+<div class="sw-case">
+<div><p class="sw-kicker">{e(c["caseColA"])}</p><ul class="sw-facts">{fakty}</ul></div>
+<div><p class="sw-kicker">{e(c["caseColB"])}</p>{wyniki}</div>
+</div>
+<ul class="sw-ptaszki">{ptaszki}</ul>
+</section>
+"""
+
+    uniw = f"""<section class="sw sw-sec" id="platform">
+<p class="dx-eyebrow">{e(c["univEyebrow"])}</p>
+{_tytul("sw-h2", c["univTitle"], c["univTitleEm"])}
+<p class="sw-lead">{e(c["univLead"])}</p>
+<div class="sw-cards-3">{"".join(_karta(it) for it in c["univ"])}</div>
+</section>
+"""
+
+    drogi = "".join(
+        f'<div class="sw-card"><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p>'
+        f'<p class="sw-card-cta"><a class="dx-btn {"dx-btn-primary" if i == 0 else "dx-btn-dark"}" '
+        f'href="{p["contact"]}">{e(it["btn"])} \u2192</a></p></div>'
+        for i, it in enumerate(c["start"]))
+    start = f"""<section class="sw sw-close" id="start">
+<p class="dx-eyebrow">{e(c["startEyebrow"])}</p>
+{_tytul("sw-h2", c["startTitle"], c["startTitleEm"])}
+<div class="sw-cards-2">{drogi}</div>
+<p class="sw-note">{e(c["photoCredit"])} {e(c["note"])}
+<a href="{p["localcontent"]}">{e(c["noteLink"])} \u2192</a></p>
+</section>
+"""
+    return hero + ryzyka + dostarczamy + case + uniw + start
+
+
+def page_localcontent(lang):
+    c = C[lang]["localcontent"]
+    p = PATHS[lang]
+    h1 = (f'<h1>{e(c["title"][:-len(c["titleEm"])])}<em>{e(c["titleEm"])}</em></h1>'
+          if c["title"].endswith(c["titleEm"]) else f'<h1>{e(c["title"])}</h1>')
+
+    hero = f"""<section class="lc lc-hero">
+<div class="lc-flag" role="img" aria-label="{e(c["flagLabel"])}"><div class="lc-flag-b"></div><div class="lc-flag-c"></div></div>
+<p class="dx-eyebrow">{e(c["eyebrow"])}</p>
+{h1}
+<p class="lc-lead">{e(c["lead"])}</p>
+</section>
+"""
+
+    krit = "".join(
+        f'<li><i class="lc-dot"></i><span>{e(t)}</span><span class="lc-w">{e(w)}</span></li>'
+        for t, w in c["crit"])
+    punkty = "".join(f'<div><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p></div>' for it in c["points"])
+    kryteria = f"""<section class="lc lc-sec" id="criteria">
+<p class="dx-eyebrow">{e(c["critEyebrow"])}</p>
+{_tytul("lc-h2", c["critTitle"], c["critTitleEm"])}
+<p class="lc-lead">{e(c["critLead"])}</p>
+<div class="lc-grid">
+<div class="lc-card"><h3>{e(c["critCard"])}</h3><ul class="lc-crit">{krit}</ul>
+<div class="lc-sum"><b>{e(c["critSum"])}</b><span>{e(c["critSumText"])}</span></div></div>
+<div class="lc-points">{punkty}</div>
+</div>
+</section>
+"""
+
+    sektory = "".join(
+        f'<div class="lc-sektor{" on" if on else ""}">{e(n)}<span>{e(o)}</span></div>'
+        for n, o, on in c["sektory"])
+    sek = f"""<section class="lc lc-sec" id="sectors">
+<p class="dx-eyebrow">{e(c["sekEyebrow"])}</p>
+{_tytul("lc-h2", c["sekTitle"], c["sekTitleEm"])}
+<p class="lc-lead">{e(c["sekLead"])}</p>
+<div class="lc-sektory">{sektory}</div>
+</section>
+"""
+
+    def karta_co(it):
+        link = (f' <a class="dx-link-quiet" href="{p["crane"]}">{e(it["link"])} \u2192</a>'
+                if it.get("link") else "")
+        return f'<div class="lc-card"><h3>{e(it["h"])}</h3><p>{e(it["p"])}{link}</p></div>'
+
+    co = f"""<section class="lc lc-sec" id="what-we-do">
+<p class="dx-eyebrow">{e(c["coEyebrow"])}</p>
+{_tytul("lc-h2", c["coTitle"], c["coTitleEm"])}
+<p class="lc-lead">{e(c["coLead"])}</p>
+<div class="lc-co">{"".join(karta_co(it) for it in c["co"])}</div>
+</section>
+"""
+
+    close = f"""<section class="lc lc-close" id="ask">
+<p class="dx-eyebrow">{e(c["closeEyebrow"])}</p>
+{_tytul("lc-h2", c["closeTitle"], c["closeTitleEm"])}
+<p class="lc-lead">{e(c["closeLead"])}</p>
+<div class="lc-cta">
+<a class="dx-btn dx-btn-primary" href="{p["contact"]}">{e(c["closeBtn"])} \u2192</a>
+<a class="dx-link-quiet" href="{p["crane"]}">{e(c["closeLink"])} \u2192</a>
+</div>
+<p class="lc-note">{e(c["note"])}</p>
+</section>
+"""
+    return hero + kryteria + sek + co + close
+
+
 RENDERERS = {
     "home": page_home,
+    "crane": page_crane,
+    "localcontent": page_localcontent,
     "services": page_services,
     "cases": page_cases,
     "contact": page_contact,
@@ -759,6 +928,26 @@ def build():
 
 FORBIDDEN = ["tauron", "pyxis", "unpkg.com", "fonts.googleapis", "gstatic.com", "wrocław", "northwind"]
 
+# Wyjatki od FORBIDDEN: string -> strony, na ktorych jest dozwolony swiadomie.
+#
+# "tauron": nazwa operatora farmy wiatrowej w opisie wdrozenia referencyjnego.
+# Zakaz zostal wpisany, gdy nie mielismy prawa uzywac tej nazwy. Kamil zdjal to
+# ograniczenie (2026-09-10): oprogramowanie napisal i wdrozyl on, raport dla
+# operatora zostal zatwierdzony, a podwykonawca do dnia dzisiejszego nie zaplacil
+# i wedlug umowy nie moze posilkowac sie wynikami tego raportu.
+#
+# Zakaz zostaje dla CALEJ RESZTY serwisu — nazwa ma sie pojawiac wylacznie tam,
+# gdzie jest opisanym wdrozeniem, a nie przypadkiem w innym tekscie.
+#
+# DO POTWIERDZENIA PRZED PUBLIKACJA: nazwa klienta na publicznej stronie to co
+# innego niz nazwa na spotkaniu. Warto miec krotka pisemna zgode operatora na
+# uzycie nazwy w materialach marketingowych. Do tego czasu wystarczy w
+# content.json zamienic naglowek case study na "Farma wiatrowa w Polsce" —
+# liczby i oba wyniki dzialaja bez nazwy.
+FORBIDDEN_EXCEPT = {
+    "tauron": {"monitoring-suwnic/index.html", "en/crane-monitoring/index.html"},
+}
+
 
 def check():
     errors = []
@@ -773,7 +962,7 @@ def check():
         low = f.read_text(encoding="utf-8").lower()
         rel = f.relative_to(DIST).as_posix()
         for bad in FORBIDDEN:
-            if bad in low:
+            if bad in low and rel not in FORBIDDEN_EXCEPT.get(bad, ()):
                 errors.append(f"{rel}: zakazany string '{bad}'")
 
     for f in html_files:
