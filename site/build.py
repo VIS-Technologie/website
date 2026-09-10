@@ -860,10 +860,11 @@ def page_crane(lang):
 </section>
 """
 
+    cele = [p["pilot"], p["meeting"]]
     drogi = "".join(
         f'<div class="sw-card"><h3>{e(it["h"])}</h3><p>{e(it["p"])}</p>'
         f'<p class="sw-card-cta"><a class="dx-btn {"dx-btn-primary" if i == 0 else "dx-btn-dark"}" '
-        f'href="{p["contact"]}">{e(it["btn"])} \u2192</a></p></div>'
+        f'href="{cele[i]}">{e(it["btn"])} \u2192</a></p></div>'
         for i, it in enumerate(c["start"]))
     start = f"""<section class="sw sw-close" id="start">
 <p class="dx-eyebrow">{e(c["startEyebrow"])}</p>
