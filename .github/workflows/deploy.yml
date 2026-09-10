@@ -1,0 +1,92 @@
+# Wdrożenie vistechnologie.pl na hosting Kylos.
+#
+# Uruchamiane RĘCZNIE: GitHub -> zakładka Actions -> "Wdrożenie na produkcję"
+# -> przycisk "Run workflow". Nic nie dzieje się samo przy push do main —
+# tak jest bezpieczniej dla strony firmowej.
+#
+# Zanim zadziała, w repo trzeba dodać cztery sekrety:
+#   Settings -> Secrets and variables -> Actions -> New repository secret
+#     FTP_HOST        host z panelu Kylos (np. ftp.vistechnologie.pl)
+#     FTP_USER        login FTP
+#     FTP_PASS        hasło FTP
+#     FTP_REMOTE_DIR  katalog domeny na serwerze, zwykle /public_html
+#
+# To te same dane co w tools/.env.deploy. GitHub trzyma je zaszyfrowane
+# i nie pokazuje w logach — w logu widać wyłącznie nazwy plików.
+#
+# Odpowiednik deploy.ps1 BEZ flagi -Mirror: pliki są wgrywane i nadpisywane,
+# ale nic nie jest kasowane z serwera. Kasowanie wymagałoby "mirror --delete"
+# i świadomej decyzji — celowo tego tu nie ma.
+
+name: Wdrożenie na produkcję
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Próba na sucho — pokaż, co poleci, ale nic nie wysyłaj"
+        type: boolean
+        default: true
+
+concurrency:
+  group: deploy-produkcja
+  cancel-in-progress: false
+
+jobs:
+  wdroz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Build musi przejść razem z checkerem (linki, kotwice, hreflang,
+      # zakazane stringi). Jeśli padnie, wdrożenie nie ruszy dalej.
+      - name: Zbuduj serwis
+        run: python site/build.py
+
+      # dist/ jest w repo, więc build nie powinien niczego zmienić.
+      # Jeśli zmienił — ktoś commitował dist/ niezgodny ze źródłem.
+      - name: Sprawdź, że dist/ zgadza się ze źródłem
+        run: |
+          if [ -n "$(git status --porcelain dist)" ]; then
+            echo "::error::Build zmienił dist/ — commit jest niespójny ze źródłem."
+            git status --short dist
+            exit 1
+          fi
+
+      - name: Zainstaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Wyślij dist/ na serwer
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+          DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: |
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set net:max-retries 3;
+            set net:timeout 20;
+            open -u '$FTP_USER','$FTP_PASS' '$FTP_HOST';
+            mirror --reverse --verbose=1 --parallel=4 $DRY dist/ '$FTP_REMOTE_DIR';
+            bye
+          "
+
+      # Po wysyłce sprawdzamy, czy strony faktycznie odpowiadają.
+      - name: Sprawdź, czy strony żyją
+        if: ${{ !inputs.dry_run }}
+        run: |
+          bledy=0
+          for u in / /en/ /monitoring-suwnic/ /local-content/ \
+                   /en/crane-monitoring/ /en/local-content/; do
+            kod=$(curl -s -o /dev/null -w '%{http_code}' "https://vistechnologie.pl$u")
+            printf '%-26s %s\n' "$u" "$kod"
+            [ "$kod" = "200" ] || bledy=$((bledy+1))
+          done
+          [ "$bledy" -eq 0 ] || { echo "::error::$bledy adresów nie zwróciło 200"; exit 1; }

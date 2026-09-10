@@ -50,4 +50,20 @@ build podglądu w PowerShellu albo z `MSYS_NO_PATHCONV=1` (build.py wykrywa to i
 
 ## Wdrożenie
 
-Patrz `docs/wdrozenie.md` (FTP Kylos, konfiguracja PHP, checklist po wdrożeniu).
+Dwie drogi — obie robią to samo, obie wymagają tych samych czterech danych z panelu Kylos.
+
+**Z komputera** (wymaga WinSCP i `tools/.env.deploy`):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -DryRun   # tylko podgląd
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1           # właściwa wysyłka
+```
+
+**Z GitHuba, bez komputera** — zakładka **Actions → „Wdrożenie na produkcję" → Run workflow**.
+Domyślnie odpala się jako próba na sucho; odznacz „dry run", żeby wysłać naprawdę.
+Wymaga jednorazowego dodania sekretów w *Settings → Secrets and variables → Actions*:
+`FTP_HOST`, `FTP_USER`, `FTP_PASS`, `FTP_REMOTE_DIR`.
+Workflow buduje serwis, sprawdza checkerem, wysyła `dist/` i na koniec weryfikuje,
+czy wszystkie adresy zwracają 200.
+
+Żadna z dróg nie kasuje plików z serwera. Pełny opis i checklista: `docs/wdrozenie.md`.
