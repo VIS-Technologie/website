@@ -626,7 +626,16 @@ html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
 .sw-more { margin: 26px 0 0; }
 
 .sw-figure { margin: 44px 0 0; min-width: 0; }
-.sw-figure img { width: 100%; border-radius: 18px; border: 1px solid var(--kn-card-line); }
+/* height:auto jest KONIECZNE. Bez niego atrybut height="747" z HTML dziala jako
+   wskazowka prezentacyjna i zdjecie jest sciskane do 747 px wysokosci przy dowolnej
+   szerokosci — czyli rozciagniete w pionie. Reset .dx img nie ustawia height. */
+.sw-figure img { width: 100%; height: auto; border-radius: 18px;
+  border: 1px solid var(--kn-card-line); }
+/* Na telefonie zdjecie 2,4:1 schodzi do paska wysokiego na 145 px, na ktorym nic
+   nie widac. Kadrujemy je do proporcji uzytecznej na waskim ekranie. */
+@media (max-width: 620px) {
+  .sw-figure img { aspect-ratio: 3 / 2; object-fit: cover; object-position: center 42%; }
+}
 .sw-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--vt-fg-2); }
 
 /* karty */
