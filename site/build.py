@@ -36,6 +36,8 @@ PAGES = [
     ("legal", "/polityka-prywatnosci/", "/en/privacy-policy/"),
     ("crane", "/monitoring-suwnic/", "/en/crane-monitoring/"),
     ("localcontent", "/local-content/", "/en/local-content/"),
+    ("meeting", "/umow-spotkanie/", "/en/book-a-meeting/"),
+    ("pilot", "/pilotaz-monitoringu/", "/en/crane-monitoring-pilot/"),
 ]
 NOINDEX = {"thanks", "notfound"}
 PATHS = {
@@ -632,6 +634,78 @@ def page_contact(lang):
 """)
 
 
+def _select(fid, name, label, choose, options):
+    opts = f'<option value="" disabled selected>{e(choose)}</option>' + "".join(
+        f'<option value="{e(o["v"])}">{e(o["t"])}</option>' for o in options)
+    return (f'<div class="dx-field"><label for="{fid}">{e(label)}</label>'
+            f'<select id="{fid}" name="{name}" required>{opts}</select></div>')
+
+
+def _form_shell(lang, form_id, error_msg, fields, submit_label, below, cross_pre, cross_key, cross_label):
+    """Wspólny układ stron-formularzy: grid jak /kontakt/ (formularz + kolumna info)."""
+    ct = C[lang]["contact"]
+    p = PATHS[lang]
+    info = "".join(
+        f'<div class="dx-info-row"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></div>'
+        for k, v in ct["info"]
+    )
+    return f"""<section class="dx-contact-wrap">
+<div class="dx-contact-grid">
+<div data-reveal>
+<div class="dx-form-error" role="alert">{e(error_msg)}</div>
+<form method="post" action="{FORM_ACTION}">
+<input type="hidden" name="lang" value="{lang}">
+<input type="hidden" name="form" value="{form_id}">
+<p class="dx-hp" aria-hidden="true"><label>WWW <input type="text" name="www" tabindex="-1" autocomplete="off"></label></p>
+{fields}
+<label class="dx-rodo"><input type="checkbox" name="rodo" required> <span>{e(ct["rodoCheckbox"])}</span></label>
+<button type="submit" class="dx-btn dx-btn-primary">{e(submit_label)} →</button>
+{below}<p class="dx-clause">{e(ct["clausePre"])}<a href="{p["legal"]}">{e(ct["clauseLink"])}</a>{e(ct["clausePost"])}</p>
+<p class="dx-clause">{e(cross_pre)}<a href="{p[cross_key]}">{e(cross_label)} →</a></p>
+</form>
+</div>
+<div data-reveal>{info}</div>
+</div>
+</section>
+"""
+
+
+def page_meeting(lang):
+    mt = C[lang]["meeting"]
+    fl = mt["labels"]
+    fields = (
+        f'<div class="dx-field"><label for="f-name">{e(fl["name"])}</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>'
+        f'<div class="dx-field"><label for="f-email">{e(fl["email"])}</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>'
+        f'<div class="dx-field"><label for="f-company">{e(fl["company"])}</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>'
+        + _select("f-topic", "topic", fl["topic"], fl["choose"], mt["topicOptions"])
+        + _select("f-mode", "mode", fl["mode"], fl["choose"], mt["modeOptions"])
+        + f'<div class="dx-field"><label for="f-slots">{e(fl["slots"])}</label><input id="f-slots" name="slots" type="text" required placeholder="{e(mt["slotsPlaceholder"])}"></div>'
+        f'<div class="dx-field"><label for="f-message">{e(fl["message"])}</label><textarea id="f-message" name="message" rows="4"></textarea></div>'
+    )
+    below = f'<p class="dx-clause">{e(mt["promise"])}</p>'
+    return (page_head_block("pink", mt["eyebrow"], mt["title"], mt["sub"])
+            + _form_shell(lang, "meeting", mt["formError"], fields,
+                          fl["send"], below, mt["crossPre"], "pilot", mt["crossLink"]))
+
+
+def page_pilot(lang):
+    pt = C[lang]["pilot"]
+    fl = pt["labels"]
+    fields = (
+        f'<div class="dx-field"><label for="f-name">{e(fl["name"])}</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>'
+        f'<div class="dx-field"><label for="f-email">{e(fl["email"])}</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>'
+        f'<div class="dx-field"><label for="f-company">{e(fl["company"])}</label><input id="f-company" name="company" type="text" required autocomplete="organization"></div>'
+        + _select("f-cranes", "cranes", fl["cranes"], fl["choose"], pt["cranesOptions"])
+        + _select("f-ctype", "ctype", fl["ctype"], fl["choose"], pt["ctypeOptions"])
+        + f'<div class="dx-field"><label for="f-location">{e(fl["location"])}</label><input id="f-location" name="location" type="text" required placeholder="{e(pt["locationPlaceholder"])}"></div>'
+        + _select("f-horizon", "horizon", fl["horizon"], fl["choose"], pt["horizonOptions"])
+        + f'<div class="dx-field"><label for="f-message">{e(fl["message"])}</label><textarea id="f-message" name="message" rows="4"></textarea></div>'
+    )
+    return (page_head_block("pink", pt["eyebrow"], pt["title"], pt["sub"])
+            + _form_shell(lang, "pilot", pt["formError"], fields,
+                          fl["send"], "", pt["crossPre"], "meeting", pt["crossLink"]))
+
+
 def page_thanks(lang):
     ct = C[lang]["contact"]
     s = C[lang]["site"]
@@ -877,6 +951,8 @@ RENDERERS = {
     "contact": page_contact,
     "thanks": page_thanks,
     "legal": page_legal,
+    "meeting": page_meeting,
+    "pilot": page_pilot,
 }
 
 
