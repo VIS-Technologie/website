@@ -28,6 +28,12 @@
 - [ ] **Formularz — test poprawny**: wypełnij wszystkie pola + zgoda → redirect na `/kontakt/dziekujemy/`, mail dociera na `biuro@vistechnologie.pl` (sprawdź też spam), Reply-To wskazuje adres nadawcy.
 - [ ] **Formularz — test błędny**: wyślij bez zgody/e-maila (np. z wyłączonym JS albo przez `curl -X POST`) → redirect na `/kontakt/?blad=1` i czerwony komunikat.
 - [ ] **Formularz — EN**: test z `/en/contact/` → redirect na `/en/contact/thank-you/`.
+- [ ] Nowe podstrony odpowiadają (HTTP 200): `/umow-spotkanie/`, `/pilotaz-monitoringu/`, `/en/book-a-meeting/`, `/en/crane-monitoring-pilot/`.
+- [ ] **Formularz spotkania — test poprawny (PL i EN)**: wypełnij wszystkie pola + zgoda → redirect na stronę podziękowania, mail dociera z polami temat/tryb/terminy (topic/mode/slots).
+- [ ] **Formularz spotkania — test błędny**: wyślij bez zgody lub z wartością spoza listy w polu select (np. `curl -X POST`) → redirect na stronę formularza z `?blad=1` (PL) / `?error=1` (EN) i widoczny komunikat błędu.
+- [ ] **Formularz pilotażu — test poprawny (PL i EN)**: analogicznie → mail zawiera pola dźwigi/typ/lokalizacja/horyzont (cranes/ctype/location/horizon).
+- [ ] **Formularz pilotażu — test błędny**: analogicznie jak wyżej (brak zgody / wartość spoza listy) → redirect z `?blad=1` / `?error=1` i widoczny komunikat.
+- [ ] **Honeypot**: wyślij POST z wypełnionym polem `www` → redirect na stronę podziękowania, ale mail NIE przychodzi.
 - [ ] Mail NIE wpada do spamu u popularnych dostawców (Gmail/Outlook). Jeśli wpada: sprawdź w panelu Kylos rekord SPF domeny (powinien obejmować serwery pocztowe Kylos) i rozważ DKIM.
 - [ ] Belka cookies pojawia się przy pierwszej wizycie i nie wraca po kliknięciu „Rozumiem".
 - [ ] DevTools → Network: strona nie łączy się z żadną domeną zewnętrzną.

@@ -527,6 +527,9 @@ html:not([data-theme="dark"]) .dx-logo::after {
     --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
     --kn-card: #141412; --kn-card-line: #262622; --kn-acc-ink: #D8FF3A; --kn-acc-stroke: #D8FF3A;
   }
+  html:not([data-theme="dark"]) .dx-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2356544E' stroke-width='2'/%3E%3C/svg%3E");
+  }
 }
 html[data-theme="light"] .dx {
     --vt-ink: #FFFFFF; --vt-ink-2: #FBFBFA;
@@ -575,6 +578,9 @@ html[data-theme="light"] .kn-fx > span {
 html[data-theme="light"] .sim, html[data-theme="light"] .kino-ai-demo {
     --vt-fg: #F4F2EC; --vt-fg-2: #A5A198; --kn-lime: #D8FF3A;
     --kn-card: #141412; --kn-card-line: #262622; --kn-acc-ink: #D8FF3A; --kn-acc-stroke: #D8FF3A;
+}
+html[data-theme="light"] .dx-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2356544E' stroke-width='2'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: light) and (max-width: 900px) {
   html:not([data-theme="dark"]) .dx-nav-links { background: #F6F6F4; }
