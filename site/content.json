@@ -693,6 +693,17 @@
       },
       "fab": "Porozmawiajmy"
     },
+    "craneHome": {
+      "eyebrow": "Produkt · monitoring akustyczny suwnic",
+      "lead": "Sonda w maszynowni słucha suwnicy bez przerwy i sama ocenia każdą sekundę dźwięku. Kiedy coś odbiega od normy, utrzymanie ruchu wie o tym w kilka sekund — nie na najbliższym przeglądzie.",
+      "ctaPrimary": "Zobacz monitoring suwnic",
+      "ctaSecondary": "Zgłoś pilotaż na jednej suwnicy"
+    },
+    "lcHome": {
+      "label": "Local content",
+      "text": "Polska spółka, polski kapitał, zespół i realizacja w Polsce. Spełniamy wszystkie sześć kryteriów krajowości podmiotu z Kodeksu Dobrych Praktyk Local Content — wydatek u nas liczy się po Waszej stronie.",
+      "link": "Co to znaczy dla Was"
+    },
     "crane": {
       "eyebrow": "Monitoring akustyczny · suwnice terminalowe",
       "title": "Suwnica mówi, że się psuje. Nikt jej nie słucha.",
@@ -1643,6 +1654,17 @@
         }
       },
       "fab": "Let's talk"
+    },
+    "craneHome": {
+      "eyebrow": "Product · acoustic crane monitoring",
+      "lead": "A probe in the machinery house listens to the crane without a break and scores every second of audio. When something departs from the norm, maintenance knows within seconds — not at the next inspection.",
+      "ctaPrimary": "See crane monitoring",
+      "ctaSecondary": "Request a single-crane pilot"
+    },
+    "lcHome": {
+      "label": "Local content",
+      "text": "A Polish company with Polish capital, a Polish team and delivery in Poland. We meet all six domestic entity criteria of the Local Content Code of Good Practice — money spent with us counts on your side.",
+      "link": "What that means for you"
     },
     "crane": {
       "eyebrow": "Acoustic monitoring · terminal cranes",

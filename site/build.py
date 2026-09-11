@@ -196,8 +196,10 @@ def sec_hero(lang):
     p = PATHS[lang]
     rot_words = {
         "pl": ("Wdrażamy AI, które", ["czyta dokumenty przewozowe", "słyszy zużycie turbin, zanim stanie farma",
+                                      "słyszy awarię suwnicy, zanim stanie terminal",
                                       "pilnuje operacji terminala 24/7", "uczy się procesów Twojej firmy"]),
         "en": ("We deploy AI that", ["reads freight documents", "hears turbine wear before downtime",
+                                     "hears a crane fail before the terminal stops",
                                      "watches terminal operations 24/7", "learns your company's processes"]),
     }[lang]
     words_attr = e(json.dumps(rot_words[1], ensure_ascii=False))
@@ -229,8 +231,8 @@ def sec_hero(lang):
 
 def sec_band(lang):
     items = {
-        "pl": ["12 lat jednego systemu w produkcji", "AI, które słyszy usterki turbin", "MVP w 8–12 tygodni", "systemy mission-critical 24/7"],
-        "en": ["12 years of one system in production", "AI that hears turbine faults", "MVP in 8–12 weeks", "mission-critical systems 24/7"],
+        "pl": ["12 lat jednego systemu w produkcji", "AI, które słyszy usterki turbin", "monitoring akustyczny suwnic", "MVP w 8–12 tygodni", "systemy mission-critical 24/7"],
+        "en": ["12 years of one system in production", "AI that hears turbine faults", "acoustic crane monitoring", "MVP in 8–12 weeks", "mission-critical systems 24/7"],
     }[lang]
     seq = "".join(f"<span>{e(x)}</span><span>—</span>" for x in items)
     seq2 = "".join(f'<span aria-hidden="true">{e(x)}</span><span aria-hidden="true">—</span>' for x in items)
@@ -487,9 +489,51 @@ def sec_tech_kn(lang):
 """
 
 
+def sec_crane_home(lang):
+    """Zajawka produktu: monitoring suwnic (naglowek i ryzyka z klucza `crane`, reszta z `craneHome`)."""
+    c = C[lang]
+    cr, h = c["crane"], c["craneHome"]
+    p = PATHS[lang]
+    risks = "".join(f'<li><i></i><span>{e(it["h"])}</span></li>' for it in cr["risks"][:3])
+    return f"""<section class="kn-crane" data-zone="paper">
+<div class="kn-crane-inner">
+<div class="kn-crane-head" data-reveal>
+<span class="dx-eyebrow">{e(h["eyebrow"])}</span>
+{_tytul("dx-h1", cr["title"], cr["titleEm"])}
+<p class="dx-body">{e(h["lead"])}</p>
+<div class="sw-cta">
+<a class="dx-btn dx-btn-primary" href="{p["crane"]}">{e(h["ctaPrimary"])} →</a>
+<a class="dx-link-quiet" href="{p["pilot"]}">{e(h["ctaSecondary"])} →</a>
+</div>
+</div>
+<aside class="kn-crane-risks" data-reveal>
+<p class="kn-hint">{e(cr["riskEyebrow"])}</p>
+<ul>{risks}</ul>
+</aside>
+</div>
+</section>
+"""
+
+
+def sec_lc_home(lang):
+    """Pasek local content przed sekcja O nas (flaga z klucza `localcontent`, tresc z `lcHome`)."""
+    c = C[lang]
+    lc, h = c["localcontent"], c["lcHome"]
+    p = PATHS[lang]
+    return f"""<section class="kn-lc">
+<div class="kn-lc-inner" data-reveal>
+<div class="lc-flag kn-lc-flag" role="img" aria-label="{e(lc["flagLabel"])}"><div class="lc-flag-b"></div><div class="lc-flag-c"></div></div>
+<div class="kn-lc-txt"><p class="kn-hint">{e(h["label"])}</p><p class="kn-lc-p">{e(h["text"])}</p></div>
+<a class="dx-link-quiet" href="{p["localcontent"]}">{e(h["link"])} →</a>
+</div>
+</section>
+"""
+
+
 def page_home(lang):
-    return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_partners_kn(lang) + sec_cases_home(lang) + sec_ai_demo(lang) + sec_pull(lang)
-            + sec_features(lang) + sec_tech_kn(lang) + sec_process(lang) + sec_about(lang) + sec_close(lang))
+    return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_partners_kn(lang) + sec_cases_home(lang) + sec_ai_demo(lang)
+            + sec_crane_home(lang) + sec_pull(lang) + sec_features(lang) + sec_tech_kn(lang) + sec_process(lang)
+            + sec_lc_home(lang) + sec_about(lang) + sec_close(lang))
 
 
 def page_services(lang):
