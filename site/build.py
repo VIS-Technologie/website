@@ -428,19 +428,33 @@ def sec_cases_home(lang):
         "en": ["RUNNING FOR 12 YEARS", "AI HEARS TURBINES"],
     }[lang]
     link_t = "Pełne studium przypadku" if lang == "pl" else "Full case study"
-    rows = []
-    for i, w in enumerate(c["cases"]):
-        eff = " · ".join(x.split(" — ")[0] for x in w["effects"]["items"][:2])
-        txt = (f'<div class="kn-case-txt"><div><p class="kn-hint">{e(w["tag"])}</p>'
-               f'<h3>{e(w["title"])}</h3></div>'
-               f'<div class="kn-case-side"><p class="kn-case-p">{e(w["challenge"]["ps"][0])}</p>'
-               f'<p class="kn-case-eff">{e(eff)}</p>'
-               f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a></div></div>')
-        half = f'<span>{e(fx[i])}</span><span>{e(fx[i])}</span>'
+
+    def _row(i, fx_txt, tag, title, para, eff, links):
+        half = f'<span>{e(fx_txt)}</span><span>{e(fx_txt)}</span>'
         rev = " rev" if i % 2 else ""
         strip = (f'<div class="kn-fx-strip"><div class="kn-fx{rev}" aria-hidden="true">'
                  f'{half}{half}</div></div>')
-        rows.append(f'<div class="kn-case" data-reveal>{strip}{txt}</div>')
+        txt = (f'<div class="kn-case-txt"><div><p class="kn-hint">{e(tag)}</p>{title}</div>'
+               f'<div class="kn-case-side"><p class="kn-case-p">{e(para)}</p>'
+               f'<p class="kn-case-eff">{e(eff)}</p><div class="kn-case-links">{links}</div></div></div>')
+        return f'<div class="kn-case" data-reveal>{strip}{txt}</div>'
+
+    # Zajawka produktu (monitoring suwnic) wchodzi jako wiersz zaraz po PCC Intermodal.
+    cr, ch = C[lang]["crane"], C[lang]["craneHome"]
+    crane_fx = "AI SŁUCHA SUWNIC" if lang == "pl" else "AI HEARS CRANES"
+    crane_title = _tytul("", cr["title"], cr["titleEm"]).replace('<h2 class="">', "<h3>").replace("</h2>", "</h3>")
+    crane_eff = " · ".join(it["h"] for it in cr["risks"][:3])
+    crane_links = (f'<a class="dx-link-quiet" href="{p["crane"]}">{e(ch["ctaPrimary"])} →</a>'
+                   f'<a class="dx-link-quiet" href="{p["pilot"]}">{e(ch["ctaSecondary"])} →</a>')
+
+    items = []
+    for i, w in enumerate(c["cases"]):
+        eff = " · ".join(x.split(" — ")[0] for x in w["effects"]["items"][:2])
+        items.append((fx[i], w["tag"], f'<h3>{e(w["title"])}</h3>', w["challenge"]["ps"][0], eff,
+                      f'<a class="dx-link-quiet" href="{p["cases"]}">{link_t} →</a>'))
+        if i == 0:
+            items.append((crane_fx, ch["eyebrow"], crane_title, ch["lead"], crane_eff, crane_links))
+    rows = [_row(i, *it) for i, it in enumerate(items)]
     return f'<section class="kn-cases" data-zone="paper"><div class="kn-cases-inner">{"".join(rows)}</div></section>' + chr(10)
 
 
@@ -489,32 +503,6 @@ def sec_tech_kn(lang):
 """
 
 
-def sec_crane_home(lang):
-    """Zajawka produktu: monitoring suwnic (naglowek i ryzyka z klucza `crane`, reszta z `craneHome`)."""
-    c = C[lang]
-    cr, h = c["crane"], c["craneHome"]
-    p = PATHS[lang]
-    risks = "".join(f'<li><i></i><span>{e(it["h"])}</span></li>' for it in cr["risks"][:3])
-    return f"""<section class="kn-crane" data-zone="paper">
-<div class="kn-crane-inner">
-<div class="kn-crane-head" data-reveal>
-<span class="dx-eyebrow">{e(h["eyebrow"])}</span>
-{_tytul("dx-h1", cr["title"], cr["titleEm"])}
-<p class="dx-body">{e(h["lead"])}</p>
-<div class="sw-cta">
-<a class="dx-btn dx-btn-primary" href="{p["crane"]}">{e(h["ctaPrimary"])} →</a>
-<a class="dx-link-quiet" href="{p["pilot"]}">{e(h["ctaSecondary"])} →</a>
-</div>
-</div>
-<aside class="kn-crane-risks" data-reveal>
-<p class="kn-hint">{e(cr["riskEyebrow"])}</p>
-<ul>{risks}</ul>
-</aside>
-</div>
-</section>
-"""
-
-
 def sec_lc_home(lang):
     """Pasek local content przed sekcja O nas (flaga z klucza `localcontent`, tresc z `lcHome`)."""
     c = C[lang]
@@ -532,7 +520,7 @@ def sec_lc_home(lang):
 
 def page_home(lang):
     return (sec_hero(lang) + sec_band(lang) + sec_stats(lang) + sec_partners_kn(lang) + sec_cases_home(lang) + sec_ai_demo(lang)
-            + sec_crane_home(lang) + sec_pull(lang) + sec_features(lang) + sec_tech_kn(lang) + sec_process(lang)
+            + sec_pull(lang) + sec_features(lang) + sec_tech_kn(lang) + sec_process(lang)
             + sec_lc_home(lang) + sec_about(lang) + sec_close(lang))
 
 
