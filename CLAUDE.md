@@ -4,8 +4,9 @@ Statyczna, dwujęzyczna (PL/EN) strona firmowa. Generator własny w Pythonie (st
 
 ## Komendy
 
-- **Build:** `python site/build.py` → generuje `dist/` i uruchamia checker (linki, kotwice, wymagane pliki, zakazane wzorce). Build musi kończyć się `OK: 21 stron HTML, checker czysty`.
-- **Podgląd lokalny:** `python -m http.server 8001` w katalogu `dist/` (kotwice `/#o-nas` wymagają serwera; nie otwieraj `dist/` przez `file://`).
+- **Build:** `py -3 site/build.py` → generuje `dist/` i uruchamia checker (linki, kotwice, wymagane pliki, zakazane wzorce). Build musi kończyć się `OK: 21 stron HTML, checker czysty`.
+- **Podgląd lokalny:** `py -3 -m http.server 8001` w katalogu `dist/` (kotwice `/#o-nas` wymagają serwera; nie otwieraj `dist/` przez `file://`).
+- Na tej maszynie `python` w Git Bash to stub Microsoft Store — używaj launchera `py -3` (`tools/deploy.ps1` robi to sam).
 - **Wdrożenie na Kylos:** `powershell -ExecutionPolicy Bypass -File tools/deploy.ps1` (wymaga `.env.deploy` — patrz `tools/.env.deploy.example` i `docs/wdrozenie.md`).
 
 ## Struktura
